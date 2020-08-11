@@ -11,11 +11,9 @@ type User {
 input userInput {
   username: String!
   email: String!
-  password: String
+  password: String!
   status: Boolean
 }
-
-
 
 type Query {
    getUser(id: Int!): User

@@ -17,7 +17,7 @@ export class UserResolvers {
   }
 
   @Mutation(() => User, { nullable: true })
-  public async createUser(@Args('data') input: UserInput): Promise<User> {
+  public async createUser(@Args('input') input: UserInput): Promise<User> {
     return await this._userService.createUser(input);
   }
 
@@ -31,7 +31,7 @@ export class UserResolvers {
     return await this._userService.deleteUser(id);
   }
 
-
+  
   // @Subscription(() => User)
   // countUser(){
 
