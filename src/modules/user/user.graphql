@@ -8,11 +8,17 @@ type User {
   createUpd: String
 }
 
-input userInput {
+input UserInput {
   username: String!
   email: String!
   password: String!
   status: Boolean
+}
+
+input NewUserInput {
+  username: String!
+  email: String!
+  password: String!
 }
 
 type Query {
@@ -21,8 +27,8 @@ type Query {
 }
 
 type Mutation {
-  createUser(input: userInput!): User! 
-  updateUser(id: Int!, input: userInput!): Boolean!
+  createUser(input: NewUserInput!): User! 
+  updateUser(id: Int!, input: UserInput!): Boolean!
   deleteUser(id: Int!): Boolean!
 }
 

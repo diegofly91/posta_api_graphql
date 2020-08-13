@@ -5,6 +5,6 @@ export const GraphQL = GraphQLModule.forRoot({
   playground: true,
   installSubscriptionHandlers: true,
   debug: true,
-  context: ({ req }) => ({ req }),
+  context: ({ req, connection }) => ({ req }),
   formatError: error => new Error(error.message),
 });

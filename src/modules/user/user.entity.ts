@@ -1,5 +1,5 @@
 
-import { Field, ObjectType, InputType } from '@nestjs/graphql';
+import { Field, ObjectType,Int } from '@nestjs/graphql';
 import {
 	BaseEntity,
 	Entity,
@@ -12,24 +12,24 @@ import {
 	UpdateDateColumn,
 	JoinTable
 } from 'typeorm';
-// import { UserDetails } from './user.details.entity';
-// import { Role } from '../role/role.entity';
 
+@ObjectType()
 @Entity({ name: 'user' })
 export class User extends BaseEntity {
-	@Field()
-	@PrimaryGeneratedColumn('increment') id: number;
+	@Field(type => Int, { description: `ID of the user`})
+	@PrimaryGeneratedColumn('increment') 
+	id: number;
 
-    @Field()
-	@Column({ type: 'varchar', length: 36, nullable: false })
+	@Field({ nullable: true, description: `name user` })
+	@Column({ type: 'varchar', nullable: false, length: 50 })
 	username: String;
 
-	@Field()
-	@Column({ type: 'varchar', nullable: false })
+	@Field({ nullable: true, description: `name mail` })
+	@Column({ type: 'varchar', nullable: false, length: 50 })
 	email: String;
 
-	@Field()
-	@Column({ type: 'varchar', nullable: false })
+	@Field({ nullable: true, description:  `name password` })
+	@Column({ type: 'varchar', nullable: false, length: 50 })
 	password: String;
 
 	// @OneToOne((type) => UserDetails, {
@@ -54,21 +54,5 @@ export class User extends BaseEntity {
 
 	@Field()
 	@UpdateDateColumn({ type: 'timestamp', name: 'update_at' })
-	createUpd: Date;
-}
-
-@InputType()
-export class UserInput {
- 
-  @Field()
-  readonly username: string;
-
-  @Field()
-  readonly email: string;
-
-  @Field()
-  readonly password: string;
-
-  @Field()
-  readonly status: boolean;
+    createUpd: Date;
 }

@@ -1,7 +1,9 @@
 import { Injectable, BadRequestException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User, UserInput } from './user.entity';
+import { User, } from './user.entity';
+import {  UserInput, NewUserInput } from './userDto/user.Input';
+
 
 @Injectable()
 export class UserService {
@@ -18,7 +20,7 @@ export class UserService {
 		return  await this._userRepository.find();
 	}
 
-	async createUser(input: UserInput): Promise<User> {
+	async createUser(input: NewUserInput): Promise<User> {
 		let user = await this._userRepository.findOne({
 			where: { email: input.email.toLowerCase().trim() },
 		});
@@ -26,14 +28,14 @@ export class UserService {
 			const savedUser: User = await this._userRepository.save(input);
 			return savedUser;
 		}else{
-			throw new NotFoundException();
+			throw new NotFoundException('exist mail');
 		}
+		
 	}
 	async updateUser(id: number,input: UserInput): Promise<boolean> {
 		
-		const userr =  await this._userRepository.update(id,input);
-		console.log(userr);
-		if(userr)
+		const user =  await this._userRepository.update(id,input);
+		if(user)
 			 return true;
 		else
 		     throw new NotFoundException();	 
