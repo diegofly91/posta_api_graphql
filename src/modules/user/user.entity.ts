@@ -13,7 +13,7 @@ import {
 } from 'typeorm';
 
 @ObjectType()
-@Entity({ name: 'user' })
+@Entity({ name: 'users' })
 export class User extends BaseEntity {
     @Field(type => Int, { description: `ID of the user` })
     @PrimaryGeneratedColumn('increment')

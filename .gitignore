@@ -3,7 +3,6 @@
 /node_modules
 /.history
 /.vcode
-/src/database/migrations/*
 # Logs
 logs
 *.log
