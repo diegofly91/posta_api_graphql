@@ -1,4 +1,4 @@
-import { Field, InputType, ArgsType, Int } from '@nestjs/graphql';
+import { Field, InputType} from '@nestjs/graphql';
 import {
     Length,
     IsEmail,
@@ -10,14 +10,7 @@ import {
     IsBoolean,
 } from 'class-validator';
 
-@ArgsType()
-export class PaginationArgs {
-  @Field({nullable: true})
-  offset?: number;
 
-  @Field({nullable: true})
-  limit?: number;
-}
 
 @InputType()
 export class CompanyInput {

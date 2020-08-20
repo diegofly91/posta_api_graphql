@@ -5,7 +5,8 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Company } from './company.entity';
-import { CompanyInput, PaginationArgs } from './companyDto/company.Input';
+import { CompanyInput } from './companyDto/company.Input';
+import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
 
 @Injectable()
 export class CompanyService {

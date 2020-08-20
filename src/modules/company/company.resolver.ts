@@ -1,7 +1,8 @@
 import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 import { CompanyService } from './company.service';
 import { Company } from './company.entity';
-import { CompanyInput, PaginationArgs } from './companyDto/company.Input';
+import { CompanyInput,  } from './companyDto/company.Input';
+import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
 import { UsePipes, ValidationPipe } from '@nestjs/common';
 
 @Resolver(() => Company)

@@ -19,12 +19,6 @@ input CompanyInput {
   status: Boolean
 }
 
-""" Input de paginacion  """
-input Pagination {
-  limit: Int
-  offset: Int
-}
-
 """ Query para ver datos de  Empresas """
 type Query {
    #obten los datos una empresa mediante el ID

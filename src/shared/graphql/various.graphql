@@ -1,0 +1,5 @@
+""" Input de paginacion  """
+input Pagination {
+  limit: Int
+  offset: Int
+}
