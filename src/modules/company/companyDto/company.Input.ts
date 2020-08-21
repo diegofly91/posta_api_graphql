@@ -1,4 +1,4 @@
-import { Field, InputType} from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
 import {
     Length,
     IsEmail,
@@ -10,8 +10,6 @@ import {
     IsBoolean,
 } from 'class-validator';
 
-
-
 @InputType()
 export class CompanyInput {
     @Field({ nullable: false })
@@ -21,12 +19,16 @@ export class CompanyInput {
     name: string;
 
     @Field({ nullable: true })
-    @MaxLength(150, { message: 'Title is too long' })
-    description?: string;
+    @MaxLength(150, { message: 'Description is too long' })
+    description: string;
 
     @Field({ nullable: true })
-    @MaxLength(100, { message: 'Title is too long' })
+    @MaxLength(100, { message: 'Address is too long' })
     address: string;
+
+    @Field({ nullable: true })
+    @IsInt()
+    phone: number;
 
     @Field({ nullable: true })
     @IsBoolean()

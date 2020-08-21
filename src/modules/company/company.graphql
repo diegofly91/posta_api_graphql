@@ -6,6 +6,7 @@ type Company {
     description: String
     address: String
     status: Boolean
+    phone: Int
     createAdt: String!
     createUpd: String
 }
@@ -17,6 +18,7 @@ input CompanyInput {
   description: String
   address: String
   status: Boolean
+  phone: Int
 }
 
 """ Query para ver datos de  Empresas """

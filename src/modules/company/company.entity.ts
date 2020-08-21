@@ -23,13 +23,17 @@ export class Company extends BaseEntity {
     @Column({ type: 'varchar', nullable: false, length: 50 })
     name: string;
 
-    @Field({  description: `company description` })
-    @Column({ type: 'varchar',nullable: true,  length: 150 })
+    @Field({ description: `company description` })
+    @Column({ type: 'varchar', nullable: true, length: 150 })
     description: string;
 
     @Field({ description: `company address` })
-    @Column({ type: 'varchar',nullable: true,  length: 100 })
+    @Column({ type: 'varchar', nullable: true, length: 100 })
     address: string;
+
+    @Field({ description: `phone company` })
+    @Column({ type: 'bigint', nullable: true })
+    phone: number;
 
     @Field()
     @Column({ type: 'boolean', default: 1 })
@@ -43,7 +47,6 @@ export class Company extends BaseEntity {
     @UpdateDateColumn({ type: 'timestamp', name: 'update_at' })
     createUpd: Date;
 
-    
     // @OneToOne((type) => UserDetails, {
     // 	cascade: true,
     // 	nullable: false,
