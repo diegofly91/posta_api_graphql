@@ -15,7 +15,6 @@ export class ConfigService {
                 console.log('.env file does not exist');
                 process.exit(0);
             }
-
             this.envConfig = parse(fs.readFileSync(envFilePath));
         } else {
             this.envConfig = {
