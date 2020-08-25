@@ -7,42 +7,36 @@ import {
     OneToOne,
     JoinColumn,
     ManyToMany,
-    ManyToOne,
+    OneToMany,
     CreateDateColumn,
     UpdateDateColumn,
     JoinTable,
 } from 'typeorm';
-import { Company } from '../company/company.entity';
+import { Service } from '../service/service.entity'
+
 
 @ObjectType()
-@Entity({ name: 'services' })
-export class Service extends BaseEntity {
-    @Field(type => Int, { description: `ID of the service` })
+@Entity({ name: 'companys' })
+export class Company extends BaseEntity {
+    @Field(type => Int, { description: `ID of the company` })
     @PrimaryGeneratedColumn('increment')
     id: number;
 
-    @Field({ description: `ID company` })
-    @Column({ type: 'int', nullable: true })
-    id_company: number;
-
-    @ManyToOne(type => Company, company => company.id)
-    company: Company;
-
-    @Field({ description: `name service` })
+    @Field({ description: `name company` })
     @Column({ type: 'varchar', nullable: false, length: 50 })
     name: string;
 
-    @Field({ description: `service description` })
+    @Field({ description: `company description` })
     @Column({ type: 'varchar', nullable: true, length: 150 })
     description: string;
 
-    @Field({ description: `phone company` })
-    @Column({ type: 'int', nullable: true })
-    duration: number;
+    @Field({ description: `company address` })
+    @Column({ type: 'varchar', nullable: true, length: 100 })
+    address: string;
 
-    @Field({ description: `price service` })
-    @Column({ type: 'float', nullable: true })
-    price: number;
+    @Field({ description: `phone company` })
+    @Column({ type: 'bigint', nullable: true })
+    phone: number;
 
     @Field()
     @Column({ type: 'boolean', default: 1 })
@@ -56,7 +50,10 @@ export class Service extends BaseEntity {
     @UpdateDateColumn({ type: 'timestamp', name: 'update_at' })
     createUpd: Date;
 
-    // @OneToOne((type) => Company, {
+    @OneToMany(type => Service, service => service.id_company, { cascade: true })
+    service: Service[];
+
+    // @OneToOne((type) => UserDetails, {
     // 	cascade: true,
     // 	nullable: false,
     // 	eager: true

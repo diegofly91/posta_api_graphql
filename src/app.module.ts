@@ -6,9 +6,10 @@ import { Configuration } from './config/config.keys';
 import { DatabaseModule } from './database/database.module';
 import { UserModule } from './modules/user/user.module';
 import { ServiceModule } from './modules/service/service.module';
+import { CompanyModule } from './modules/company/company.module';
 
 @Module({
-    imports: [ConfigModule, DatabaseModule, UserModule, ServiceModule, GraphQL],
+    imports: [ConfigModule, DatabaseModule, UserModule, ServiceModule, CompanyModule, GraphQL],
 })
 export class AppModule {
     static port: number | string;

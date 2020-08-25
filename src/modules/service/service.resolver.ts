@@ -1,30 +1,31 @@
-import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver,ResolveField, Parent, Subscription } from '@nestjs/graphql';
 import { ServiceService } from './service.service';
 import { Service } from './service.entity';
-import { ServiceInput } from './serviceDto/service.Input';
-// import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
+import { ServiceInput, NewServiceInput, ServiceInputQuery } from './serviceDto/service.Input';
+import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
 import { UsePipes, ValidationPipe } from '@nestjs/common';
+import { CompanyService } from '../company/company.service';
 
 @Resolver(() => Service)
 export class ServiceResolvers {
-    constructor(private readonly _serviceService: ServiceService) {}
+    constructor(
+        private readonly _serviceService: ServiceService,
+        private readonly _companyService: CompanyService
+        ) {}
 
-    // @Query(() => [Service])
-    // public async getServices(
-    //     @Args('pagination') pagination?: PaginationArgs,
-    // ): Promise<Service[]> {
-    //     return this._serviceService.getServices(pagination);
-    // }
     @Query(() => [Service])
-    public async getServices(): Promise<Service[]> {
-        return this._serviceService.getServices();
+    public async getServices(
+        @Args('input') input?: ServiceInputQuery,
+        @Args('pagination') pagination?: PaginationArgs,
+    ): Promise<Service[]> {
+        return this._serviceService.getServices(input,pagination);
     }
-
+    
     @Query(() => Number)
     public async countServices(
-        @Args('status') status?: boolean,
+        @Args('input') input?: ServiceInputQuery,
     ): Promise<number> {
-        return this._serviceService.countServices(status);
+        return this._serviceService.countServices(input);
     }
 
     @Query(() => Service, { nullable: true })
@@ -35,7 +36,7 @@ export class ServiceResolvers {
     @UsePipes(new ValidationPipe({ disableErrorMessages: true }))
     @Mutation(() => Service, { nullable: true })
     public async createService(
-        @Args('input') input: ServiceInput,
+        @Args('input') input: NewServiceInput,
     ): Promise<Service> {
         return await this._serviceService.createService(input);
     }
@@ -52,6 +53,12 @@ export class ServiceResolvers {
     @Mutation(() => Service)
     public async deleteService(@Args('id') id: number): Promise<boolean> {
         return await this._serviceService.deleteService(id);
+    }
+
+    @ResolveField()
+    async company(@Parent() service) {
+        const { id_company } = service;
+        return await this._companyService.getCompany(id_company);
     }
 
     // @Subscription(() => Service)

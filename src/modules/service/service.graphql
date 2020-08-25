@@ -1,12 +1,23 @@
 type Service {
   id: Int!
+  id_company: Int!
   name: String!
   description: String
   price: Float
   duration: Int!
+  company: Company!
   status: Boolean
   createAdt: String!
   createUpd: String
+}
+
+input NewServiceInput {
+  id_company: Int!
+  name: String!
+  description: String
+  price: Float
+  duration: Int
+  status: Boolean
 }
 
 input ServiceInput {
@@ -16,16 +27,24 @@ input ServiceInput {
   duration: Int
   status: Boolean
 }
+input ServiceInputQuery {
+  id_company: Int
+  name: String
+  description: String
+  price: Float
+  duration: Int
+  status: Boolean
+}
 
 
 type Query {
    getService(id: Int!): Service
-   getServices: [Service!]!
-   countServices(status: Boolean): Int!
+   getServices(input: ServiceInputQuery, pagination: Pagination): [Service!]!
+   countServices(input: ServiceInputQuery): Int!
 }
 
 type Mutation {
-  createService(input: ServiceInput!): Service! 
+  createService(input: NewServiceInput!): Service! 
   updateService(id: Int!, input: ServiceInput!): Boolean!
   deleteService(id: Int!): Boolean!
 }
