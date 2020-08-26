@@ -10,9 +10,10 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     BeforeInsert,
+    BeforeUpdate,
     JoinTable,
 } from 'typeorm';
-import * as bcrypt from 'bcryptjs';
+import { hash } from 'bcryptjs';
 
 @ObjectType()
 @Entity({ name: 'users' })
@@ -34,8 +35,12 @@ export class User extends BaseEntity {
     password: string;
 
     @BeforeInsert()
+    @BeforeUpdate()
     async hashPassword() {
-        this.password = await bcrypt.hash(this.password, 10);
+      if (!this.password) {
+        return;
+      }
+      this.password = await hash(this.password, 10);
     }
 
     // @OneToOne((type) => UserDetails, {

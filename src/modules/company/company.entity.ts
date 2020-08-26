@@ -52,16 +52,5 @@ export class Company extends BaseEntity {
 
     @OneToMany(type => Service, service => service.id_company, { cascade: true })
     service: Service[];
-
-    // @OneToOne((type) => UserDetails, {
-    // 	cascade: true,
-    // 	nullable: false,
-    // 	eager: true
-    // })
-    // @JoinColumn({ name: 'detail_id' })
-    // details: UserDetails;
-
-    // @ManyToMany((type) => Role, (role) => role.users, { eager: true })
-    // @JoinTable({ name: 'user_roles' })
-    // roles: Role[];
+  
 }

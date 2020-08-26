@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Company } from './company.entity';
-import { CompanyInput } from './companyDto/company.Input';
+import { CompanyInput, CompanyInputQuery } from './companyDto/company.Input';
 import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
 
 @Injectable()
@@ -16,19 +16,21 @@ export class CompanyService {
         return await this._companyRepository.findOne(id);
     }
 
-    async getCompanys(pagination?: PaginationArgs): Promise<Company[]> {
+    async getCompanys(input?: CompanyInputQuery, pagination?: PaginationArgs): Promise<Company[]> {
+        let inputData = input? input : {};
         if (pagination) {
             const { limit, offset } = pagination;
             return await this._companyRepository.find({
+                where: inputData,
                 take: limit,
                 skip: offset,
             });
-        } else return await this._companyRepository.find();
+        } else return await this._companyRepository.find({where: inputData});
     }
 
-    async countCompanys(status?: boolean): Promise<number> {
-        if (status != null)
-            return await this._companyRepository.count({ where: { status } });
+    async countCompanys(input?: CompanyInputQuery): Promise<number> {
+        if (input)
+            return await this._companyRepository.count({ where: input });
         else return await this._companyRepository.count();
     }
 

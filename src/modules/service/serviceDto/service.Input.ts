@@ -5,7 +5,9 @@ import {
     IsNotEmpty,
     IsInt,
     IsBoolean,
+    IsOptional,
     IsNumber,
+    IsString
 } from 'class-validator';
 
 @InputType()
@@ -37,7 +39,7 @@ export class ServiceInput {
 @InputType()
 export class NewServiceInput {
     
-    @Field({ nullable: true })
+    @Field({ nullable: false })
     @IsInt()
     id_company: number;
 
@@ -49,18 +51,23 @@ export class NewServiceInput {
 
     @Field({ nullable: true })
     @MaxLength(150, { message: 'Description is too long' })
+    @IsString()
+    @IsOptional()
     description: string;
 
     @Field({ nullable: true })
     @IsInt()
+    @IsOptional()
     duration: number;
 
     @Field({ nullable: true })
     @IsNumber()
+    @IsOptional()
     price: number;
 
     @Field({ nullable: true })
     @IsBoolean()
+    @IsOptional()
     status: boolean;
 }
 
@@ -69,25 +76,33 @@ export class ServiceInputQuery {
     
     @Field({ nullable: true })
     @IsInt()
+    @IsOptional()
     id_company: number;
 
-    @Field({ nullable: true })
-    name: string;
+    @Field({ nullable: true }) 
+    @IsString()
+    @IsOptional()
+    name?: string;
 
     @Field({ nullable: true })
     @MaxLength(150, { message: 'Description is too long' })
-    description: string;
+    @IsString()
+    @IsOptional()
+    description?: string;
 
     @Field({ nullable: true })
     @IsInt()
-    duration: number;
+    @IsOptional()
+    duration?: number;
 
     @Field({ nullable: true })
     @IsNumber()
-    price: number;
+    @IsOptional()
+    price?: number;
 
     @Field({ nullable: true })
     @IsBoolean()
-    status: boolean;
+    @IsOptional()
+    status?: boolean;
 }
 

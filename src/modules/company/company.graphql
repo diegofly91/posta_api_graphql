@@ -7,6 +7,7 @@ type Company {
     address: String
     status: Boolean
     phone: Int
+    service: [Service!]!
     createAdt: String!
     createUpd: String
 }
@@ -21,14 +22,22 @@ input CompanyInput {
   phone: Int
 }
 
+input CompanyInputQuery {
+     name: String
+     description: String
+     address: String
+     status: Boolean
+     phone: Int
+}
+
 """ Query para ver datos de  Empresas """
 type Query {
    #obten los datos una empresa mediante el ID
    getCompany(id: Int!): Company
    # traer todas las empresas o (desde hasta )
-   getCompanys(pagination: Pagination): [Company!]!
+   getCompanys( input: CompanyInputQuery,pagination: Pagination): [Company!]!
    #trarer la cantidad de empresas 
-   countCompanys(status: Boolean): Int
+   countCompanys(input: CompanyInputQuery): Int
 }
 
 """ Mutation  modulo empresas"""
