@@ -5,7 +5,6 @@ import { CompanyResolvers } from './company.resolver';
 import { Company } from './company.entity';
 import { Service } from '../service/service.entity'
 import { ServiceService } from '../service/service.service';
-import { ServiceInputQuery } from '../service/serviceDto/service.input';
 
 @Module({
     imports: [TypeOrmModule.forFeature([Company, Service])],

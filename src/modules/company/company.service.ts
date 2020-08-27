@@ -35,6 +35,7 @@ export class CompanyService {
     }
 
     async createCompany(input: CompanyInput): Promise<Company> {
+        console.log('12345');
         const savedCompany: Company = await this._companyRepository.save(input);
         return savedCompany;
     }

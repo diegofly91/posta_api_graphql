@@ -41,7 +41,7 @@ export class NewServiceInput {
     
     @Field({ nullable: false })
     @IsInt()
-    id_company: number;
+    companyId: number;
 
     @Field({ nullable: false })
     @MinLength(1, { message: 'Title is too short' })
@@ -77,7 +77,7 @@ export class ServiceInputQuery {
     @Field({ nullable: true })
     @IsInt()
     @IsOptional()
-    id_company: number;
+    companyId: number;
 
     @Field({ nullable: true }) 
     @IsString()

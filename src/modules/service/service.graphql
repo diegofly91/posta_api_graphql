@@ -1,6 +1,6 @@
 type Service {
   id: Int!
-  id_company: Int!
+  companyId: Int!
   name: String!
   description: String
   price: Float
@@ -12,7 +12,7 @@ type Service {
 }
 
 input NewServiceInput {
-  id_company: Int!
+  companyId: Int!
   name: String!
   description: String
   price: Float
@@ -28,7 +28,7 @@ input ServiceInput {
   status: Boolean
 }
 input ServiceInputQuery {
-  id_company: Int
+  companyId: Int
   name: String
   description: String
   price: Float

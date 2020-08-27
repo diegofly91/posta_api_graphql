@@ -4,13 +4,9 @@ import {
     Entity,
     PrimaryGeneratedColumn,
     Column,
-    OneToOne,
-    JoinColumn,
-    ManyToMany,
     OneToMany,
     CreateDateColumn,
     UpdateDateColumn,
-    JoinTable,
 } from 'typeorm';
 import { Service } from '../service/service.entity'
 
@@ -50,7 +46,6 @@ export class Company extends BaseEntity {
     @UpdateDateColumn({ type: 'timestamp', name: 'update_at' })
     createUpd: Date;
 
-    @OneToMany(type => Service, service => service.id_company, { cascade: true })
-    service: Service[];
-  
+    @OneToMany(type => Service, service => service.company, { cascade: true })
+    services: Service[];
 }

@@ -4,13 +4,9 @@ import {
     Entity,
     PrimaryGeneratedColumn,
     Column,
-    OneToOne,
-    JoinColumn,
-    ManyToMany,
     ManyToOne,
     CreateDateColumn,
     UpdateDateColumn,
-    JoinTable,
 } from 'typeorm';
 import { Company } from '../company/company.entity';
 
@@ -21,11 +17,7 @@ export class Service extends BaseEntity {
     @PrimaryGeneratedColumn('increment')
     id: number;
 
-    @Field({ description: `ID company` })
-    @Column({ type: 'int', nullable: true })
-    id_company: number;
-
-    @ManyToOne(type => Company, company => company.id)
+    @ManyToOne(type => Company, company => company.services, { nullable: false })
     company: Company;
 
     @Field({ description: `name service` })
@@ -55,16 +47,4 @@ export class Service extends BaseEntity {
     @Field()
     @UpdateDateColumn({ type: 'timestamp', name: 'update_at' })
     createUpd: Date;
-
-    // @OneToOne((type) => Company, {
-    // 	cascade: true,
-    // 	nullable: false,
-    // 	eager: true
-    // })
-    // @JoinColumn({ name: 'detail_id' })
-    // details: UserDetails;
-
-    // @ManyToMany((type) => Role, (role) => role.users, { eager: true })
-    // @JoinTable({ name: 'user_roles' })
-    // roles: Role[];
 }

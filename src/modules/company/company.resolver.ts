@@ -7,16 +7,17 @@ import { CompanyInput, CompanyInputQuery } from './companyDto/company.Input';
 
 import { ServiceService } from '../service/service.service';
 import { Service } from '../service/service.entity';
-import { ServiceInputQuery } from '../service/serviceDto/service.input';
+import { ServiceInputQuery } from '../service/serviceDto/service.Input';
 
 import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
 
 @Resolver(() => Company)
 export class CompanyResolvers {
+    
     constructor(
         private readonly _companyService: CompanyService,
         private readonly _serviceService: ServiceService,
-        ) {}
+    ) {}
 
     @Query(() => [Company])
     public async getCompanys(
@@ -60,7 +61,7 @@ export class CompanyResolvers {
     async service(@Parent() company: Company  ) {
        const { id } = company;
        let input = new ServiceInputQuery();
-       input.id_company = id;
+       input.companyId = id;
        return await this._serviceService.getServices(input);
     }
 

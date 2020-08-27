@@ -1,7 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql';
 import {
-    Length,
-    IsEmail,
     MinLength,
     MaxLength,
     IsNotEmpty,
@@ -68,6 +66,6 @@ export class CompanyInputQuery {
 
     @Field({ nullable: true })
     @IsBoolean()
-     @IsOptional()
+    @IsOptional()
     status: boolean;
 }

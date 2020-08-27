@@ -7,7 +7,7 @@ type Company {
     address: String
     status: Boolean
     phone: Int
-    service: [Service!]!
+    service: [Service]
     createAdt: String!
     createUpd: String
 }
