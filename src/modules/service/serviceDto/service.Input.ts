@@ -57,7 +57,7 @@ export class NewServiceInput {
 
     @Field({ nullable: true })
     @IsInt()
-    @IsOptional()
+    @IsNotEmpty()
     duration: number;
 
     @Field({ nullable: true })

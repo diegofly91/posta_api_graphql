@@ -7,6 +7,8 @@ import {
     ManyToOne,
     CreateDateColumn,
     UpdateDateColumn,
+    PrimaryColumn,
+    JoinColumn
 } from 'typeorm';
 import { Company } from '../company/company.entity';
 
@@ -17,7 +19,11 @@ export class Service extends BaseEntity {
     @PrimaryGeneratedColumn('increment')
     id: number;
 
-    @ManyToOne(type => Company, company => company.services, { nullable: false })
+    @PrimaryColumn({name: 'companys_id'})
+    companyId: number;
+
+    @ManyToOne(() => Company, company => company.services, {primary:true})
+    @JoinColumn({name: 'companys_id'})
     company: Company;
 
     @Field({ description: `name service` })
@@ -28,8 +34,8 @@ export class Service extends BaseEntity {
     @Column({ type: 'varchar', nullable: true, length: 150 })
     description: string;
 
-    @Field({ description: `phone company` })
-    @Column({ type: 'int', nullable: true })
+    @Field({ description: `duration company` })
+    @Column({ type: 'int', nullable: false })
     duration: number;
 
     @Field({ description: `price service` })

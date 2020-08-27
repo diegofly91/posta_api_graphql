@@ -29,26 +29,33 @@ export class CompanyService {
     }
 
     async countCompanys(input?: CompanyInputQuery): Promise<number> {
-        if (input)
+        if (input){
             return await this._companyRepository.count({ where: input });
-        else return await this._companyRepository.count();
+        }else {
+            return await this._companyRepository.count();
+        }
     }
 
     async createCompany(input: CompanyInput): Promise<Company> {
-        console.log('12345');
         const savedCompany: Company = await this._companyRepository.save(input);
         return savedCompany;
     }
 
     async updateCompany(id: number, input: CompanyInput): Promise<boolean> {
         const company = await this._companyRepository.update(id, input);
-        if (company) return true;
-        else throw new NotFoundException();
+        if (company) {
+            return true;
+        }else {
+            throw new NotFoundException();
+        } 
     }
 
     async deleteCompany(id: number): Promise<boolean> {
         const dele = await this._companyRepository.delete(id);
-        if (dele) return true;
-        else throw new NotFoundException();
+        if (dele) {
+            return true;
+        }else {
+            throw new NotFoundException();
+        }
     }
 }
