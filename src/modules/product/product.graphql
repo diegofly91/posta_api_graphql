@@ -1,0 +1,46 @@
+type Product {
+    id: Int!
+    companyId: Int!
+    name: String!
+    description: String!
+    price: Float!
+    company: Company!
+    status: Boolean
+    createAdt: String!
+    createUpd: String
+}
+
+input NewProductInput {
+    companyId: Int!
+    name: String!
+    description: String
+    price: Float!
+    status: Boolean
+}
+input ProductInput {
+    name: String!
+    description: String
+    price: Float
+    status: Boolean
+}
+
+input ProductInputQuery {
+    companyId: Int
+    name: String
+    description: String
+    price: Float
+    status: Boolean
+}
+
+type Query {
+   getProduct(id: Int!): Product!
+   getProducts(input: ProductInputQuery, pagination: Pagination): [Product!]!
+   countProducts(input: ProductInputQuery): Int!
+}
+
+type Mutation {
+  createProduct(input: NewProductInput!): Product! 
+  updateProduct(id: Int!, input: ProductInput!): Boolean!
+  deleteProduct(id: Int!): Boolean!
+}
+

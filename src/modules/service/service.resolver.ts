@@ -30,7 +30,7 @@ export class ServiceResolvers {
         return this._serviceService.getService(id);
     }
 
-    @UsePipes(new ValidationPipe({ disableErrorMessages: true }))
+    @UsePipes(new ValidationPipe())
     @Mutation(() => Service, { nullable: true })
     public async createService( @Args('input') input: NewServiceInput,): Promise<Service> {
         return await this._serviceService.createService(input);

@@ -9,6 +9,10 @@ import { ServiceService } from '../service/service.service';
 import { Service } from '../service/service.entity';
 import { ServiceInputQuery } from '../service/serviceDto/service.Input';
 
+import { ProductService } from '../product/product.service';
+import { Product } from '../product/product.entity';
+import { ProductInputQuery } from '../product/productDto/product.Input';
+
 import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
 
 @Resolver(() => Company)
@@ -17,6 +21,7 @@ export class CompanyResolvers {
     constructor(
         private readonly _companyService: CompanyService,
         private readonly _serviceService: ServiceService,
+        private readonly _productService: ProductService,
     ) {}
 
     @Query(() => [Company])
@@ -63,6 +68,14 @@ export class CompanyResolvers {
        let input = new ServiceInputQuery();
        input.companyId = id;
        return await this._serviceService.getServices(input);
+    }
+
+    @ResolveProperty('product', returns => [Product])
+    async product(@Parent() company: Company  ) {
+       const { id } = company;
+       let input = new ProductInputQuery();
+       input.companyId = id;
+       return await this._productService.getProducts(input);
     }
 
     // @Subscription(() => Company)

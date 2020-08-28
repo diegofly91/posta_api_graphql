@@ -14,7 +14,7 @@ export class ServiceService {
     }
 
     async getService(id: number): Promise<Service> {
-        return await this._serviceRepository.findOne(id);
+        return await this._serviceRepository.findOne({id});
     }
 
     async getServices(input?: ServiceInputQuery, pagination?: PaginationArgs): Promise<Service[]> {
@@ -46,7 +46,7 @@ export class ServiceService {
     }
 
     async updateService(id: number, input: ServiceInput): Promise<boolean> {
-        const service = await this._serviceRepository.update(id, input);
+        const service = await this._serviceRepository.update({id}, input);
         if (service) {
             return true;
         } else {
@@ -55,7 +55,7 @@ export class ServiceService {
     }
 
     async deleteService(id: number): Promise<boolean> {
-        const dele = await this._serviceRepository.delete(id);
+        const dele = await this._serviceRepository.delete({id});
         if (dele) {
             return true;
         } else {

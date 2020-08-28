@@ -11,7 +11,6 @@ import {
     UpdateDateColumn,
     BeforeInsert,
     BeforeUpdate,
-    JoinTable,
 } from 'typeorm';
 import { hash } from 'bcryptjs';
 

@@ -38,7 +38,7 @@ input ServiceInputQuery {
 
 
 type Query {
-   getService(id: Int!): Service
+   getService(id: Int!): Service!
    getServices(input: ServiceInputQuery, pagination: Pagination): [Service!]!
    countServices(input: ServiceInputQuery): Int!
 }
