@@ -9,7 +9,6 @@ import {
     UpdateDateColumn,
 } from 'typeorm';
 import { Service } from '../service/service.entity';
-import { Product } from '../product/product.entity';
 
 
 @ObjectType()
@@ -49,7 +48,5 @@ export class Company extends BaseEntity {
 
     @OneToMany(type => Service, service => service.company, { cascade: true })
     services: Service[];
-
-    @OneToMany(type => Product, product => product.company, { cascade: true })
-    products: Product[];
+z
 }
