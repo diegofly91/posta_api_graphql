@@ -1,0 +1,50 @@
+type Service {
+  id: Int!
+  companyId: Int!
+  name: String!
+  description: String
+  price: Float
+  duration: Int!
+  company: Company!
+  status: Boolean
+  createAdt: String!
+  createUpd: String
+}
+
+input NewServiceInput {
+  companyId: Int!
+  name: String!
+  description: String
+  price: Float
+  duration: Int!
+  status: Boolean
+}
+
+input ServiceInput {
+  name: String!
+  description: String
+  price: Float
+  duration: Int!
+  status: Boolean
+}
+input ServiceInputQuery {
+  companyId: Int
+  name: String
+  description: String
+  price: Float
+  duration: Int
+  status: Boolean
+}
+
+
+type Query {
+   getService(id: Int!): Service!
+   getServices(input: ServiceInputQuery, pagination: Pagination): [Service!]!
+   countServices(input: ServiceInputQuery): Int!
+}
+
+type Mutation {
+  createService(input: NewServiceInput!): Service! 
+  updateService(id: Int!, input: ServiceInput!): Boolean!
+  deleteService(id: Int!): Boolean!
+}
