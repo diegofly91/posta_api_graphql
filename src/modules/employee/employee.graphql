@@ -1,0 +1,44 @@
+type Employee {
+  id: Int!
+  companyId: Int!
+  name: String!
+  company: Company!
+  status: Boolean
+  createAdt: String!
+  createUpd: String
+}
+
+input NewEmployeeInput {
+  companyId: Int!
+  name: String!
+  status: Boolean
+}
+
+input NewEmployeeInput {
+  companyId: Int!
+  name: String!
+  status: Boolean
+}
+
+input EmployeeInput {
+  name: String!
+  status: Boolean
+}
+
+input EmployeeInputQuery {
+  companyId: Int
+  name: String
+  status: Boolean
+}
+
+type Query {
+   getEmployee(id: Int!): Employee!
+   getEmployees(input: EmployeeInputQuery, pagination: Pagination): [Employee!]!
+   countEmployees(input: EmployeeInputQuery): Int!
+}
+
+type Mutation {
+  createEmployee(input: NewEmployeeInput!): Employee! 
+  updateEmployee(id: Int!, input: EmployeeInput!): Boolean!
+  deleteEmployee(id: Int!): Boolean!
+}

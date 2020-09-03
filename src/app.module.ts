@@ -6,14 +6,17 @@ import { Configuration } from './config/config.keys';
 import { DatabaseModule } from './database/database.module';
 import { UserModule } from './modules/user/user.module';
 import { ServiceModule } from './modules/service/service.module';
+import { EmployeeModule } from './modules/employee/employee.module';
 import { CompanyModule } from './modules/company/company.module';
 
+const Modules = ['./modules/*.module.ts'];
+console.log(Modules);
 @Module({
-    imports: [ConfigModule, DatabaseModule, UserModule, ServiceModule, CompanyModule, GraphQL],
+    imports: [ConfigModule, DatabaseModule, UserModule, ServiceModule, CompanyModule,EmployeeModule, GraphQL],
 })
 export class AppModule {
     static port: number | string;
-
+    
     constructor(private readonly _configService: ConfigService) {
         AppModule.port = this._configService.get(Configuration.APP_PORT);
     }

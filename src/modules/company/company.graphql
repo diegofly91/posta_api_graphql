@@ -8,7 +8,7 @@ type Company {
     status: Boolean
     phone: Int
     service: [Service!]!
-    # product: [Product!]!
+    employee: [Employee!]!
     createAdt: String!
     createUpd: String
 }
