@@ -8,11 +8,16 @@ import { UserModule } from './modules/user/user.module';
 import { ServiceModule } from './modules/service/service.module';
 import { EmployeeModule } from './modules/employee/employee.module';
 import { CompanyModule } from './modules/company/company.module';
+import { DayModule } from './modules/day/day.module';
+import { TimetableModule } from './modules/timetable/timetable.module';
 
-const Modules = ['./modules/*.module.ts'];
-console.log(Modules);
 @Module({
-    imports: [ConfigModule, DatabaseModule, UserModule, ServiceModule, CompanyModule,EmployeeModule, GraphQL],
+    imports: [
+                 ConfigModule, DatabaseModule, 
+                 UserModule, ServiceModule, 
+                 CompanyModule,EmployeeModule,
+                 TimetableModule, DayModule,  GraphQL
+             ],
 })
 export class AppModule {
     static port: number | string;

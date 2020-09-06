@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import { Service } from '../service/service.entity';
 import { Employee } from '../employee/employee.entity';
+import { Timetable } from '../timetable/timetable.entity';
 
 
 @ObjectType()
@@ -52,5 +53,8 @@ export class Company extends BaseEntity {
 
     @OneToMany(type => Employee, employee => employee.company, { cascade: true })
     employees: Employee[];
+
+    @OneToMany(type => Timetable, timetable => timetable.company, { cascade: true })
+    timetables: Timetable[];
 
 }

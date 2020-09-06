@@ -1,0 +1,40 @@
+type Timetable {
+    id: Int!
+    companyId: Int!
+    company: Company!
+    dayId: Int!
+    day: Day!
+    hini: String!
+    hend: String!
+    createAdt: String!
+    createUpd: String
+}
+
+input NewTimetableInput {
+  companyId: Int!
+  dayId: Int!
+  hini: String!
+  hend: String!
+}
+
+input TimetableInput {
+  dayId: Int!
+  hini: String!
+  hend: String!
+}
+
+input TimetableInputQuery {
+  companyId: Int!
+  dayId: Int
+}
+
+type Query {
+   getTimetable(input: TimetableInputQuery!): [Timetable!]!
+  # getTimetables(input: TimetableInputQuery, pagination: Pagination): [Employee!]!
+}
+
+type Mutation {
+  createTimetable(input: NewTimetableInput!): Boolean! 
+  updateTimetable(id: Int!, input: TimetableInput!): Boolean!
+  deleteTimetable(id: Int!): Boolean!
+}

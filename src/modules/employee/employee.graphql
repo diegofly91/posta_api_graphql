@@ -14,11 +14,6 @@ input NewEmployeeInput {
   status: Boolean
 }
 
-input NewEmployeeInput {
-  companyId: Int!
-  name: String!
-  status: Boolean
-}
 
 input EmployeeInput {
   name: String!

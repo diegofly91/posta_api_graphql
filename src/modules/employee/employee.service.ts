@@ -1,6 +1,4 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { Employee } from './employee.entity';
 import { NewEmployeeInput, EmployeeInput, EmployeeInputQuery } from './employeeDto/employee.Input';
 import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
@@ -40,8 +38,8 @@ export class EmployeeService {
     }
 
     async createEmployee(input: NewEmployeeInput): Promise<Employee> {
-        const savedCompany: Employee = await this.repos._employeeRepository.save(input);
-        return savedCompany;
+        const savedEmployee: Employee = await this.repos._employeeRepository.save(input);
+        return savedEmployee;
     }
 
     async updateEmployee(id: number, input: EmployeeInput): Promise<boolean> {

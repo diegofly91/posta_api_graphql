@@ -1,7 +1,7 @@
 import { Args, Mutation, Query, Resolver,ResolveField, Parent, Subscription } from '@nestjs/graphql';
 import { EmployeeService } from './employee.service';
 import { Employee } from './employee.entity';
-import { EmployeeInput, NewEmployeeInput,EmployeeInputQuery } from './employeeDto/employee.Input';
+import { EmployeeInput, NewEmployeeInput, EmployeeInputQuery } from './employeeDto/employee.Input';
 import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
 import { UsePipes, ValidationPipe } from '@nestjs/common';
 import { CompanyService } from '../company/company.service';
@@ -12,6 +12,11 @@ export class EmployeeResolvers {
     constructor(private readonly _employeeService: EmployeeService,
                 private readonly _companyService: CompanyService
     ) {}
+
+    @Query(() => Employee, { nullable: true })
+    public async getEmployee(@Args('id') id: number): Promise<Employee> {
+        return this._employeeService.getEmployee(id);
+    }
 
     @Query(() => [Employee])
     public async getEmployees(@Args('input') input?: EmployeeInputQuery, 
@@ -25,14 +30,9 @@ export class EmployeeResolvers {
         return this._employeeService.countEmployees(input);
     }
 
-    @Query(() => Employee, { nullable: true })
-    public async getEmployee(@Args('id') id: number): Promise<Employee> {
-        return this._employeeService.getEmployee(id);
-    }
-
     @UsePipes(new ValidationPipe())
     @Mutation(() => Employee, { nullable: true })
-    public async createService( @Args('input') input: NewEmployeeInput,): Promise<Employee> {
+    public async createEmployee( @Args('input') input: NewEmployeeInput): Promise<Employee> {
         return await this._employeeService.createEmployee(input);
     }
 
@@ -49,8 +49,8 @@ export class EmployeeResolvers {
 
     @ResolveField('company', returns => Company)
     async company(@Parent() employee) {
-        const { id_company } = employee;
-        return await this._companyService.getCompany(id_company);
+        const { companyId } = employee;
+        return await this._companyService.getCompany(companyId);
     }
 
     // @Subscription(() => Service)

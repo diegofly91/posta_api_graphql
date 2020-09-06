@@ -1,0 +1,16 @@
+type Day {
+    id: Int!
+    name: String! 
+    createAdt: String!
+    createUpd: String
+}
+
+type Query {
+   getDay(id: Int!): Day!
+   getDays : [Day!]!
+}
+
+type Mutation {
+  createDay(name: String!): Boolean! 
+  updateDay(id: Int!, name: String!): Boolean!
+}
