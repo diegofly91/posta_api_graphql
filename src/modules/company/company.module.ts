@@ -22,21 +22,33 @@ import RepoTimeService from '../timeservice/timeservice.repository';
 import { TimeServiceService } from '../timeservice/timeservice.service';
 import { TimeService } from '../timeservice/timeservice.entity';
 
+import RepoTimeEmployee from '../timeemployee/timeemployee.repository';
+import { TimeEmployeeService } from '../timeemployee/timeemployee.service';
+import { TimeEmployee } from '../timeemployee/timeemployee.entity';
+
 import { Day } from '../day/day.entity';
 import RepoDay from '../day/day.repository';
 import { DayService} from '../day/day.service'
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Company, Service, Employee,Timetable, Day, TimeService])],
+    imports:   [TypeOrmModule.forFeature([Company, Service, Employee,Timetable, Day, TimeService, TimeEmployee])],
     providers: [ 
-                CompanyService, DayService,RepoCompany,
-                EmployeeService, CompanyResolvers, 
-                ServiceService,TimetableService, 
-                RepoEmployee, RepoTimetable,TimeServiceService, 
-                RepoDay,RepoTimeService, RepoService],
-    exports: [  RepoCompany,CompanyService,
-                RepoTimetable, RepoDay, 
-                RepoService, RepoTimeService
-            ], 
+                RepoCompany,CompanyService,CompanyResolvers, 
+                RepoDay, DayService,
+                RepoEmployee,EmployeeService,
+                RepoService,ServiceService,
+                RepoTimetable,TimetableService,
+                RepoTimeService,TimeServiceService,
+                RepoTimeEmployee,TimeEmployeeService
+               ],
+    exports:   [  
+                RepoCompany,CompanyService,
+                RepoDay,
+                RepoEmployee, 
+                RepoService, 
+                RepoTimetable, 
+                RepoTimeService, 
+                RepoTimeEmployee
+               ], 
 })
 export class CompanyModule {}

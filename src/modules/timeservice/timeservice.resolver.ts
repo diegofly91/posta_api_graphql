@@ -29,6 +29,7 @@ export class TimeServiceResolvers {
     public async updateTimeService( @Args('id') id: number, @Args('input') input: TimeServiceInput): Promise<boolean> {
         return await this._timeService.updateTimeService(id,input);
     }
+    
     @Mutation(() => TimeService, { nullable: true })
     public async deleteTimeService( @Args('id') id: number): Promise<boolean> {
         return await this._timeService.deleteTimeService(id);

@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { Day } from './day.entity';
 import { DayResolvers } from './day.resolver';
 import { DayService } from './day.service';
@@ -14,8 +15,16 @@ import { Company } from '../company/company.entity';
 import { CompanyService } from '../company/company.service';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Day,Timetable, Company ])],
-    providers: [RepoDay, RepoCompany, RepoTamitable, DayResolvers, DayService, TimetableService, CompanyService ],
-    exports: [RepoDay, RepoCompany,  DayService],
+    imports:   [TypeOrmModule.forFeature([Day, Company, Timetable ])],
+    providers: [
+                 RepoDay, DayService, DayResolvers,    
+                 RepoCompany, CompanyService, 
+                 RepoTamitable,TimetableService,
+               ],
+    exports:   [
+                 RepoDay, 
+                 RepoCompany,  
+                 DayService
+               ],
 })
 export class DayModule {}

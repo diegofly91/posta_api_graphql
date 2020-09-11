@@ -18,32 +18,25 @@ import RepoTimetable from '../timetable/timetable.repository';
 import { Timetable } from '../timetable/timetable.entity';
 import { TimetableService} from '../timetable/timetable.service';
 
+import RepoDay from '../day/day.repository';
 import { Day } from '../day/day.entity';
 import { DayService } from '../day/day.service';
-import RepoDay from '../day/day.repository';
 
 @Module({
     imports:   [TypeOrmModule.forFeature([Service, Company, TimeService, Timetable, Day ])],
     providers: [
-                    RepoTimeService,
-                    RepoDay,
-                    RepoService,
-                    RepoCompany,
-                    RepoTimetable,
-                    ServiceService,
-                    DayService,
-                    TimetableService,
-                    TimeServiceService, 
-                    ServiceResolvers, 
-                    CompanyService
+                    RepoService, ServiceService,ServiceResolvers,
+                    RepoTimeService,TimeServiceService,
+                    RepoDay,DayService,
+                    RepoCompany, CompanyService,
+                    RepoTimetable, TimetableService
                 ],
     exports:   [
+                    RepoService,ServiceService,
                     RepoTimeService, 
-                    RepoService,
                     RepoDay,
                     RepoCompany,
-                    RepoTimetable,
-                    ServiceService
+                    RepoTimetable
                ],
 })
 export class ServiceModule {}

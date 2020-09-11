@@ -7,11 +7,11 @@ import {
     ManyToOne,
     CreateDateColumn,
     UpdateDateColumn,
-    PrimaryColumn,
-    RelationId,
+    OneToMany,
     JoinColumn
 } from 'typeorm';
 import { Company } from '../company/company.entity';
+import { TimeEmployee } from '../timeemployee/timeemployee.entity';
 
 @ObjectType()
 @Entity({ name: 'employees' })
@@ -27,6 +27,9 @@ export class Employee extends BaseEntity {
     @ManyToOne(() => Company, company => company.employees, {primary:true})
     @JoinColumn({name: 'companies_id'})
     company: Company;
+
+    @OneToMany(() => TimeEmployee, timeemployee => timeemployee.employees, { cascade: true } ) 
+    timeemployees: TimeEmployee[];
 
     @Field({ description: `name employee` })
     @Column({ type: 'varchar', nullable: false, length: 30 })

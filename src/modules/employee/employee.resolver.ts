@@ -6,11 +6,16 @@ import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
 import { UsePipes, ValidationPipe } from '@nestjs/common';
 import { CompanyService } from '../company/company.service';
 import { Company } from '../company/company.entity';
+import { TimeEmployeeService } from '../timeemployee/timeemployee.service';
+import { TimeEmployee } from '../timeemployee/timeemployee.entity';
+import { TimeEmployeeInputQuery } from '../timeemployee/timeemployeeDto/timeemployee.Input';
+
 
 @Resolver(() => Employee)
 export class EmployeeResolvers {
     constructor(private readonly _employeeService: EmployeeService,
-                private readonly _companyService: CompanyService
+                private readonly _companyService: CompanyService,
+                private readonly _timeemployeeService: TimeEmployeeService,
     ) {}
 
     @Query(() => Employee, { nullable: true })
@@ -51,6 +56,14 @@ export class EmployeeResolvers {
     async company(@Parent() employee) {
         const { companyId } = employee;
         return await this._companyService.getCompany(companyId);
+    }
+
+    @ResolveField('timeemployee', returns => TimeEmployee)
+    async timeemployee(@Parent() employee) {
+        const { id } = employee;
+        const input = new TimeEmployeeInputQuery();
+        input.employeeId = id;
+        return await this._timeemployeeService.getTimeEmployee(input);
     }
 
     // @Subscription(() => Service)

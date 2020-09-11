@@ -1,0 +1,41 @@
+type TimeEmployee {
+    id: Int!
+    timetableId: Int!
+    timetable: Timetable
+    employeeId: Int!
+    employee: Employee
+    hini: String!
+    hend: String!
+    status: Boolean
+    createAdt: String!
+    createUpd: String
+}
+
+input NewTimeEmployeeInput {
+  timetableId: Int!
+  employeeId: Int!
+  hini: String!
+  hend: String!
+  status: Boolean!
+}
+
+input TimeEmployeeInput {
+  hini: String!
+  hend: String!
+  status: Boolean!
+}
+
+input TimeEmployeeInputQuery {
+  employeeId: Int!
+  status: Boolean
+}
+
+type Query {
+   getTimeEmployee(input: TimeEmployeeInputQuery!): [TimeEmployee!]!
+}
+
+type Mutation {
+  createTimeEmployee(input: NewTimeEmployeeInput!): Boolean! 
+  updateTimeEmployee(id: Int!, input: TimeEmployeeInput!): Boolean!
+  deleteTimeEmployee(id: Int!): Boolean!
+}

@@ -14,6 +14,8 @@ import {
 import { Day } from '../day/day.entity';
 import { Company } from '../company/company.entity';
 import { TimeService } from '../timeservice/timeservice.entity';
+import { TimeEmployee } from '../timeemployee/timeemployee.entity';
+
 
 @ObjectType()
 @Entity({ name: 'timetables' })
@@ -40,6 +42,9 @@ export class Timetable extends BaseEntity {
 
     @OneToMany(type => TimeService, timeservice => timeservice.timetables,  { eager: true } )
     timeservices: TimeService[];
+
+    @OneToMany(type => TimeEmployee, timeemployee => timeemployee.timetables,  { eager: true } )
+    timeemployees: TimeService[];
 
     @Field({ description: `hour start` })
     @Column({ type: 'time', nullable: false })

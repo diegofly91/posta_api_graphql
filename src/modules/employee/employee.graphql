@@ -5,6 +5,7 @@ type Employee {
   lastname: String
   mobile: String
   company: Company!
+  timeemployee: [TimeEmployee]!
   status: Boolean
   createAdt: String!
   createUpd: String

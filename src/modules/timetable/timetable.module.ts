@@ -25,25 +25,18 @@ import { ServiceService } from '../service/service.service';
 @Module({
     imports: [  TypeOrmModule.forFeature([Timetable, Company, Day, Service, TimeService ])],
     providers: [
-                RepoTimeService,
-                RepoDay,
-                RepoCompany,
-                RepoTimetable,
-                RepoService, 
-                CompanyService,
-                ServiceService,
-                TimeServiceService, 
-                DayService, 
-                TimetableResolvers, 
-                TimetableService 
+                RepoTimeService,TimeServiceService,TimetableResolvers,
+                RepoDay,DayService,
+                RepoCompany,CompanyService,
+                RepoTimetable,TimetableService,
+                RepoService, ServiceService
                ],
     exports:   [
-                RepoTimeService,
+                RepoTimeService,TimetableService,
                 RepoDay,
                 RepoCompany,
                 RepoService,
-                RepoTimetable, 
-                TimetableService
+                RepoTimetable
                ],
 })
 export class TimetableModule {}
