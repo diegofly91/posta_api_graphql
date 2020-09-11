@@ -44,7 +44,7 @@ export class EmployeeService {
 
     async updateEmployee(id: number, input: EmployeeInput): Promise<boolean> {
         const employee = await this.repos._employeeRepository.update({id}, input);
-        if (employee) {
+        if (employee.affected) {
             return true;
         } else {
             throw new NotFoundException();
@@ -53,7 +53,7 @@ export class EmployeeService {
 
     async deleteEmployee(id: number): Promise<boolean> {
         const dele = await this.repos._employeeRepository.delete({id});
-        if (dele) {
+        if (dele.affected) {
             return true;
         } else {
             throw new NotFoundException();

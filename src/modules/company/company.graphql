@@ -6,7 +6,7 @@ type Company {
     description: String
     address: String
     status: Boolean
-    phone: Int
+    mobile: String
     timetable: [Timetable!]!
     service: [Service!]!
     employee: [Employee!]!
@@ -21,7 +21,7 @@ input CompanyInput {
   description: String
   address: String
   status: Boolean
-  phone: Int
+  mobile: String
 }
 
 input CompanyInputQuery {
@@ -29,7 +29,6 @@ input CompanyInputQuery {
      description: String
      address: String
      status: Boolean
-     phone: Int
 }
 
 """ Query para ver datos de  Empresas """
@@ -37,9 +36,9 @@ type Query {
    #obten los datos una empresa mediante el ID
    getCompany(id: Int!): Company
    # traer todas las empresas o (desde hasta )
-   getCompanys( input: CompanyInputQuery,pagination: Pagination): [Company!]!
+   getCompanies( input: CompanyInputQuery,pagination: Pagination): [Company!]!
    #trarer la cantidad de empresas 
-   countCompanys(input: CompanyInputQuery): Int
+   countCompanies(input: CompanyInputQuery): Int
 }
 
 """ Mutation  modulo empresas"""

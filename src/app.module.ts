@@ -10,13 +10,15 @@ import { EmployeeModule } from './modules/employee/employee.module';
 import { CompanyModule } from './modules/company/company.module';
 import { DayModule } from './modules/day/day.module';
 import { TimetableModule } from './modules/timetable/timetable.module';
+import { TimeServiceModule } from './modules/timeservice/timeservice.module';
 
 @Module({
     imports: [
                  ConfigModule, DatabaseModule, 
                  UserModule, ServiceModule, 
-                 CompanyModule,EmployeeModule,
-                 TimetableModule, DayModule,  GraphQL
+                 CompanyModule,EmployeeModule, DayModule, 
+                 TimeServiceModule,
+                 TimetableModule, GraphQL
              ],
 })
 export class AppModule {

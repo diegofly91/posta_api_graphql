@@ -14,7 +14,7 @@ import { Timetable } from '../timetable/timetable.entity';
 
 
 @ObjectType()
-@Entity({ name: 'companys' })
+@Entity({ name: 'companies' })
 export class Company extends BaseEntity {
     @Field(type => Int, { description: `ID of the company` })
     @PrimaryGeneratedColumn('increment')
@@ -33,8 +33,8 @@ export class Company extends BaseEntity {
     address: string;
 
     @Field({ description: `phone company` })
-    @Column({ type: 'bigint', nullable: true })
-    phone: number;
+    @Column({ type: 'varchar', nullable: true, length: 20 })
+    mobile: string;
 
     @Field()
     @Column({ type: 'boolean', default: 1 })

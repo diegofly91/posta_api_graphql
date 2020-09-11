@@ -6,19 +6,18 @@ import {
     IsMilitaryTime,
     IsBoolean
 } from 'class-validator';
-
 @InputType()
-export class NewTimetableInput {
+export class NewTimeServiceInput {
 
     @Field({ nullable: false })
     @IsInt()
     @IsNotEmpty()
-    companyId: number;
+    timetableId: number;
 
     @Field({ nullable: false })
     @IsInt()
     @IsNotEmpty()
-    dayId: number;
+    serviceId: number;
     
     @Field({ nullable: false })
     @IsMilitaryTime({ message: 'FORMAT HH:MM' })
@@ -30,14 +29,15 @@ export class NewTimetableInput {
     @IsNotEmpty()
     hend: Date;
 
-}
-@InputType()
-export class TimetableInput {
-
-    @Field({ nullable: false })
-    @IsInt()
+    @Field({ nullable: true })
+    @IsBoolean()
     @IsNotEmpty()
-    dayId: number;
+    status: boolean;
+
+}
+
+@InputType()
+export class TimeServiceInput {
 
     @Field({ nullable: false })
     @IsMilitaryTime({ message: 'FORMAT HH:MM' })
@@ -53,18 +53,16 @@ export class TimetableInput {
     @IsBoolean()
     @IsOptional()
     status: boolean;
+
 }
+
 @InputType()
-export class TimetableInputQuery {
+export class TimeServiceInputQuery {
+
     @Field({ nullable: false })
     @IsInt()
     @IsNotEmpty()
-    companyId: number;
-
-    @Field({ nullable: true })
-    @IsInt()
-    @IsOptional()
-    dayId: number;
+    serviceId: number;
 
     @Field({ nullable: true })
     @IsBoolean()

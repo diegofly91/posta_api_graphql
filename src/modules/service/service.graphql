@@ -6,6 +6,7 @@ type Service {
   price: Float
   duration: Int!
   company: Company!
+  timeservice: [TimeService]!
   status: Boolean
   createAdt: String!
   createUpd: String

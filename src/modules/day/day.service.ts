@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { Day } from './day.entity';
+import { Not} from 'typeorm';
 
 import RepoDay  from './day.repository';
 
@@ -28,7 +29,7 @@ export class DayService {
     }
 
     async updateDay(id: number, name: string): Promise<boolean> {
-        const day = await this.repos._dayRepository.findOne({  where: { name: name.toLowerCase().trim(), id: !id }});
+        const day = await this.repos._dayRepository.findOne({  where: { name: name.toLowerCase().trim(), id: Not(id) }});
         if (day){
             throw new BadRequestException('the day already exists');
         }

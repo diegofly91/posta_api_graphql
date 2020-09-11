@@ -6,6 +6,7 @@ type Timetable {
     day: Day!
     hini: String!
     hend: String!
+    status: Boolean
     createAdt: String!
     createUpd: String
 }
@@ -21,14 +22,17 @@ input TimetableInput {
   dayId: Int!
   hini: String!
   hend: String!
+  status: Boolean
 }
 
 input TimetableInputQuery {
   companyId: Int!
   dayId: Int
+  status: Boolean
 }
 
 type Query {
+    getTimetableId(id: Int!): Timetable!
    getTimetable(input: TimetableInputQuery!): [Timetable!]!
   # getTimetables(input: TimetableInputQuery, pagination: Pagination): [Employee!]!
 }

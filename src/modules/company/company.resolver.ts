@@ -30,18 +30,18 @@ export class CompanyResolvers {
     ) {}
 
     @Query(() => [Company])
-    public async getCompanys(
+    public async getCompanies(
         @Args('input') input?: CompanyInputQuery, 
         @Args('pagination') pagination?: PaginationArgs,
     ): Promise<Company[]> {
-        return this._companyService.getCompanys(input,pagination);
+        return this._companyService.getCompanies(input,pagination);
     }
 
     @Query(() => Number)
-    public async countCompanys(
+    public async countCompanies(
         @Args('input') input?: CompanyInputQuery,
     ): Promise<number> {
-        return this._companyService.countCompanys(input);
+        return this._companyService.countCompanies(input);
     }
 
     @Query(() => Company, { nullable: true })

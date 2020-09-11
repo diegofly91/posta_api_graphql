@@ -8,31 +8,38 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     PrimaryColumn,
+    OneToMany,
     JoinColumn
 } from 'typeorm';
 import { Day } from '../day/day.entity';
 import { Company } from '../company/company.entity';
+import { TimeService } from '../timeservice/timeservice.entity';
 
 @ObjectType()
 @Entity({ name: 'timetables' })
 export class Timetable extends BaseEntity {
-    @Field(type => Int, { description: `ID of the employee` })
+    @Field(type => Int, { description: `ID hours table ` })
     @PrimaryGeneratedColumn('increment')
     id: number;
 
-    @PrimaryColumn({name: 'companys_id'})
+    @Field({ description: `ID company` })
+    @Column({name: 'companies_id'})
     companyId: number;
 
     @ManyToOne(() => Company, company => company.timetables, {primary:true})
-    @JoinColumn({name: 'companys_id'})
+    @JoinColumn({name: 'companies_id'})
     company: Company;
 
-    @PrimaryColumn({name: 'days_id'})
+    @Field({ description: `ID day` })
+    @Column({name: 'days_id'})
     dayId: number;
 
-    @ManyToOne(() => Day, day => day.timetables, {primary:true})
+    @ManyToOne(() => Day, day => day.timetables,  { eager: true })
     @JoinColumn({name: 'days_id'})
     day: Day;
+
+    @OneToMany(type => TimeService, timeservice => timeservice.timetables,  { eager: true } )
+    timeservices: TimeService[];
 
     @Field({ description: `hour start` })
     @Column({ type: 'time', nullable: false })
@@ -41,6 +48,10 @@ export class Timetable extends BaseEntity {
     @Field({ description: `hour end` })
     @Column({ type: 'time', nullable: false })
     hend: Date;
+
+    @Field()
+    @Column({ type: 'boolean', default: 1 })
+    status: boolean;
 
     @Field()
     @CreateDateColumn({ type: 'timestamp', name: 'created_at' })

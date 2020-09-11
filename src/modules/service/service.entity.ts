@@ -5,12 +5,13 @@ import {
     PrimaryGeneratedColumn,
     Column,
     ManyToOne,
+    OneToMany,
     CreateDateColumn,
     UpdateDateColumn,
-    PrimaryColumn,
     JoinColumn
 } from 'typeorm';
 import { Company } from '../company/company.entity';
+import { TimeService } from '../timeservice/timeservice.entity';
 
 @ObjectType()
 @Entity({ name: 'services' })
@@ -19,13 +20,17 @@ export class Service extends BaseEntity {
     @PrimaryGeneratedColumn('increment')
     id: number;
 
-    @PrimaryColumn({name: 'companys_id'})
+    @Field({ description: `timetable id` })
+    @Column({name: 'companies_id'})
     companyId: number;
 
     @ManyToOne(() => Company, company => company.services, {primary:true})
-    @JoinColumn({name: 'companys_id'})
+    @JoinColumn({name: 'companies_id'})
     company: Company;
 
+    @OneToMany(() => TimeService, timeservice => timeservice.services, { cascade: true } ) 
+    timeservices: TimeService[];
+  
     @Field({ description: `name service` })
     @Column({ type: 'varchar', nullable: false, length: 50 })
     name: string;

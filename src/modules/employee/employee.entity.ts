@@ -8,6 +8,7 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     PrimaryColumn,
+    RelationId,
     JoinColumn
 } from 'typeorm';
 import { Company } from '../company/company.entity';
@@ -19,16 +20,26 @@ export class Employee extends BaseEntity {
     @PrimaryGeneratedColumn('increment')
     id: number;
 
-    @PrimaryColumn({name: 'companys_id'})
+    @Field({ description: `ID  company` })
+    @Column({name: 'companies_id'})
     companyId: number;
-
+    
     @ManyToOne(() => Company, company => company.employees, {primary:true})
-    @JoinColumn({name: 'companys_id'})
+    @JoinColumn({name: 'companies_id'})
     company: Company;
 
     @Field({ description: `name employee` })
-    @Column({ type: 'varchar', nullable: false, length: 50 })
+    @Column({ type: 'varchar', nullable: false, length: 30 })
     name: string;
+
+    
+    @Field({ description: `last name employee` })
+    @Column({ type: 'varchar', nullable: true, length: 30 })
+    lastname: string;
+    
+    @Field({ description: `name employee` })
+    @Column({ type: 'varchar', nullable: true, length: 20 })
+    mobile: string;
 
     @Field()
     @Column({ type: 'boolean', default: 1 })

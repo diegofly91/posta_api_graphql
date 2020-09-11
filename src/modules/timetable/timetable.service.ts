@@ -9,12 +9,20 @@ import RepoTimetable  from './timetable.repository';
 export class TimetableService {
     constructor(private readonly repos: RepoTimetable) {}
 
+
+    async getTimetableId(id: number): Promise<Timetable> {
+        return await this.repos._timetableRepository.findOne({id});
+    }
+
      async getTimetable(input: TimetableInputQuery): Promise<Timetable[]> {
-        return await this.repos._timetableRepository.find({where : input});
+        return await this.repos._timetableRepository.find({where : input , order:{dayId: "ASC",hini: "ASC"}});
     }
 
     async createTimetable(input: NewTimetableInput): Promise<boolean> {
         const {companyId, dayId, hini, hend } = input;
+        if(hini >= hend){
+            throw new BadRequestException('start time mator to end time');
+        }
         const exists =  await this.repos._timetableRepository.find({
                           where:[{dayId, companyId,hini: Between(hini, hend)},
                                  {dayId, companyId,hend: Between(hini, hend)}
@@ -31,6 +39,7 @@ export class TimetableService {
 
     async updateTimetable(id: number, input: TimetableInput): Promise<boolean> {
         const {dayId, hini, hend } = input;
+
         const exist =  await this.repos._timetableRepository.find({
                        where:[{dayId,id: Not(id),hini: Between(hini, hend),},
                               {dayId,id: Not(id),hend: Between(hini, hend)}

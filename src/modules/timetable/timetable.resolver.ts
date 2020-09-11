@@ -16,6 +16,10 @@ export class TimetableResolvers {
                 private readonly _dayService: DayService
     ) {}
 
+    @Query(() => Timetable, { nullable: true })
+    public async getTimetableId(@Args('id') id: number): Promise<Timetable> {
+        return this._timetableService.getTimetableId(id);
+    }
 
     @Query(() => Timetable, { nullable: true })
     public async getTimetable(@Args('input') input: TimetableInputQuery): Promise<Timetable[]> {
@@ -45,7 +49,7 @@ export class TimetableResolvers {
         return await this._companyService.getCompany(companyId);
     }
 
-    @ResolveField('day', returns => Company)
+    @ResolveField('day', returns => Day)
     async day(@Parent() timetable) {
         const { dayId } = timetable;
         return await this._dayService.getDay(dayId);

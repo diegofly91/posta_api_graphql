@@ -1,4 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql';
+import {BadRequestException,InternalServerErrorException} from '@nestjs/common';
 import {
     MinLength,
     MaxLength,
@@ -6,18 +7,39 @@ import {
     IsInt,
     IsBoolean,
     IsOptional,
-    IsNumber,
-    IsString
+    IsPhoneNumber,
+    IsString,
+    ValidationArguments
 } from 'class-validator';
 
 @InputType()
 export class EmployeeInput {
     
     @Field({ nullable: false })
-    @MinLength(1, { message: 'Title is too short' })
-    @MaxLength(50, { message: 'Title is too long' })
+    @MinLength(1, { message: 'name is too short' })
+    @MaxLength(30, { message: 'name is too long' })
     @IsNotEmpty()
     name: string;
+
+    @Field({ nullable: true })
+    @MinLength(1, { message: 'lastname is too short' })
+    @MaxLength(30, { message: 'lastname is too long' })
+    @IsOptional()
+    lastname: string;
+
+    @Field({ nullable: true })
+    @IsString({ message: 'must be a valid number' })
+    @IsPhoneNumber('CO' ,{
+        message: (args: ValidationArguments) => {
+            if (args.value.length !== 12) {
+                throw new BadRequestException(`${args.value} Invalid MobilePhone Number`);
+            } else {
+                throw new InternalServerErrorException();
+            }
+        },
+    })
+    @IsOptional()
+    mobile: string;
 
     @Field({ nullable: true })
     @IsBoolean()
@@ -32,10 +54,30 @@ export class NewEmployeeInput {
     companyId: number;
 
     @Field({ nullable: false })
-    @MinLength(1, { message: 'Title is too short' })
-    @MaxLength(50, { message: 'Title is too long' })
+    @MinLength(1, { message: 'name is too short' })
+    @MaxLength(30, { message: 'name is too long' })
     @IsNotEmpty()
     name: string;
+
+    @Field({ nullable: true })
+    @MinLength(1, { message: 'lastname is too short' })
+    @MaxLength(30, { message: 'lastname is too long' })
+    @IsOptional()
+    lastname: string;
+
+    @Field({ nullable: true })
+    @IsString({ message: 'must be a valid number' })
+    @IsPhoneNumber('CO' ,{
+        message: (args: ValidationArguments) => {
+            if (args.value.length !== 12) {
+                throw new BadRequestException(`${args.value} Invalid MobilePhone Number`);
+            } else {
+                throw new InternalServerErrorException();
+            }
+        },
+    })
+    @IsOptional()
+    mobile: string;
 
     @Field({ nullable: true })
     @IsBoolean()

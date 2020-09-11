@@ -2,6 +2,8 @@ type Employee {
   id: Int!
   companyId: Int!
   name: String!
+  lastname: String
+  mobile: String
   company: Company!
   status: Boolean
   createAdt: String!
@@ -11,18 +13,23 @@ type Employee {
 input NewEmployeeInput {
   companyId: Int!
   name: String!
+  mobile: String
+  lastname: String
   status: Boolean
 }
 
 
 input EmployeeInput {
   name: String!
+  lastname: String
+  mobile: String
   status: Boolean
 }
 
 input EmployeeInputQuery {
   companyId: Int
   name: String
+  lastname: String
   status: Boolean
 }
 

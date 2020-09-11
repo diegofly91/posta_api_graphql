@@ -5,9 +5,13 @@ import {
     IsNotEmpty,
     IsString,
     IsInt,
+    IsPhoneNumber,
     IsBoolean,
-    IsOptional
+    IsOptional,
+    ValidationArguments
 } from 'class-validator';
+import {BadRequestException,InternalServerErrorException} from '@nestjs/common';
+
 
 @InputType()
 export class CompanyInput {
@@ -29,9 +33,19 @@ export class CompanyInput {
     address: string;
 
     @Field({ nullable: true })
-    @IsInt()
+    @IsString({ message: 'must be a valid number' })
+    @IsPhoneNumber('CO' ,{
+        message: (args: ValidationArguments) => {
+            if (args.value.length !== 12) {
+                throw new BadRequestException(`${args.value} Invalid MobilePhone Number`);
+            } else {
+                throw new InternalServerErrorException();
+            }
+        },
+    })
     @IsOptional()
-    phone: number;
+    mobile: string;
+
 
     @Field({ nullable: true })
     @IsBoolean()
@@ -58,11 +72,6 @@ export class CompanyInputQuery {
     @IsString()
     @IsOptional()
     address: string;
-
-    @Field({ nullable: true })
-    @IsInt()
-    @IsOptional()
-    phone: number;
 
     @Field({ nullable: true })
     @IsBoolean()
