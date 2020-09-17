@@ -56,4 +56,11 @@ export class UserRepository extends Repository<User> {
         
         return true;
     }
+    
+    async deleteUser(id: number): Promise<void> {
+        const userDeleted = await this.delete(id);
+        if (!userDeleted) {
+            throw new NotFoundException();
+        }
+    }
 }

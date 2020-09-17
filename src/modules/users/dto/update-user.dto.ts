@@ -4,6 +4,7 @@ export class UpdateUserDto {
     @MinLength(10, { message: 'Email is too short' })
     @MaxLength(60, { message: 'Email is too long' })
     @IsEmail()
+    @IsNotEmpty()
     email: string;
 
     @MinLength(8, { message: 'Username is too short' })
