@@ -1,13 +1,11 @@
 import { IsBoolean, IsEmail, IsNotEmpty, IsString, MaxLength, MinLength } from 'class-validator';
 
-export class CreateUserDto {
+export class UpdateUserDto {
     @MinLength(10, { message: 'Email is too short' })
     @MaxLength(60, { message: 'Email is too long' })
     @IsEmail()
-    @IsString()
-    @IsNotEmpty()
     email: string;
-    
+
     @MinLength(8, { message: 'Username is too short' })
     @MaxLength(30, { message: 'Username is too long' })
     @IsString()

@@ -2,9 +2,10 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe, BadRequestException, ValidationError, Logger } from '@nestjs/common';
 import { AppModule } from './app.module';
 
-async function bootstrap() {
+(async function bootstrap() {
     const app = await NestFactory.create(AppModule);
-    
+    const logger = new Logger();
+
     app.useGlobalPipes(
         new ValidationPipe({
             exceptionFactory: (errors: ValidationError[]) => {
@@ -16,10 +17,8 @@ async function bootstrap() {
             forbidUnknownValues: false,
         }),
     );
-    
-    await app.listen(AppModule.port);
-}
 
-bootstrap().then(() => {
-    Logger.log(`Your application is running on http://${AppModule.host}:${AppModule.port}`, 'main:bootstrap');
-});
+    await app.listen(AppModule.port);
+    logger.log(`Server is running in ${await app.getUrl()}`);
+})()
+

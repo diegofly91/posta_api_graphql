@@ -1,7 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { User } from './user.entity';
 import { UserRepository } from './user.repository';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -24,6 +25,10 @@ export class UsersService {
 
     async createUser(createUserDto: CreateUserDto): Promise<User> {
         return this.userRepository.createUser(createUserDto);
+    }
+    
+    async updateUser(id: number, updateUserDto: UpdateUserDto): Promise<boolean> {
+        return await this.userRepository.updateUser(id, updateUserDto);
     }
 
     async removeUser(id: number): Promise<void> {

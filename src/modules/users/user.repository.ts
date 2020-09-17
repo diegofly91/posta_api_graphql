@@ -1,7 +1,8 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { User } from './user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
@@ -22,14 +23,19 @@ export class UserRepository extends Repository<User> {
         return await this.findOne({ email });
     }
     
-    async createUser(createUserDto: CreateUserDto): Promise<User> {
-        const alreadyUser = await this.createQueryBuilder('user')
+    async existsUser(createUserDto: CreateUserDto): Promise<boolean> {
+        const existsUser = await this.createQueryBuilder('user')
             .select()
             .where('user.email = :email', { email: createUserDto.email })
             .orWhere('user.username = :username', { username: createUserDto.username })
             .getOne();
-
-        if (alreadyUser) {
+        
+        return !!(existsUser);
+    }
+    
+    async createUser(createUserDto: CreateUserDto): Promise<User> {
+        const existsUser = await this.existsUser(createUserDto);
+        if (existsUser) {
             throw new BadRequestException(`The user already registered.`);
         }
 
@@ -40,5 +46,14 @@ export class UserRepository extends Repository<User> {
         user.isActive = createUserDto.isActive;
         
         return this.save(user);
+    }
+    
+    async updateUser(id: number, updateUserDto: UpdateUserDto): Promise<boolean> {
+        const userUpdated = await this.update(id, updateUserDto);
+        if (!userUpdated) {
+            throw new NotFoundException();
+        }
+        
+        return true;
     }
 }
