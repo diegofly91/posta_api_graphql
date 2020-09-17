@@ -31,7 +31,3 @@ type Mutation {
   updateUser(id: Int!, input: UserInput!): Boolean!
   deleteUser(id: Int!): Boolean!
 }
-
-# type Subscription {
-#         countUser : Int
-# }
