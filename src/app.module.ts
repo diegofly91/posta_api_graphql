@@ -13,20 +13,21 @@ import { TimetableModule } from './modules/timetable/timetable.module';
 import { TimeServiceModule } from './modules/timeservice/timeservice.module';
 import { TimeEmployeeModule } from './modules/timeemployee/timeemployee.module';
 
-
 @Module({
     imports: [
-                 ConfigModule, DatabaseModule, 
-                 UserModule, ServiceModule, 
-                 CompanyModule,EmployeeModule, DayModule, 
-                 TimeServiceModule, TimeEmployeeModule,
-                 TimetableModule, GraphQL
-             ],
+        ConfigModule, DatabaseModule,
+        UserModule, ServiceModule,
+        CompanyModule, EmployeeModule, DayModule,
+        TimeServiceModule, TimeEmployeeModule,
+        TimetableModule, GraphQL,
+    ],
 })
 export class AppModule {
     static port: number | string;
-    
-    constructor(private readonly _configService: ConfigService) {
-        AppModule.port = this._configService.get(Configuration.APP_PORT);
+    static host: string;
+
+    constructor(private readonly configService: ConfigService) {
+        AppModule.host = this.configService.get(Configuration.HOST);
+        AppModule.port = this.configService.get(Configuration.PORT);
     }
 }

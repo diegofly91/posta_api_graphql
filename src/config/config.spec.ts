@@ -6,8 +6,8 @@ describe('ConfigModule', () => {
     beforeAll(() => {
         configService = new ConfigService();
     });
-
-    it('Debería retornar el nombre de usuario de base de datos basado en el valor del campo USERNAME del archivo .env ==> USERNAME="sanders"', () => {
-        expect('sanders').toBe(configService.get('USERNAME'));
+    
+    it('This should return the name of the application according to the APP_NAME key in the .env file.', () => {
+        expect('Posta').toBe(configService.get('APP_NAME'));
     });
 });
