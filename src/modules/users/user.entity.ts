@@ -20,12 +20,12 @@ export class User {
     @Column({ type: 'varchar', nullable: false, length: 64 })
     password: string;
 
-    @Column({ name: 'is_active' })
+    @Column({ type: 'boolean', nullable: true, name: 'is_active', default: 1 })
     isActive: boolean;
 
-    @CreateDateColumn({ type: 'timestamp', name: 'created_at' })
+    @CreateDateColumn({ type: 'timestamp', nullable: true, name: 'created_at' })
     createdAt: Date;
 
-    @UpdateDateColumn({ type: 'timestamp', name: 'updated_at' })
+    @UpdateDateColumn({ type: 'timestamp', nullable: true, name: 'updated_at' })
     updatedAt: Date;
 }
