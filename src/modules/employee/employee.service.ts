@@ -1,62 +1,35 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import RepoEmployee  from './employee.repository';
 import { Employee } from './employee.entity';
 import { NewEmployeeInput, EmployeeInput, EmployeeInputQuery } from './employeeDto/employee.Input';
 import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
 
-import RepoEmployee  from './employee.repository';
-
 @Injectable()
 export class EmployeeService {
-    constructor(private readonly repos: RepoEmployee) {
+    constructor(private readonly repo: RepoEmployee) {
     }
 
     async getEmployee(id: number): Promise<Employee> {
-        return await this.repos._employeeRepository.findOne({id});
+        return await this.repo.getEmployee(id);
     }
 
     async getEmployees(input?: EmployeeInputQuery, pagination?: PaginationArgs): Promise<Employee[]> {
-        let inputData = input ? input : {};
-
-        if (pagination) {
-            const { limit, offset } = pagination;
-            return await this.repos._employeeRepository.find({
-                where: inputData,
-                take: limit,
-                skip: offset,
-            });
-        } else {
-            return await this.repos._employeeRepository.find({ where: inputData });
-        }
+        return await this.repo.getEmployees(input, pagination);
     }
 
     async countEmployees(input?: EmployeeInputQuery): Promise<number> {
-        if (input) {
-            return await this.repos._employeeRepository.count({ where: input });
-        } else {
-            return await this.repos._employeeRepository.count();
-        }
+        return await this.repo.countEmployees(input);
     }
 
     async createEmployee(input: NewEmployeeInput): Promise<Employee> {
-        const savedEmployee: Employee = await this.repos._employeeRepository.save(input);
-        return savedEmployee;
+        return await this.repo.createEmployee(input);
     }
 
     async updateEmployee(id: number, input: EmployeeInput): Promise<boolean> {
-        const employee = await this.repos._employeeRepository.update({id}, input);
-        if (employee.affected) {
-            return true;
-        } else {
-            throw new NotFoundException();
-        }
+        return await this.repo.updateEmployee(id,input);
     }
 
     async deleteEmployee(id: number): Promise<boolean> {
-        const dele = await this.repos._employeeRepository.delete({id});
-        if (dele.affected) {
-            return true;
-        } else {
-            throw new NotFoundException();
-        }
+        return await this.repo.deleteEmployee(id);
     }
 }

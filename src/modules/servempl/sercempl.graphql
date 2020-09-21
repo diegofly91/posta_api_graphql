@@ -1,0 +1,27 @@
+type ServEmpl {
+    id: Int!
+    serviceId: Int!
+    service: Service!
+    employeeId: Int!
+    employee: Employee!
+    createAdt: String!
+}
+
+input NewServEmplInput {
+     serviceId: Int!
+     employeeId: Int!
+}
+
+input ServEmplQueryInput {
+     serviceId: Int
+     employeeId: Int
+}
+
+type Query {
+   getServEmpl(input: ServEmplQueryInput!): Boolean!
+ }
+
+type Mutation {
+  createServEmpl(input: NewServEmplInput!): Boolean! 
+  deleteServEmpl(id: Int!): Boolean!
+}

@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
 import RepoCompany  from './company.repository';
 import { Company } from './company.entity';
@@ -7,52 +7,29 @@ import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
 
 @Injectable()
 export class CompanyService {
-     constructor(private readonly repos: RepoCompany) {}
+     constructor(private readonly repo: RepoCompany) {}
 
     async getCompany(id: number): Promise<Company> {
-        return await this.repos._companyRepository.findOne(id);
+        return await this.repo.getCompany(id);
     }
 
     async getCompanies(input?: CompanyInputQuery, pagination?: PaginationArgs): Promise<Company[]> {
-        let inputData = input? input : {};
-        if (pagination) {
-            const { limit, offset } = pagination;
-            return await this.repos._companyRepository.find({
-                where: inputData,
-                take: limit,
-                skip: offset,
-            });
-        } else return await this.repos._companyRepository.find({where: inputData});
+        return await this.repo.getCompanies(input, pagination);
     }
 
     async countCompanies(input?: CompanyInputQuery): Promise<number> {
-        if (input){
-            return await this.repos._companyRepository.count({ where: input });
-        }else {
-            return await this.repos._companyRepository.count();
-        }
+        return await this.repo.countCompanies(input);
     }
 
     async createCompany(input: CompanyInput): Promise<Company> {
-        const savedCompany: Company = await this.repos._companyRepository.save(input);
-        return savedCompany;
+        return await this.repo.createCompany(input);
     }
 
     async updateCompany(id: number, input: CompanyInput): Promise<boolean> {
-        const company = await this.repos._companyRepository.update(id, input);
-        if (company) {
-            return true;
-        }else {
-            throw new NotFoundException();
-        } 
+        return await this.repo.updateCompany(id,input);
     }
 
     async deleteCompany(id: number): Promise<boolean> {
-        const dele = await this.repos._companyRepository.delete(id);
-        if (dele) {
-            return true;
-        }else {
-            throw new NotFoundException();
-        }
+        return await this.repo.deleteCompany(id);
     }
 }

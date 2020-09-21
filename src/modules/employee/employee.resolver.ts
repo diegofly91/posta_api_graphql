@@ -10,12 +10,16 @@ import { TimeEmployeeService } from '../timeemployee/timeemployee.service';
 import { TimeEmployee } from '../timeemployee/timeemployee.entity';
 import { TimeEmployeeInputQuery } from '../timeemployee/timeemployeeDto/timeemployee.Input';
 
+import { ServEmpl } from '../servempl/servempl.entity';
+import { ServEmplService } from '../servempl/servempl.service';
+import { ServEmplQueryInput } from '../servempl/servemplDto/servempl.Input';
 
 @Resolver(() => Employee)
 export class EmployeeResolvers {
     constructor(private readonly _employeeService: EmployeeService,
                 private readonly _companyService: CompanyService,
                 private readonly _timeemployeeService: TimeEmployeeService,
+                private readonly _servemplService: ServEmplService
     ) {}
 
     @Query(() => Employee, { nullable: true })
@@ -57,13 +61,21 @@ export class EmployeeResolvers {
         const { companyId } = employee;
         return await this._companyService.getCompany(companyId);
     }
-
+    
     @ResolveField('timeemployee', returns => TimeEmployee)
     async timeemployee(@Parent() employee) {
         const { id } = employee;
         const input = new TimeEmployeeInputQuery();
         input.employeeId = id;
         return await this._timeemployeeService.getTimeEmployee(input);
+    }
+
+    @ResolveField('servempls', returns => ServEmpl)
+    async servempls(@Parent() employee) {
+        const { id } = employee;
+        const input = new ServEmplQueryInput();
+        input.employeeId = id;
+        return await this._servemplService.getServEmpl(input);
     }
 
     // @Subscription(() => Service)

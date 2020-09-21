@@ -36,7 +36,7 @@ export class TimeEmployeeResolvers {
     }
 
     @ResolveField('timetable', returns => Timetable)
-    async company(@Parent() timeemployee) {
+    async timetable(@Parent() timeemployee) {
         const { timetableId } = timeemployee;
         return await this._tamitableService.getTimetableId(timetableId);
     }

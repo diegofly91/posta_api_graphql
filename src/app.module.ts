@@ -12,7 +12,7 @@ import { DayModule } from './modules/day/day.module';
 import { TimetableModule } from './modules/timetable/timetable.module';
 import { TimeServiceModule } from './modules/timeservice/timeservice.module';
 import { TimeEmployeeModule } from './modules/timeemployee/timeemployee.module';
-
+import { ServEmplModule } from './modules/servempl/servempl.module';
 
 @Module({
     imports: [
@@ -20,7 +20,7 @@ import { TimeEmployeeModule } from './modules/timeemployee/timeemployee.module';
                  UserModule, ServiceModule, 
                  CompanyModule,EmployeeModule, DayModule, 
                  TimeServiceModule, TimeEmployeeModule,
-                 TimetableModule, GraphQL
+                 TimetableModule, ServEmplModule, GraphQL
              ],
 })
 export class AppModule {

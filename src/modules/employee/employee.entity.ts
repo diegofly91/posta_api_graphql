@@ -12,6 +12,7 @@ import {
 } from 'typeorm';
 import { Company } from '../company/company.entity';
 import { TimeEmployee } from '../timeemployee/timeemployee.entity';
+import { ServEmpl } from '../servempl/servempl.entity';
 
 @ObjectType()
 @Entity({ name: 'employees' })
@@ -31,10 +32,12 @@ export class Employee extends BaseEntity {
     @OneToMany(() => TimeEmployee, timeemployee => timeemployee.employees, { cascade: true } ) 
     timeemployees: TimeEmployee[];
 
+    @OneToMany(() => ServEmpl, servempl => servempl.employees, { cascade: true })
+    servempls: ServEmpl[];
+
     @Field({ description: `name employee` })
     @Column({ type: 'varchar', nullable: false, length: 30 })
     name: string;
-
     
     @Field({ description: `last name employee` })
     @Column({ type: 'varchar', nullable: true, length: 30 })

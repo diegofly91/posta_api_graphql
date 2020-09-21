@@ -6,4 +6,5 @@ export enum Configuration {
     PASSWORD = 'PASSWORD',
     DATABASE = 'DATABASE',
     SECRET = 'SECRET',
+    PLAYGROUND = 'PLAYGROUND'
 }

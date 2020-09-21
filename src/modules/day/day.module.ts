@@ -14,6 +14,7 @@ import RepoCompany from '../company/company.repository';
 import { Company } from '../company/company.entity';
 import { CompanyService } from '../company/company.service';
 
+
 @Module({
     imports:   [TypeOrmModule.forFeature([Day, Company, Timetable ])],
     providers: [
@@ -26,5 +27,6 @@ import { CompanyService } from '../company/company.service';
                  RepoCompany,  
                  DayService
                ],
+  
 })
 export class DayModule {}

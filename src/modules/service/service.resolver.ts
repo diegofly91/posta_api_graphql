@@ -9,13 +9,17 @@ import { Company } from '../company/company.entity';
 import { TimeServiceService } from '../timeservice/timeservice.service';
 import { TimeService } from '../timeservice/timeservice.entity';
 import { TimeServiceInputQuery } from '../timeservice/timeserviceDto/timeservice.Input';
+import { ServEmpl } from '../servempl/servempl.entity';
+import { ServEmplService } from '../servempl/servempl.service';
+import { ServEmplQueryInput } from '../servempl/servemplDto/servempl.Input';
 
 
 @Resolver(() => Service)
 export class ServiceResolvers {
     constructor(private readonly _serviceService: ServiceService,
                 private readonly _timeserviceService: TimeServiceService,
-                private readonly _companyService: CompanyService
+                private readonly _companyService: CompanyService,
+                private readonly _servemplService: ServEmplService
     ) {}
 
     @Query(() => [Service])
@@ -64,6 +68,14 @@ export class ServiceResolvers {
         const input = new TimeServiceInputQuery();
         input.serviceId = id;
         return await this._timeserviceService.getTimeService(input);
+    }
+
+    @ResolveField('servempls', returns => ServEmpl)
+    async servempls(@Parent() service) {
+        const { id } = service;
+        const input = new ServEmplQueryInput();
+        input.serviceId = id;
+        return await this._servemplService.getServEmpl(input);
     }
 
     // @Subscription(() => Service)

@@ -12,6 +12,8 @@ import {
 } from 'typeorm';
 import { Company } from '../company/company.entity';
 import { TimeService } from '../timeservice/timeservice.entity';
+import { ServEmpl } from '../servempl/servempl.entity';
+
 
 @ObjectType()
 @Entity({ name: 'services' })
@@ -30,6 +32,9 @@ export class Service extends BaseEntity {
 
     @OneToMany(() => TimeService, timeservice => timeservice.services, { cascade: true } ) 
     timeservices: TimeService[];
+
+    @OneToMany(() => ServEmpl, servempl => servempl.services, { cascade: true })
+    servempls: ServEmpl[];
   
     @Field({ description: `name service` })
     @Column({ type: 'varchar', nullable: false, length: 50 })

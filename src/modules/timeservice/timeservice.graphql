@@ -3,7 +3,7 @@ type TimeService {
     timetableId: Int!
     timetable: Timetable
     serviceId: Int!
-    service: Service
+    # service: Service
     hini: String!
     hend: String!
     status: Boolean

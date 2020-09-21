@@ -22,21 +22,27 @@ import RepoDay from '../day/day.repository';
 import { Day } from '../day/day.entity';
 import { DayService } from '../day/day.service';
 
+import { ServEmpl } from '../servempl/servempl.entity';
+import { ServEmplService } from '../servempl/servempl.service';
+import RepoServEmpl from '../servempl/servempl.repository';
+
 @Module({
-    imports:   [TypeOrmModule.forFeature([Service, Company, TimeService, Timetable, Day ])],
+    imports:   [TypeOrmModule.forFeature([Service, Company, TimeService, Timetable, Day, ServEmpl ])],
     providers: [
                     RepoService, ServiceService,ServiceResolvers,
                     RepoTimeService,TimeServiceService,
                     RepoDay,DayService,
                     RepoCompany, CompanyService,
-                    RepoTimetable, TimetableService
+                    RepoTimetable, TimetableService,
+                    RepoServEmpl, ServEmplService
                 ],
     exports:   [
                     RepoService,ServiceService,
                     RepoTimeService, 
                     RepoDay,
                     RepoCompany,
-                    RepoTimetable
+                    RepoTimetable,
+                    RepoServEmpl
                ],
 })
 export class ServiceModule {}

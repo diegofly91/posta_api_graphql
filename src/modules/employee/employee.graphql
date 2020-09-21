@@ -6,6 +6,7 @@ type Employee {
   mobile: String
   company: Company!
   timeemployee: [TimeEmployee]!
+  servempls: [ServEmpl]!
   status: Boolean
   createAdt: String!
   createUpd: String
