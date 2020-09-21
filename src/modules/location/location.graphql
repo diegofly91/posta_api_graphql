@@ -1,0 +1,31 @@
+type Location {
+    id: Int!
+    companyId: Int!
+    lat: Float!
+    lng: Float!
+    createAdt: String!
+    createUpd: String
+}
+
+input NewLocationInput {
+   companyId: Int!
+   lat: Float!
+   lng: Float!
+}
+
+input LocationInput {
+   lat: Float!
+   lng: Float!
+}
+
+type Query {
+   getLocation(companyId: Int!): Location!
+}
+
+type Mutation {
+  createLocation(input: NewLocationInput!): Boolean! 
+  updateLocation(id: Int!, input: LocationInput!): Boolean!
+  deleteLocation(id: Int!): Boolean!
+}
+
+

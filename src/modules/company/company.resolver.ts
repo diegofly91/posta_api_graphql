@@ -17,6 +17,9 @@ import { TimetableService } from '../timetable/timetable.service';
 import { Timetable } from '../timetable/timetable.entity';
 import { TimetableInputQuery } from '../timetable/timetableDto/timetable.Input';
 
+import { Location } from '../location/location.entity';
+import { LocationService } from '../location/location.service';
+
 import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
 
 @Resolver(() => Company)
@@ -27,6 +30,7 @@ export class CompanyResolvers {
         private readonly _serviceService: ServiceService,
         private readonly _employeeService: EmployeeService,
         private readonly _timetableService: TimetableService,
+        private readonly _locationService: LocationService,
     ) {}
 
     @Query(() => [Company])
@@ -89,6 +93,12 @@ export class CompanyResolvers {
        let input = new TimetableInputQuery();
        input.companyId = id;
        return await this._timetableService.getTimetable(input);
+    }
+    
+    @ResolveProperty('location', returns => Location)
+    async location(@Parent() company: Company  ) {
+       const { id } = company;
+       return await this._locationService.getLocation(id);
     }
 
     // @Subscription(() => Company)

@@ -1,9 +1,9 @@
 import { Args, Mutation, Query, Resolver,ResolveField, Parent, Subscription } from '@nestjs/graphql';
+import { UsePipes, ValidationPipe } from '@nestjs/common';
 import { EmployeeService } from './employee.service';
 import { Employee } from './employee.entity';
 import { EmployeeInput, NewEmployeeInput, EmployeeInputQuery } from './employeeDto/employee.Input';
 import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
-import { UsePipes, ValidationPipe } from '@nestjs/common';
 import { CompanyService } from '../company/company.service';
 import { Company } from '../company/company.entity';
 import { TimeEmployeeService } from '../timeemployee/timeemployee.service';

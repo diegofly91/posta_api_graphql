@@ -30,11 +30,16 @@ import { Day } from '../day/day.entity';
 import RepoDay from '../day/day.repository';
 import { DayService} from '../day/day.service'
 
+import { Location } from '../location/location.entity';
+import { LocationService } from '../location/location.service';
+import RepoLocation from '../location/location.repository';
+
 @Module({
-    imports:   [TypeOrmModule.forFeature([Company, Service, Employee,Timetable, Day, TimeService, TimeEmployee])],
+    imports:   [TypeOrmModule.forFeature([Company,Location, Service, Employee,Timetable, Day, TimeService, TimeEmployee])],
     providers: [ 
                 RepoCompany,CompanyService,CompanyResolvers, 
                 RepoDay, DayService,
+                RepoLocation, LocationService,
                 RepoEmployee,EmployeeService,
                 RepoService,ServiceService,
                 RepoTimetable,TimetableService,
@@ -44,8 +49,9 @@ import { DayService} from '../day/day.service'
     exports:   [  
                 RepoCompany,CompanyService,
                 RepoDay,
-                RepoEmployee, 
                 RepoService, 
+                RepoLocation,
+                RepoEmployee, 
                 RepoTimetable, 
                 RepoTimeService, 
                 RepoTimeEmployee

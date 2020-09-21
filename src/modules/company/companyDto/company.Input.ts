@@ -4,7 +4,6 @@ import {
     MaxLength,
     IsNotEmpty,
     IsString,
-    IsInt,
     IsPhoneNumber,
     IsBoolean,
     IsOptional,
