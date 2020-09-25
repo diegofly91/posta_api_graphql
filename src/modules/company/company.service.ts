@@ -1,20 +1,23 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import RepoCompany  from './company.repository';
-import { Company } from './company.entity';
-import { CompanyInput, CompanyInputQuery } from './companyDto/company.Input';
+import RepoCompany from './company.repository';
+import { Company } from './entities';
+import { CompanyInput, CompanyInputQuery } from './dtos';
 import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
 
 @Injectable()
 export class CompanyService {
-     constructor(private readonly repos: RepoCompany) {}
+    constructor(private readonly repos: RepoCompany) {}
 
     async getCompany(id: number): Promise<Company> {
         return await this.repos._companyRepository.findOne(id);
     }
 
-    async getCompanies(input?: CompanyInputQuery, pagination?: PaginationArgs): Promise<Company[]> {
-        let inputData = input? input : {};
+    async getCompanies(
+        input?: CompanyInputQuery,
+        pagination?: PaginationArgs,
+    ): Promise<Company[]> {
+        let inputData = input ? input : {};
         if (pagination) {
             const { limit, offset } = pagination;
             return await this.repos._companyRepository.find({
@@ -22,19 +25,24 @@ export class CompanyService {
                 take: limit,
                 skip: offset,
             });
-        } else return await this.repos._companyRepository.find({where: inputData});
+        } else
+            return await this.repos._companyRepository.find({
+                where: inputData,
+            });
     }
 
     async countCompanies(input?: CompanyInputQuery): Promise<number> {
-        if (input){
+        if (input) {
             return await this.repos._companyRepository.count({ where: input });
-        }else {
+        } else {
             return await this.repos._companyRepository.count();
         }
     }
 
     async createCompany(input: CompanyInput): Promise<Company> {
-        const savedCompany: Company = await this.repos._companyRepository.save(input);
+        const savedCompany: Company = await this.repos._companyRepository.save(
+            input,
+        );
         return savedCompany;
     }
 
@@ -42,16 +50,16 @@ export class CompanyService {
         const company = await this.repos._companyRepository.update(id, input);
         if (company) {
             return true;
-        }else {
+        } else {
             throw new NotFoundException();
-        } 
+        }
     }
 
     async deleteCompany(id: number): Promise<boolean> {
         const dele = await this.repos._companyRepository.delete(id);
         if (dele) {
             return true;
-        }else {
+        } else {
             throw new NotFoundException();
         }
     }

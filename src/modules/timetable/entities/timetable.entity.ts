@@ -9,13 +9,12 @@ import {
     UpdateDateColumn,
     PrimaryColumn,
     OneToMany,
-    JoinColumn
+    JoinColumn,
 } from 'typeorm';
-import { Day } from '../day/day.entity';
-import { Company } from '../company/company.entity';
-import { TimeService } from '../timeservice/timeservice.entity';
-import { TimeEmployee } from '../timeemployee/timeemployee.entity';
-
+import { Day } from '../../day/entities/day.entity';
+import { Company } from '../../company/entities/company.entity';
+import { TimeService } from '../../timeservice/entities/timeservice.entity';
+import { TimeEmployee } from '../../timeemployee/entities/timeemployee.entity';
 
 @ObjectType()
 @Entity({ name: 'timetables' })
@@ -25,25 +24,41 @@ export class Timetable extends BaseEntity {
     id: number;
 
     @Field({ description: `ID company` })
-    @Column({name: 'companies_id'})
+    @Column({ name: 'companies_id' })
     companyId: number;
 
-    @ManyToOne(() => Company, company => company.timetables, {primary:true})
-    @JoinColumn({name: 'companies_id'})
+    @ManyToOne(
+        () => Company,
+        company => company.timetables,
+        { primary: true },
+    )
+    @JoinColumn({ name: 'companies_id' })
     company: Company;
 
     @Field({ description: `ID day` })
-    @Column({name: 'days_id'})
+    @Column({ name: 'days_id' })
     dayId: number;
 
-    @ManyToOne(() => Day, day => day.timetables,  { eager: true })
-    @JoinColumn({name: 'days_id'})
+    @ManyToOne(
+        () => Day,
+        day => day.timetables,
+        { eager: true },
+    )
+    @JoinColumn({ name: 'days_id' })
     day: Day;
 
-    @OneToMany(type => TimeService, timeservice => timeservice.timetables,  { eager: true } )
+    @OneToMany(
+        type => TimeService,
+        timeservice => timeservice.timetables,
+        { eager: true },
+    )
     timeservices: TimeService[];
 
-    @OneToMany(type => TimeEmployee, timeemployee => timeemployee.timetables,  { eager: true } )
+    @OneToMany(
+        type => TimeEmployee,
+        timeemployee => timeemployee.timetables,
+        { eager: true },
+    )
     timeemployees: TimeService[];
 
     @Field({ description: `hour start` })

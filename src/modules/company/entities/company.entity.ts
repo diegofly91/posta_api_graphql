@@ -8,10 +8,9 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
 } from 'typeorm';
-import { Service } from '../service/service.entity';
-import { Employee } from '../employee/employee.entity';
-import { Timetable } from '../timetable/timetable.entity';
-
+import { Service } from '../../service/entities/service.entity';
+import { Employee } from '../../employee/entities/employee.entity';
+import { Timetable } from '../../timetable/entities/timetable.entity';
 
 @ObjectType()
 @Entity({ name: 'companies' })
@@ -48,13 +47,24 @@ export class Company extends BaseEntity {
     @UpdateDateColumn({ type: 'timestamp', name: 'update_at' })
     createUpd: Date;
 
-    @OneToMany(type => Service, service => service.company, { cascade: true })
+    @OneToMany(
+        type => Service,
+        service => service.company,
+        { cascade: true },
+    )
     services: Service[];
 
-    @OneToMany(type => Employee, employee => employee.company, { cascade: true })
+    @OneToMany(
+        type => Employee,
+        employee => employee.company,
+        { cascade: true },
+    )
     employees: Employee[];
 
-    @OneToMany(type => Timetable, timetable => timetable.company, { cascade: true })
+    @OneToMany(
+        type => Timetable,
+        timetable => timetable.company,
+        { cascade: true },
+    )
     timetables: Timetable[];
-
 }

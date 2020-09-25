@@ -6,10 +6,9 @@ import {
     Column,
     OneToMany,
     CreateDateColumn,
-    UpdateDateColumn
+    UpdateDateColumn,
 } from 'typeorm';
-import { Timetable } from '../timetable/timetable.entity';
-
+import { Timetable } from '../../timetable/entities/timetable.entity';
 
 @ObjectType()
 @Entity({ name: 'days' })
@@ -18,9 +17,13 @@ export class Day extends BaseEntity {
     @PrimaryGeneratedColumn('increment')
     id: number;
 
-    @OneToMany(type => Timetable, timetable => timetable.day, { cascade: true })
+    @OneToMany(
+        type => Timetable,
+        timetable => timetable.day,
+        { cascade: true },
+    )
     timetables: Timetable[];
-    
+
     @Field({ description: `name day` })
     @Column({ type: 'varchar', nullable: false, length: 50 })
     name: string;

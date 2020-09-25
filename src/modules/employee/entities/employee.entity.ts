@@ -8,10 +8,10 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     OneToMany,
-    JoinColumn
+    JoinColumn,
 } from 'typeorm';
-import { Company } from '../company/company.entity';
-import { TimeEmployee } from '../timeemployee/timeemployee.entity';
+import { Company } from '../../company/entities/company.entity';
+import { TimeEmployee } from '../../timeemployee/entities/timeemployee.entity';
 
 @ObjectType()
 @Entity({ name: 'employees' })
@@ -21,25 +21,32 @@ export class Employee extends BaseEntity {
     id: number;
 
     @Field({ description: `ID  company` })
-    @Column({name: 'companies_id'})
+    @Column({ name: 'companies_id' })
     companyId: number;
-    
-    @ManyToOne(() => Company, company => company.employees, {primary:true})
-    @JoinColumn({name: 'companies_id'})
+
+    @ManyToOne(
+        () => Company,
+        company => company.employees,
+        { primary: true },
+    )
+    @JoinColumn({ name: 'companies_id' })
     company: Company;
 
-    @OneToMany(() => TimeEmployee, timeemployee => timeemployee.employees, { cascade: true } ) 
+    @OneToMany(
+        () => TimeEmployee,
+        timeemployee => timeemployee.employees,
+        { cascade: true },
+    )
     timeemployees: TimeEmployee[];
 
     @Field({ description: `name employee` })
     @Column({ type: 'varchar', nullable: false, length: 30 })
     name: string;
 
-    
     @Field({ description: `last name employee` })
     @Column({ type: 'varchar', nullable: true, length: 30 })
     lastname: string;
-    
+
     @Field({ description: `name employee` })
     @Column({ type: 'varchar', nullable: true, length: 20 })
     mobile: string;

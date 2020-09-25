@@ -1,20 +1,26 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Employee } from './employee.entity';
-import { NewEmployeeInput, EmployeeInput, EmployeeInputQuery } from './employeeDto/employee.Input';
+import { Employee } from './entities/employee.entity';
+import {
+    NewEmployeeInput,
+    EmployeeInput,
+    EmployeeInputQuery,
+} from './dtos/employee.Input';
 import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
 
-import RepoEmployee  from './employee.repository';
+import RepoEmployee from './employee.repository';
 
 @Injectable()
 export class EmployeeService {
-    constructor(private readonly repos: RepoEmployee) {
-    }
+    constructor(private readonly repos: RepoEmployee) {}
 
     async getEmployee(id: number): Promise<Employee> {
-        return await this.repos._employeeRepository.findOne({id});
+        return await this.repos._employeeRepository.findOne({ id });
     }
 
-    async getEmployees(input?: EmployeeInputQuery, pagination?: PaginationArgs): Promise<Employee[]> {
+    async getEmployees(
+        input?: EmployeeInputQuery,
+        pagination?: PaginationArgs,
+    ): Promise<Employee[]> {
         let inputData = input ? input : {};
 
         if (pagination) {
@@ -25,7 +31,9 @@ export class EmployeeService {
                 skip: offset,
             });
         } else {
-            return await this.repos._employeeRepository.find({ where: inputData });
+            return await this.repos._employeeRepository.find({
+                where: inputData,
+            });
         }
     }
 
@@ -38,12 +46,17 @@ export class EmployeeService {
     }
 
     async createEmployee(input: NewEmployeeInput): Promise<Employee> {
-        const savedEmployee: Employee = await this.repos._employeeRepository.save(input);
+        const savedEmployee: Employee = await this.repos._employeeRepository.save(
+            input,
+        );
         return savedEmployee;
     }
 
     async updateEmployee(id: number, input: EmployeeInput): Promise<boolean> {
-        const employee = await this.repos._employeeRepository.update({id}, input);
+        const employee = await this.repos._employeeRepository.update(
+            { id },
+            input,
+        );
         if (employee.affected) {
             return true;
         } else {
@@ -52,7 +65,7 @@ export class EmployeeService {
     }
 
     async deleteEmployee(id: number): Promise<boolean> {
-        const dele = await this.repos._employeeRepository.delete({id});
+        const dele = await this.repos._employeeRepository.delete({ id });
         if (dele.affected) {
             return true;
         } else {

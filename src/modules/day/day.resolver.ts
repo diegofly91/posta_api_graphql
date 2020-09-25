@@ -1,13 +1,19 @@
-import { Args, Mutation, Query, Resolver,ResolveField, Parent, Subscription } from '@nestjs/graphql';
+import {
+    Args,
+    Mutation,
+    Query,
+    Resolver,
+    ResolveField,
+    Parent,
+    Subscription,
+} from '@nestjs/graphql';
 import { DayService } from './day.service';
-import { Day } from './day.entity';
+import { Day } from './entities/day.entity';
 // import { EmployeeInput, NewEmployeeInput,EmployeeInputQuery } from './employeeDto/day.Input';
-
 
 @Resolver(() => Day)
 export class DayResolvers {
-    constructor(private readonly _dayService: DayService
-    ) {}
+    constructor(private readonly _dayService: DayService) {}
 
     @Query(() => [Day])
     public async getDays(): Promise<Day[]> {
@@ -20,12 +26,15 @@ export class DayResolvers {
     }
 
     @Mutation(() => Day, { nullable: true })
-    public async createDay( @Args('name') name: string): Promise<boolean> {
+    public async createDay(@Args('name') name: string): Promise<boolean> {
         return await this._dayService.createDay(name);
     }
 
     @Mutation(() => Day)
-    public async updateDay( @Args('id') id: number,  @Args('name') name: string): Promise<boolean> {
+    public async updateDay(
+        @Args('id') id: number,
+        @Args('name') name: string,
+    ): Promise<boolean> {
         return await this._dayService.updateDay(id, name);
     }
 

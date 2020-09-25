@@ -8,10 +8,10 @@ import {
     OneToMany,
     CreateDateColumn,
     UpdateDateColumn,
-    JoinColumn
+    JoinColumn,
 } from 'typeorm';
-import { Company } from '../company/company.entity';
-import { TimeService } from '../timeservice/timeservice.entity';
+import { Company } from '../../company/entities/company.entity';
+import { TimeService } from '../../timeservice/entities/timeservice.entity';
 
 @ObjectType()
 @Entity({ name: 'services' })
@@ -21,16 +21,24 @@ export class Service extends BaseEntity {
     id: number;
 
     @Field({ description: `timetable id` })
-    @Column({name: 'companies_id'})
+    @Column({ name: 'companies_id' })
     companyId: number;
 
-    @ManyToOne(() => Company, company => company.services, {primary:true})
-    @JoinColumn({name: 'companies_id'})
+    @ManyToOne(
+        () => Company,
+        company => company.services,
+        { primary: true },
+    )
+    @JoinColumn({ name: 'companies_id' })
     company: Company;
 
-    @OneToMany(() => TimeService, timeservice => timeservice.services, { cascade: true } ) 
+    @OneToMany(
+        () => TimeService,
+        timeservice => timeservice.services,
+        { cascade: true },
+    )
     timeservices: TimeService[];
-  
+
     @Field({ description: `name service` })
     @Column({ type: 'varchar', nullable: false, length: 50 })
     name: string;
