@@ -1,5 +1,10 @@
 import { NestFactory } from '@nestjs/core';
-import { ValidationPipe, BadRequestException, ValidationError, Logger } from '@nestjs/common';
+import {
+    ValidationPipe,
+    BadRequestException,
+    ValidationError,
+    Logger,
+} from '@nestjs/common';
 import { AppModule } from './app.module';
 
 (async function bootstrap() {
@@ -18,7 +23,7 @@ import { AppModule } from './app.module';
         }),
     );
 
-    await app.listen(AppModule.port);
-    logger.log(`Server is running in ${await app.getUrl()}`);
-})()
-
+    await app.listen(AppModule.port, () => {
+        logger.log(`Server is running in ${AppModule.host}:${AppModule.port}`);
+    });
+})();
