@@ -1,7 +1,7 @@
 import { GraphQLModule } from '@nestjs/graphql';
 
 export const GraphQL = GraphQLModule.forRoot({
-    typePaths: ['../**/**/*.graphql'],
+    typePaths: ['../**/*.graphql'],
     playground: true,
     installSubscriptionHandlers: true,
     debug: true,
