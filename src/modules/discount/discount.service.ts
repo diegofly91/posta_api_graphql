@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import RepoDiscount  from './discount.repository';
-import { Discount } from './discount.entity';
-import { NewDiscountInput, DiscountInput, DiscountInputQuery } from './discountDto/discount.Input';
+import { Discount } from './entities/discount.entity';
+import { NewDiscountInput, DiscountInput, DiscountInputQuery } from './dtos/discount.Input';
 import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
 
 @Injectable()

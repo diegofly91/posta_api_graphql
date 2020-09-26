@@ -1,9 +1,12 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
-import { LessThanOrEqual, MoreThanOrEqual } from "typeorm";
+import { Injectable } from '@nestjs/common';
 
-import { TimeEmployee } from './timeemployee.entity';
-import RepoTimeEmployee  from './timeemployee.repository';
-import { NewTimeEmployeeInput, TimeEmployeeInput, TimeEmployeeInputQuery } from './timeemployeeDto/timeemployee.Input';
+import { TimeEmployee } from './entities/timeemployee.entity';
+import RepoTimeEmployee from './timeemployee.repository';
+import {
+    NewTimeEmployeeInput,
+    TimeEmployeeInput,
+    TimeEmployeeInputQuery,
+} from './dtos/timeemployee.Input';
 
 @Injectable()
 export class TimeEmployeeService {
@@ -14,23 +17,14 @@ export class TimeEmployeeService {
     }
 
     async createTimeEmployee(input: NewTimeEmployeeInput): Promise<boolean> {
-        const { hini, hend } = input;
-        if(hini >= hend){
-            throw new BadRequestException('start time mator to end time');
-        }
         return await this.repo.createTimeEmployee(input);
     }
 
     async updateTimeEmployee(id: number,input: TimeEmployeeInput): Promise<boolean> {
-        const { hini, hend } = input;
-        if(hini >= hend){
-            throw new BadRequestException('start time mator to end time');
-        } 
         return await this.repo.updateTimeEmployee(id,input);
     }
 
     async deleteTimeEmployee(id: number): Promise<boolean> {
         return await this.repo.deleteTimeEmployee(id);
     }
-
 }

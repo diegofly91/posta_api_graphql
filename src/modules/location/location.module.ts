@@ -2,12 +2,12 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import RepoLocation from './location.repository';
-import { Location } from './location.entity';
+import { Location } from './entities/location.entity';
 import { LocationResolvers } from './location.resolver';
 import { LocationService } from './location.service';
 
 import RepoCompany from '../company/company.repository';
-import { Company } from '../company/company.entity';
+import { Company } from '../company/entities/company.entity';
 import { CompanyService } from '../company/company.service';
 
 

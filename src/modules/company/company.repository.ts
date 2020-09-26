@@ -1,8 +1,8 @@
 import {  NotFoundException } from '@nestjs/common';
 import { EntityRepository, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Company } from './company.entity';
-import { CompanyInput, CompanyInputQuery } from './companyDto/company.Input';
+import { Company } from './entities/company.entity';
+import { CompanyInput, CompanyInputQuery } from './dtos/company.Input';
 import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
 
 

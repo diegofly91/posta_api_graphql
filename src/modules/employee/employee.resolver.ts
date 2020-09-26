@@ -1,18 +1,22 @@
 import { Args, Mutation, Query, Resolver,ResolveField, Parent, Subscription } from '@nestjs/graphql';
 import { UsePipes, ValidationPipe } from '@nestjs/common';
 import { EmployeeService } from './employee.service';
-import { Employee } from './employee.entity';
-import { EmployeeInput, NewEmployeeInput, EmployeeInputQuery } from './employeeDto/employee.Input';
+import { Employee } from './entities/employee.entity';
+import {
+    EmployeeInput,
+    NewEmployeeInput,
+    EmployeeInputQuery,
+} from './dtos/employee.Input';
 import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
 import { CompanyService } from '../company/company.service';
-import { Company } from '../company/company.entity';
+import { Company } from '../company/entities/company.entity';
 import { TimeEmployeeService } from '../timeemployee/timeemployee.service';
-import { TimeEmployee } from '../timeemployee/timeemployee.entity';
-import { TimeEmployeeInputQuery } from '../timeemployee/timeemployeeDto/timeemployee.Input';
+import { TimeEmployee } from '../timeemployee/entities/timeemployee.entity';
+import { TimeEmployeeInputQuery } from '../timeemployee/dtos/timeemployee.Input';
 
-import { ServEmpl } from '../servempl/servempl.entity';
+import { ServEmpl } from '../servempl/entities/servempl.entity';
 import { ServEmplService } from '../servempl/servempl.service';
-import { ServEmplQueryInput } from '../servempl/servemplDto/servempl.Input';
+import { ServEmplQueryInput } from '../servempl/dtos/servempl.Input';
 
 @Resolver(() => Employee)
 export class EmployeeResolvers {
@@ -31,9 +35,9 @@ export class EmployeeResolvers {
     public async getEmployees(@Args('input') input: EmployeeInputQuery, 
                              @Args('pagination') pagination?: PaginationArgs,
     ): Promise<Employee[]> {
-        return this._employeeService.getEmployees(input,pagination);
+        return this._employeeService.getEmployees(input, pagination);
     }
-    
+
     @Query(() => Number)
     public async countEmployees( @Args('input') input: EmployeeInputQuery): Promise<number> {
         return this._employeeService.countEmployees(input);
@@ -41,13 +45,18 @@ export class EmployeeResolvers {
 
     @UsePipes(new ValidationPipe())
     @Mutation(() => Employee, { nullable: true })
-    public async createEmployee( @Args('input') input: NewEmployeeInput): Promise<Employee> {
+    public async createEmployee(
+        @Args('input') input: NewEmployeeInput,
+    ): Promise<Employee> {
         return await this._employeeService.createEmployee(input);
     }
 
     @UsePipes(new ValidationPipe())
     @Mutation(() => Employee)
-    public async updateEmployee( @Args('id') id: number,  @Args('input') input: EmployeeInput): Promise<boolean> {
+    public async updateEmployee(
+        @Args('id') id: number,
+        @Args('input') input: EmployeeInput,
+    ): Promise<boolean> {
         return await this._employeeService.updateEmployee(id, input);
     }
 

@@ -1,14 +1,14 @@
 import { Args, Mutation, Query, Resolver,ResolveField, Parent, Subscription } from '@nestjs/graphql';
 import { UsePipes, ValidationPipe } from '@nestjs/common';
 
-import { ServEmplQueryInput, NewServEmplInput} from './servemplDto/servempl.Input';
-import { ServEmpl } from './servempl.entity';
+import { ServEmplQueryInput, NewServEmplInput} from './dtos/servempl.Input';
+import { ServEmpl } from './entities/servempl.entity';
 import { ServEmplService } from './servempl.service';
 
-import { Service } from '../service/service.entity';
+import { Service } from '../service/entities/service.entity';
 import { ServiceService } from '../service/service.service';
 
-import { Employee } from '../employee/employee.entity';
+import { Employee } from '../employee/entities/employee.entity';
 import { EmployeeService } from '../employee/employee.service';
 
 @Resolver(() => ServEmpl)

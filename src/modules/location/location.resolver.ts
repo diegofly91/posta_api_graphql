@@ -1,8 +1,8 @@
-import { Args, Mutation, Query, Resolver,ResolveField, Parent } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UsePipes, ValidationPipe } from '@nestjs/common';
 
-import { NewLocationInput, LocationInput} from './locationDto/location.Input';
-import { Location } from './location.entity';
+import { NewLocationInput, LocationInput} from './dtos/location.Input';
+import { Location } from './entities/location.entity';
 import { LocationService }  from './location.service';
 
 @Resolver(() => Location)

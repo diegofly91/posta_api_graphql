@@ -2,7 +2,7 @@ import {  NotFoundException, BadRequestException } from '@nestjs/common';
 import { EntityRepository,Repository, Not } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { Day } from './day.entity';
+import { Day } from './entities/day.entity';
 
 @EntityRepository()
 class RepoDay {

@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
-import RepoCompany  from './company.repository';
-import { Company } from './company.entity';
-import { CompanyInput, CompanyInputQuery } from './companyDto/company.Input';
+import RepoCompany from './company.repository';
+import { Company } from './entities';
+import { CompanyInput, CompanyInputQuery } from './dtos';
 import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
 
 @Injectable()

@@ -1,5 +1,7 @@
 import * as fs from 'fs';
+import { join } from 'path';
 import { parse } from 'dotenv';
+import { Logger } from '@nestjs/common';
 
 export class ConfigService {
     private readonly envConfig: { [key: string]: string };
@@ -8,11 +10,11 @@ export class ConfigService {
         const isDevelopmentEnv = process.env.NODE_ENV !== 'production';
 
         if (isDevelopmentEnv) {
-            const envFilePath = __dirname + '/../../.env';
+            const envFilePath = join(process.cwd(), '.env');
             const existPath = fs.existsSync(envFilePath);
 
             if (!existPath) {
-                console.log('.env file does not exist');
+                Logger.log('.env file does not exist');
                 process.exit(0);
             }
             this.envConfig = parse(fs.readFileSync(envFilePath));

@@ -1,6 +1,6 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
-import { Timetable } from './timetable.entity';
-import { NewTimetableInput, TimetableInput, TimetableInputQuery } from './timetableDto/timetable.Input';
+import { Timetable } from './entities/timetable.entity';
+import { NewTimetableInput, TimetableInput, TimetableInputQuery } from './dtos/timetable.Input';
 import RepoTimetable  from './timetable.repository';
 
 @Injectable()

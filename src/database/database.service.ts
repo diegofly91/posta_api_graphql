@@ -1,8 +1,8 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from 'src/config/config.module';
-import { ConfigService } from 'src/config/config.service';
-import { Configuration } from '../config/config.keys';
 import { ConnectionOptions } from 'typeorm';
+import { ConfigModule } from '../config/config.module';
+import { ConfigService } from '../config/config.service';
+import { Configuration } from '../config/config.keys';
 
 export const databaseProviders = [
     TypeOrmModule.forRootAsync({
@@ -10,14 +10,13 @@ export const databaseProviders = [
         inject: [ConfigService],
         async useFactory(config: ConfigService) {
             return {
-                // ssl: true,
-                type: 'mysql',
-                port: parseInt(config.get(Configuration.PORT)),
-                database: config.get(Configuration.DATABASE),
-                host: config.get(Configuration.HOST),
-                username: config.get(Configuration.USERNAME),
-                password: config.get(Configuration.PASSWORD),
-                timezone: '-03:00',
+                type: config.get(Configuration.DATABASE_TYPE),
+                host: config.get(Configuration.DATABASE_HOST),
+                port: parseInt(config.get(Configuration.DATABASE_PORT)),
+                database: config.get(Configuration.DATABASE_NAME),
+                username: config.get(Configuration.DATABASE_USER),
+                password: config.get(Configuration.DATABASE_PASS),
+                timezone: config.get(Configuration.DATABASE_TIMEZONE),
                 entities: [__dirname + '/../**/*.entity{.ts,.js}'],
                 migrations: [__dirname + 'migrations/*.{.ts,.js}'],
             } as ConnectionOptions;

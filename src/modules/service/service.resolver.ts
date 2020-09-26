@@ -1,17 +1,29 @@
-import { Args, Mutation, Query, Resolver,ResolveField, Parent, Subscription } from '@nestjs/graphql';
+import {
+    Args,
+    Mutation,
+    Query,
+    Resolver,
+    ResolveField,
+    Parent,
+    Subscription,
+} from '@nestjs/graphql';
 import { ServiceService } from './service.service';
-import { Service } from './service.entity';
-import { ServiceInput, NewServiceInput, ServiceInputQuery } from './serviceDto/service.Input';
+import { Service } from './entities/service.entity';
+import {
+    ServiceInput,
+    NewServiceInput,
+    ServiceInputQuery,
+} from './dtos/service.Input';
 import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
 import { UsePipes, ValidationPipe } from '@nestjs/common';
 import { CompanyService } from '../company/company.service';
-import { Company } from '../company/company.entity';
+import { Company } from '../company/entities/company.entity';
 import { TimeServiceService } from '../timeservice/timeservice.service';
-import { TimeService } from '../timeservice/timeservice.entity';
-import { TimeServiceInputQuery } from '../timeservice/timeserviceDto/timeservice.Input';
-import { ServEmpl } from '../servempl/servempl.entity';
+import { TimeService } from '../timeservice/entities/timeservice.entity';
+import { TimeServiceInputQuery } from '../timeservice/dtos/timeservice.Input';
+import { ServEmpl } from '../servempl/entities/servempl.entity';
 import { ServEmplService } from '../servempl/servempl.service';
-import { ServEmplQueryInput } from '../servempl/servemplDto/servempl.Input';
+import { ServEmplQueryInput } from '../servempl/dtos/servempl.Input';
 
 
 @Resolver(() => Service)
@@ -23,14 +35,17 @@ export class ServiceResolvers {
     ) {}
 
     @Query(() => [Service])
-    public async getServices(@Args('input') input?: ServiceInputQuery, 
-                             @Args('pagination') pagination?: PaginationArgs,
+    public async getServices(
+        @Args('input') input?: ServiceInputQuery,
+        @Args('pagination') pagination?: PaginationArgs,
     ): Promise<Service[]> {
-        return this._serviceService.getServices(input,pagination);
+        return this._serviceService.getServices(input, pagination);
     }
-    
+
     @Query(() => Number)
-    public async countServices( @Args('input') input?: ServiceInputQuery): Promise<number> {
+    public async countServices(
+        @Args('input') input?: ServiceInputQuery,
+    ): Promise<number> {
         return this._serviceService.countServices(input);
     }
 
@@ -41,13 +56,18 @@ export class ServiceResolvers {
 
     @UsePipes(new ValidationPipe())
     @Mutation(() => Service, { nullable: true })
-    public async createService( @Args('input') input: NewServiceInput,): Promise<Service> {
+    public async createService(
+        @Args('input') input: NewServiceInput,
+    ): Promise<Service> {
         return await this._serviceService.createService(input);
     }
 
     @UsePipes(new ValidationPipe())
     @Mutation(() => Service)
-    public async updateService( @Args('id') id: number,  @Args('input') input: ServiceInput): Promise<boolean> {
+    public async updateService(
+        @Args('id') id: number,
+        @Args('input') input: ServiceInput,
+    ): Promise<boolean> {
         return await this._serviceService.updateService(id, input);
     }
 

@@ -2,20 +2,17 @@ import { NotFoundException, BadRequestException } from '@nestjs/common';
 import { EntityRepository,Repository, LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { TimeEmployee } from './timeemployee.entity';
-import { Timetable } from '../timetable/timetable.entity';
-import { Employee } from '../employee/employee.entity';
-import { NewTimeEmployeeInput, TimeEmployeeInput, TimeEmployeeInputQuery } from './timeemployeeDto/timeemployee.Input';
+import { TimeEmployee } from './entities/timeemployee.entity';
+import { Timetable } from '../timetable/entities/timetable.entity';
+import { NewTimeEmployeeInput, TimeEmployeeInput, TimeEmployeeInputQuery } from './dtos/timeemployee.Input';
 
 
 @EntityRepository()
 class RepoTimeEmployee {
   public constructor(
     @InjectRepository(TimeEmployee) public readonly _timeemployeeRepository: Repository<TimeEmployee>,
-    @InjectRepository(Timetable) public readonly _timetableRepository: Repository<Timetable>,
-    @InjectRepository(Employee) public readonly _employeeRepository: Repository<Employee>
+    @InjectRepository(Timetable) public readonly _timetableRepository: Repository<Timetable>
   ) {}
-
    async getTimeEmployee(input: TimeEmployeeInputQuery): Promise<TimeEmployee[]> {
         return await this._timeemployeeRepository.find({where : input , order:{hini: "ASC"}});
     }

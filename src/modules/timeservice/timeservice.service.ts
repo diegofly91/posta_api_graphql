@@ -1,8 +1,8 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
-import { TimeService } from './timeservice.entity';
-import { NewTimeServiceInput, TimeServiceInput, TimeServiceInputQuery } from './timeserviceDto/timeservice.Input';
+import { TimeService } from './entities/timeservice.entity';
+import { NewTimeServiceInput, TimeServiceInput, TimeServiceInputQuery } from './dtos/timeservice.Input';
 
-import RepoTimeService  from './timeservice.repository';
+import RepoTimeService from './timeservice.repository';
 
 @Injectable()
 export class TimeServiceService {
@@ -13,18 +13,10 @@ export class TimeServiceService {
     }
 
     async createTimeService(input: NewTimeServiceInput): Promise<boolean> {
-        const { hini, hend}  = input;
-        if(hini >= hend){
-            throw new BadRequestException('start time mator to end time');
-        }
         return await this.repo.createTimeService(input);
     }
 
     async updateTimeService(id: number,input: TimeServiceInput): Promise<boolean> {
-        const { hini, hend } = input;
-        if(hini >= hend){
-            throw new BadRequestException('start time mator to end time');
-        } 
         return await this.repo.updateTimeService(id,input);
     }
 

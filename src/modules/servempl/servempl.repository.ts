@@ -2,8 +2,8 @@ import {  NotFoundException, BadRequestException } from '@nestjs/common';
 import { Repository, EntityRepository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { ServEmpl } from './servempl.entity';
-import { ServEmplQueryInput, NewServEmplInput} from './servemplDto/servempl.Input';
+import { ServEmpl } from './entities/servempl.entity';
+import { ServEmplQueryInput, NewServEmplInput} from './dtos/servempl.Input';
 
 @EntityRepository()
 class RepoServEmpl {

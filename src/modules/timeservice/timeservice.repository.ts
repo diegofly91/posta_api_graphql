@@ -1,12 +1,11 @@
 import { NotFoundException, BadRequestException } from '@nestjs/common';
 import { EntityRepository, Repository, LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { NewTimeServiceInput, TimeServiceInput, TimeServiceInputQuery } from './timeserviceDto/timeservice.Input';
+import { NewTimeServiceInput, TimeServiceInput, TimeServiceInputQuery } from './dtos/timeservice.Input';
 
-import { TimeService } from './timeservice.entity';
-import { Timetable } from '../timetable/timetable.entity';
-import { Service } from '../service/service.entity';
-
+import { TimeService } from './entities/timeservice.entity';
+import { Timetable } from '../timetable/entities/timetable.entity';
+import { Service } from '../service/entities/service.entity';
 
 @EntityRepository()
 class RepoTimeService {

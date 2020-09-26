@@ -1,10 +1,10 @@
 import { NotFoundException } from '@nestjs/common';
 import { EntityRepository,Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { NewEmployeeInput, EmployeeInput, EmployeeInputQuery } from './employeeDto/employee.Input';
+import { NewEmployeeInput, EmployeeInput, EmployeeInputQuery } from './dtos/employee.Input';
 import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
 
-import { Employee } from './employee.entity';
+import { Employee } from './entities/employee.entity';
 
 
 @EntityRepository()

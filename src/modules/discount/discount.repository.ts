@@ -2,9 +2,9 @@ import { NotFoundException } from '@nestjs/common';
 import { EntityRepository,Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { NewDiscountInput, DiscountInput, DiscountInputQuery } from './discountDto/discount.Input';
+import { NewDiscountInput, DiscountInput, DiscountInputQuery } from './dtos/discount.Input';
 import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
-import { Discount } from './discount.entity';
+import { Discount } from './entities/discount.entity';
 
 @EntityRepository()
 class RepoDiscount {

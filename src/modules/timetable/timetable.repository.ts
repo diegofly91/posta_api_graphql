@@ -2,17 +2,13 @@ import { NotFoundException, BadRequestException } from '@nestjs/common';
 import { EntityRepository, Repository, Between, Not } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { NewTimetableInput, TimetableInput, TimetableInputQuery } from './timetableDto/timetable.Input';
-import { Timetable } from './timetable.entity';
-import { Company } from '../company/company.entity';
-import { Day } from '../day/day.entity';
+import { NewTimetableInput, TimetableInput, TimetableInputQuery } from './dtos/timetable.Input';
+import { Timetable } from './entities/timetable.entity';
 
 @EntityRepository()
 class RepoTimetable {
   public constructor(
-    @InjectRepository(Timetable) public readonly _timetableRepository: Repository<Timetable>,
-    @InjectRepository(Company) public readonly _companyRepository: Repository<Company>,
-    @InjectRepository(Day) public readonly _dayRepository: Repository<Day>
+    @InjectRepository(Timetable) public readonly _timetableRepository: Repository<Timetable>
   ) {}
 
   async getTimetableId(id: number): Promise<Timetable> {

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { Day } from './day.entity';
+import { Day } from './entities/day.entity';
 
-import RepoDay  from './day.repository';
+import RepoDay from './day.repository';
 
 @Injectable()
 export class DayService {
@@ -22,5 +22,4 @@ export class DayService {
     async updateDay(id: number, name: string): Promise<boolean> {
         return await this.repos.updateDay(id,name);
     }
-
 }

@@ -2,8 +2,8 @@ import { NotFoundException } from '@nestjs/common';
 import { EntityRepository,Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { Service } from './service.entity';
-import { NewServiceInput, ServiceInput, ServiceInputQuery } from './serviceDto/service.Input';
+import { Service } from './entities/service.entity';
+import { NewServiceInput, ServiceInput, ServiceInputQuery } from './dtos/service.Input';
 import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
 
 @EntityRepository()

@@ -3,11 +3,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import RepoDiscount from './discount.repository';
 import { DiscountService } from './discount.service';
-import { Discount } from './discount.entity';
+import { Discount } from './entities/discount.entity';
 import { DiscountResolvers } from './discount.resolver';
 
 import RepoCompany from '../company/company.repository';
-import { Company } from '../company/company.entity';
+import { Company } from '../company/entities/company.entity';
 import { CompanyService } from '../company/company.service';
 
 @Module({

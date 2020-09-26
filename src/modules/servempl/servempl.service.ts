@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 
-import { ServEmpl } from './servempl.entity';
-import { ServEmplQueryInput, NewServEmplInput} from './servemplDto/servempl.Input';
+import { ServEmpl } from './entities/servempl.entity';
+import { ServEmplQueryInput, NewServEmplInput} from './dtos/servempl.Input';
 import  RepoServEmpl  from './servempl.repository';
 
 @Injectable()

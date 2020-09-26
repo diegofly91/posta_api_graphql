@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import RepoEmployee  from './employee.repository';
-import { Employee } from './employee.entity';
-import { NewEmployeeInput, EmployeeInput, EmployeeInputQuery } from './employeeDto/employee.Input';
+import { Employee } from './entities/employee.entity';
+import { NewEmployeeInput, EmployeeInput, EmployeeInputQuery } from './dtos/employee.Input';
 import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
 
 @Injectable()

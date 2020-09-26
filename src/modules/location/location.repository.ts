@@ -2,8 +2,8 @@ import { EntityRepository,Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { NotFoundException } from '@nestjs/common';
 
-import { Location } from './location.entity';
-import { LocationInput, NewLocationInput } from './locationDto/location.Input';
+import { Location } from './entities/location.entity';
+import { LocationInput, NewLocationInput } from './dtos/location.Input';
 
 @EntityRepository()
 class RepoLocation {

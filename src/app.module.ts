@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { GraphQL } from './config/config.graphql';
 import { ConfigModule } from './config/config.module';
 import { ConfigService } from './config/config.service';
 import { Configuration } from './config/config.keys';
@@ -14,6 +13,8 @@ import { TimeEmployeeModule } from './modules/timeemployee/timeemployee.module';
 import { ServEmplModule } from './modules/servempl/servempl.module';
 import { LocationModule } from './modules/location/location.module'; 
 import { DiscountModule } from './modules/discount/discount.module';
+import { GraphQL } from './config/config.graphql';
+
 
 @Module({
     imports: [
@@ -26,9 +27,11 @@ import { DiscountModule } from './modules/discount/discount.module';
              ],
 })
 export class AppModule {
+    static host: string;
     static port: number | string;
-    
-    constructor(private readonly _configService: ConfigService) {
-        AppModule.port = this._configService.get(Configuration.APP_PORT);
+
+    constructor(private readonly configService: ConfigService) {
+        AppModule.host = this.configService.get(Configuration.HOST);
+        AppModule.port = this.configService.get(Configuration.PORT);
     }
 }

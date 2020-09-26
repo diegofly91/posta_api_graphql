@@ -2,20 +2,20 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import RepoServEmpl from './servempl.repository';
-import { ServEmpl } from './servempl.entity';
+import { ServEmpl } from './entities/servempl.entity';
 import { ServEmplService } from './servempl.service';
 import { ServEmplResolvers } from './servempl.resolver';
 
 import RepoService from '../service/service.repository';
-import { Service } from '../service/service.entity';
+import { Service } from '../service/entities/service.entity';
 import { ServiceService } from '../service/service.service';
 
 import RepoEmployee from '../employee/employee.repository';
-import { Employee } from '../employee/employee.entity';
+import { Employee } from '../employee/entities/employee.entity';
 import { EmployeeService } from '../employee/employee.service';
 
 import RepoCompany from '../company/company.repository';
-import { Company } from '../company/company.entity';
+import { Company } from '../company/entities/company.entity';
 import { CompanyService } from '../company/company.service'
 
 @Module({

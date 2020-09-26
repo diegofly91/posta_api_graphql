@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { Service } from './service.entity';
-import { NewServiceInput, ServiceInput, ServiceInputQuery } from './serviceDto/service.Input';
+import { Service } from './entities/service.entity';
+import { NewServiceInput, ServiceInput, ServiceInputQuery } from './dtos/service.Input';
 import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
 import RepoService  from './service.repository';
 

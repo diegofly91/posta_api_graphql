@@ -1,28 +1,28 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import   RepoService from './service.repository'
+import RepoService from './service.repository';
 import { ServiceService } from './service.service';
 import { ServiceResolvers } from './service.resolver';
-import { Service } from './service.entity';
+import { Service } from './entities';
 
 import RepoCompany from '../company/company.repository';
-import { Company } from '../company/company.entity';
+import { Company } from '../company/entities/company.entity';
 import { CompanyService } from '../company/company.service';
 
 import RepoTimeService from '../timeservice/timeservice.repository';
-import { TimeService } from '../timeservice/timeservice.entity';
+import { TimeService } from '../timeservice/entities/timeservice.entity';
 import { TimeServiceService } from '../timeservice/timeservice.service';
 
 import RepoTimetable from '../timetable/timetable.repository';
-import { Timetable } from '../timetable/timetable.entity';
-import { TimetableService} from '../timetable/timetable.service';
+import { Timetable } from '../timetable/entities/timetable.entity';
+import { TimetableService } from '../timetable/timetable.service';
 
 import RepoDay from '../day/day.repository';
-import { Day } from '../day/day.entity';
+import { Day } from '../day/entities/day.entity';
 import { DayService } from '../day/day.service';
 
-import { ServEmpl } from '../servempl/servempl.entity';
+import { ServEmpl } from '../servempl/entities/servempl.entity';
 import { ServEmplService } from '../servempl/servempl.service';
 import RepoServEmpl from '../servempl/servempl.repository';
 

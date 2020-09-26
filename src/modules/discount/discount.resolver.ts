@@ -1,8 +1,8 @@
 import { Args, Mutation, Query, Resolver,ResolveField, Parent, Subscription } from '@nestjs/graphql';
 import { UsePipes, ValidationPipe } from '@nestjs/common';
 import { DiscountService } from './discount.service';
-import { Discount } from './discount.entity';
-import { DiscountInput, NewDiscountInput, DiscountInputQuery } from './discountDto/discount.Input';
+import { Discount } from './entities/discount.entity';
+import { DiscountInput, NewDiscountInput, DiscountInputQuery } from './dtos/discount.Input';
 import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
 
 @Resolver(() => Discount)

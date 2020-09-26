@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { Location } from './location.entity';
-import { NewLocationInput, LocationInput} from './locationDto/location.Input';
+import { Location } from './entities/location.entity';
+import { NewLocationInput, LocationInput} from './dtos/location.Input';
 import RepoLocation  from './location.repository';
-
 @Injectable()
 export class LocationService {
     constructor(private readonly repo: RepoLocation) {}
