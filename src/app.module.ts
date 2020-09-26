@@ -4,7 +4,6 @@ import { ConfigModule } from './config/config.module';
 import { ConfigService } from './config/config.service';
 import { Configuration } from './config/config.keys';
 import { DatabaseModule } from './database/database.module';
-import { UserModule } from './modules/user/user.module';
 import { ServiceModule } from './modules/service/service.module';
 import { EmployeeModule } from './modules/employee/employee.module';
 import { CompanyModule } from './modules/company/company.module';
@@ -19,7 +18,7 @@ import { DiscountModule } from './modules/discount/discount.module';
 @Module({
     imports: [
                  ConfigModule, DatabaseModule, 
-                 UserModule, ServiceModule, 
+                 ServiceModule, 
                  CompanyModule,EmployeeModule, DayModule, 
                  TimeServiceModule, TimeEmployeeModule,
                  TimetableModule, ServEmplModule,
