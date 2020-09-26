@@ -11,7 +11,7 @@ import {
 import { Service } from '../service/service.entity';
 import { Employee } from '../employee/employee.entity';
 import { Timetable } from '../timetable/timetable.entity';
-
+import { Discount } from '../discount/discount.entity';
 
 @ObjectType()
 @Entity({ name: 'companies' })
@@ -56,5 +56,8 @@ export class Company extends BaseEntity {
 
     @OneToMany(type => Timetable, timetable => timetable.company, { cascade: true })
     timetables: Timetable[];
+
+    @OneToMany(type => Discount, discount => discount.company, { cascade: true })
+    discounts: Discount[];
 
 }

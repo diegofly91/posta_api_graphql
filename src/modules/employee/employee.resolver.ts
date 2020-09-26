@@ -28,14 +28,14 @@ export class EmployeeResolvers {
     }
 
     @Query(() => [Employee])
-    public async getEmployees(@Args('input') input?: EmployeeInputQuery, 
+    public async getEmployees(@Args('input') input: EmployeeInputQuery, 
                              @Args('pagination') pagination?: PaginationArgs,
     ): Promise<Employee[]> {
         return this._employeeService.getEmployees(input,pagination);
     }
     
     @Query(() => Number)
-    public async countEmployees( @Args('input') input?: EmployeeInputQuery): Promise<number> {
+    public async countEmployees( @Args('input') input: EmployeeInputQuery): Promise<number> {
         return this._employeeService.countEmployees(input);
     }
 

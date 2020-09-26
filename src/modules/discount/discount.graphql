@@ -1,0 +1,52 @@
+type Discount {
+    id:Int!
+    companyId: Int!
+    name: String!
+    discount: Int!
+    description: String
+    status: Boolean!
+    dateIni: String
+    dateEnd: String
+    createAdt: String!
+    createUpd: String
+}
+
+input NewDiscountInput {
+    companyId: Int!
+    name: String!
+    discount: Int!
+    dateIni: String
+    dateEnd: String
+    description: String
+    status: Boolean!
+}
+
+input DiscountInput {
+    name: String!
+    discount: Int!
+    description: String
+    dateIni: String
+    dateEnd: String
+    status: Boolean!
+}
+
+input DiscountInputQuery {
+    companyId: Int
+    dateIni: String
+    dateEnd: String
+    status: Boolean
+}
+
+""" Query para ver datos de  Empresas """
+type Query {
+   getDiscount(id: Int!): Discount
+   getDiscounts( input: DiscountInputQuery!,pagination: Pagination): [Discount!]!
+   countDiscounts(input: DiscountInputQuery!): Int
+}
+
+type Mutation {
+  createDiscountCompany(input: NewDiscountInput!): Discount!
+#   createDiscount(input: NewDiscountServTimeInput!): Boolean!
+  updateDiscountCompany(id: Int!, input: DiscountInput!): Boolean!
+  deleteDiscountCompany(id: Int!): Boolean!
+}

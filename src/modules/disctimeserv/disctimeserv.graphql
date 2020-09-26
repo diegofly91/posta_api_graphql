@@ -1,0 +1,28 @@
+type DiscTimeServ {
+    id: Int!
+    discountId: Int!
+    serviceId: Int!
+    timetableId: Int!
+    createAdt: String!
+}
+
+input DiscTimeServInput {
+    discountId: Int!
+    serviceId: Int!
+    timetableId: Int!
+}
+
+input DiscTimeServInputQuery {
+    discountId: Int
+    serviceId: Int
+    timetableId: Int
+}
+
+type Query {
+   getDiscTimeServ(input: DiscTimeServInputQuery!): Boolean!
+ }
+
+type Mutation {
+  createDiscTimeServ(input: DiscTimeServInput!): Boolean! 
+  deleteDiscTimeServ(id: Int!): Boolean!
+}

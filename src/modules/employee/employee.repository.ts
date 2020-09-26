@@ -17,7 +17,7 @@ class RepoEmployee {
         return await this._employeeRepository.findOne({id});
     }
 
-    async getEmployees(input?: EmployeeInputQuery, pagination?: PaginationArgs): Promise<Employee[]> {
+    async getEmployees(input: EmployeeInputQuery, pagination?: PaginationArgs): Promise<Employee[]> {
         let inputData = input ? input : {};
 
         if (pagination) {
@@ -32,12 +32,8 @@ class RepoEmployee {
         }
     }
 
-    async countEmployees(input?: EmployeeInputQuery): Promise<number> {
-        if (input) {
-            return await this._employeeRepository.count({ where: input });
-        } else {
-            return await this._employeeRepository.count();
-        }
+    async countEmployees(input: EmployeeInputQuery): Promise<number> {
+            return await this._employeeRepository.count({ where: input });   
     }
 
     async createEmployee(input: NewEmployeeInput): Promise<Employee> {
@@ -47,20 +43,18 @@ class RepoEmployee {
 
     async updateEmployee(id: number, input: EmployeeInput): Promise<boolean> {
         const employee = await this._employeeRepository.update({id}, input);
-        if (employee.affected) {
-            return true;
-        } else {
+        if (!employee.affected) {
             throw new NotFoundException();
         }
+        return true;
     }
 
     async deleteEmployee(id: number): Promise<boolean> {
         const dele = await this._employeeRepository.delete({id});
-        if (dele.affected) {
-            return true;
-        } else {
+        if (!dele.affected) {
             throw new NotFoundException();
-        }
+        } 
+        return true;
     }
 }
 

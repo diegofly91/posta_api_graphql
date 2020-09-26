@@ -29,7 +29,7 @@ input EmployeeInput {
 }
 
 input EmployeeInputQuery {
-  companyId: Int
+  companyId: Int!
   name: String
   lastname: String
   status: Boolean
@@ -37,8 +37,8 @@ input EmployeeInputQuery {
 
 type Query {
    getEmployee(id: Int!): Employee!
-   getEmployees(input: EmployeeInputQuery, pagination: Pagination): [Employee!]!
-   countEmployees(input: EmployeeInputQuery): Int!
+   getEmployees(input: EmployeeInputQuery!, pagination: Pagination): [Employee!]!
+   countEmployees(input: EmployeeInputQuery!): Int!
 }
 
 type Mutation {

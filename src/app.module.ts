@@ -14,6 +14,7 @@ import { TimeServiceModule } from './modules/timeservice/timeservice.module';
 import { TimeEmployeeModule } from './modules/timeemployee/timeemployee.module';
 import { ServEmplModule } from './modules/servempl/servempl.module';
 import { LocationModule } from './modules/location/location.module'; 
+import { DiscountModule } from './modules/discount/discount.module';
 
 @Module({
     imports: [
@@ -21,7 +22,8 @@ import { LocationModule } from './modules/location/location.module';
                  UserModule, ServiceModule, 
                  CompanyModule,EmployeeModule, DayModule, 
                  TimeServiceModule, TimeEmployeeModule,
-                 TimetableModule, ServEmplModule,LocationModule, GraphQL
+                 TimetableModule, ServEmplModule,
+                 LocationModule, DiscountModule, GraphQL
              ],
 })
 export class AppModule {

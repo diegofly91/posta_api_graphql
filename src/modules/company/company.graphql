@@ -10,6 +10,7 @@ type Company {
     timetable: [Timetable!]!
     service: [Service!]!
     employee: [Employee!]!
+    discount: [Discount!]!
     location: Location
     createAdt: String!
     createUpd: String

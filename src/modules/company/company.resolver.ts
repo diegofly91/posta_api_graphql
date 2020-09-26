@@ -20,6 +20,10 @@ import { TimetableInputQuery } from '../timetable/timetableDto/timetable.Input';
 import { Location } from '../location/location.entity';
 import { LocationService } from '../location/location.service';
 
+import { Discount } from '../discount/discount.entity';
+import { DiscountService } from '../discount/discount.service';
+import { DiscountInputQuery } from '../discount/discountDto/discount.Input';
+
 import { PaginationArgs } from '../../shared/graphql/variousDto/various.Input';
 
 @Resolver(() => Company)
@@ -31,6 +35,7 @@ export class CompanyResolvers {
         private readonly _employeeService: EmployeeService,
         private readonly _timetableService: TimetableService,
         private readonly _locationService: LocationService,
+        private readonly _discountService: DiscountService,
     ) {}
 
     @Query(() => [Company])
@@ -99,6 +104,14 @@ export class CompanyResolvers {
     async location(@Parent() company: Company  ) {
        const { id } = company;
        return await this._locationService.getLocation(id);
+    }
+
+    @ResolveProperty('discount', returns => [Discount])
+    async discount(@Parent() company: Company  ) {
+       const { id } = company;
+       let input = new DiscountInputQuery();
+       input.companyId = id;
+       return await this._discountService.getDiscounts(input);
     }
 
     // @Subscription(() => Company)

@@ -16,18 +16,10 @@ export class TimetableService {
     }
 
     async createTimetable(input: NewTimetableInput): Promise<boolean> {
-        const { hini, hend } = input;
-        if(hini >= hend){
-            throw new BadRequestException('start time mator to end time');
-        }
         return await this.repo.createTimetable(input);
     }
 
     async updateTimetable(id: number, input: TimetableInput): Promise<boolean> {
-        const {hini, hend } = input;
-        if(hini >= hend){
-            throw new BadRequestException('start time mator to end time');
-        }
         return await this.repo.updateTimetable(id,input);
     }
 

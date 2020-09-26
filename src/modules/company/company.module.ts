@@ -34,8 +34,12 @@ import { Location } from '../location/location.entity';
 import { LocationService } from '../location/location.service';
 import RepoLocation from '../location/location.repository';
 
+import { Discount } from '../discount/discount.entity';
+import { DiscountService } from '../discount/discount.service';
+import RepoDiscount from '../discount/discount.repository';
+
 @Module({
-    imports:   [TypeOrmModule.forFeature([Company,Location, Service, Employee,Timetable, Day, TimeService, TimeEmployee])],
+    imports:   [TypeOrmModule.forFeature([Company,Location,Discount, Service, Employee,Timetable, Day, TimeService, TimeEmployee])],
     providers: [ 
                 RepoCompany,CompanyService,CompanyResolvers, 
                 RepoDay, DayService,
@@ -44,7 +48,8 @@ import RepoLocation from '../location/location.repository';
                 RepoService,ServiceService,
                 RepoTimetable,TimetableService,
                 RepoTimeService,TimeServiceService,
-                RepoTimeEmployee,TimeEmployeeService
+                RepoTimeEmployee,TimeEmployeeService,
+                RepoDiscount, DiscountService
                ],
     exports:   [  
                 RepoCompany,CompanyService,
@@ -54,7 +59,8 @@ import RepoLocation from '../location/location.repository';
                 RepoEmployee, 
                 RepoTimetable, 
                 RepoTimeService, 
-                RepoTimeEmployee
+                RepoTimeEmployee,
+                RepoDiscount
                ], 
 })
 export class CompanyModule {}

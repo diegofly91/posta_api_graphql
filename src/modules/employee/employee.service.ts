@@ -13,11 +13,11 @@ export class EmployeeService {
         return await this.repo.getEmployee(id);
     }
 
-    async getEmployees(input?: EmployeeInputQuery, pagination?: PaginationArgs): Promise<Employee[]> {
+    async getEmployees(input: EmployeeInputQuery, pagination?: PaginationArgs): Promise<Employee[]> {
         return await this.repo.getEmployees(input, pagination);
     }
 
-    async countEmployees(input?: EmployeeInputQuery): Promise<number> {
+    async countEmployees(input: EmployeeInputQuery): Promise<number> {
         return await this.repo.countEmployees(input);
     }
 

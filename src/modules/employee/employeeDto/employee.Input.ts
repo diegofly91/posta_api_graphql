@@ -90,7 +90,6 @@ export class EmployeeInputQuery {
     
     @Field({ nullable: true })
     @IsInt()
-    @IsOptional()
     companyId: number;
 
     @Field({ nullable: true }) 
