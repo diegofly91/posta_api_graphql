@@ -33,7 +33,7 @@ export class Discount extends BaseEntity {
 
     @Field({ description: `discount %` })
     @Column({ type: 'smallint', nullable: false })
-    discount: number;
+    porcentage: number;
 
     @Field({ description: `discount description` })
     @Column({ type: 'varchar', nullable: true, length: 200 })

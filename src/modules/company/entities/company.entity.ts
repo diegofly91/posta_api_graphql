@@ -12,7 +12,6 @@ import { Service } from '../../service/entities/service.entity';
 import { Employee } from '../../employee/entities/employee.entity';
 import { Timetable } from '../../timetable/entities/timetable.entity';
 import { Discount } from '../../discount/entities/discount.entity';
-// import { Location } from '../../location/entities/location.entities';
 
 
 @ObjectType()

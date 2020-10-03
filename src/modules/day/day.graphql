@@ -8,6 +8,7 @@ type Day {
 type Query {
    getDay(id: Int!): Day!
    getDays : [Day!]!
+   getDaysCompany(companyId: Int!) : [Day!]!
 }
 
 type Mutation {

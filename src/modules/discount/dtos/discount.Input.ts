@@ -1,10 +1,12 @@
 import { Field, InputType } from '@nestjs/graphql';
+import { Type } from 'class-transformer';
 import {
     MinLength,
     MaxLength,
     IsNotEmpty,
     IsInt,
     Min,Max,
+    IsDateString,
     IsBoolean,
     IsOptional,
     IsDate,
@@ -35,15 +37,15 @@ export class NewDiscountInput {
     @IsInt()
     @Min(1)
     @Max(100)
-    discount: number;
+    porcentage: number;
 
     @Field({ nullable: true })
-    @IsDate()
+    @IsDateString()
     @IsOptional()
     dateIni: Date;
 
     @Field({ nullable: true })
-    @IsDate()
+    @IsDateString()
     @IsOptional()
     dateEnd: Date;
 
@@ -74,15 +76,17 @@ export class DiscountInput {
     @IsInt()
     @Min(1)
     @Max(100)
-    discount: number;
+    porcentage: number;
 
     @Field({ nullable: true })
     @IsDate()
+    @Type(() =>  Date) 
     @IsOptional()
     dateIni: Date;
 
     @Field({ nullable: true })
     @IsDate()
+    @Type(() =>  Date) 
     @IsOptional()
     dateEnd: Date;
 
@@ -103,11 +107,13 @@ export class DiscountInputQuery {
 
     @Field({ nullable: true })
     @IsDate()
+    @Type(() =>  Date) 
     @IsOptional()
     dateIni: Date;
 
     @Field({ nullable: true })
     @IsDate()
+    @Type(() =>  Date) 
     @IsOptional()
     dateEnd: Date;
 

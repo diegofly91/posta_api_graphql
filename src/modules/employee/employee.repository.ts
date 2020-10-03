@@ -26,9 +26,12 @@ class RepoEmployee {
                 where: inputData,
                 take: limit,
                 skip: offset,
+                order: {
+                    createAdt: "DESC"
+                }
             });
         } else {
-            return await this._employeeRepository.find({ where: inputData });
+            return await this._employeeRepository.find({ where: inputData, order: { createAdt: 'DESC'} });
         }
     }
 

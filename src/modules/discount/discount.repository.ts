@@ -23,9 +23,12 @@ class RepoDiscount {
                     where: input,
                     take: limit,
                     skip: offset,
+                    order: {
+                        createAdt: "DESC"
+                    }
                 });
             } else {
-                return await this._discountRepository.find(input);
+                return await this._discountRepository.find({where:input, order: { createAdt: 'DESC'}});
             }
     }
 

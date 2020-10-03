@@ -2,7 +2,7 @@ type Discount {
     id:Int!
     companyId: Int!
     name: String!
-    discount: Int!
+    porcentage: Int!
     description: String
     status: Boolean!
     dateIni: String
@@ -14,7 +14,7 @@ type Discount {
 input NewDiscountInput {
     companyId: Int!
     name: String!
-    discount: Int!
+    porcentage: Int!
     dateIni: String
     dateEnd: String
     description: String
@@ -23,7 +23,7 @@ input NewDiscountInput {
 
 input DiscountInput {
     name: String!
-    discount: Int!
+    porcentage: Int!
     description: String
     dateIni: String
     dateEnd: String
