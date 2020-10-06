@@ -7,6 +7,25 @@ type User {
     updatedAt: String
 }
 
+input CreateUserDto {
+    email: String!
+    password: String
+    isActive: Boolean
+}
+
+input UpdateUserDto {
+    email: String!
+    password: String
+    isActive: Boolean
+}
+
 type Query {
+    getUser(id:Int!): User
     getUsers: [User!]!
+}
+
+type Mutation {
+  createUser(input: CreateUserDto!): Boolean! 
+  updateUser(id: Int!, input: UpdateUserDto!): Boolean!
+  deleteUser(id: Int!): Boolean!
 }

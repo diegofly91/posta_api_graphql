@@ -1,6 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql';
 import {
-    Length,
     IsEmail,
     MinLength,
     MaxLength,
@@ -9,12 +8,11 @@ import {
 } from 'class-validator';
 
 @InputType()
-export class NewUserInput {
+export class CreateUserDto {
     @Field()
-    @MinLength(5, { message: 'Title is too short' })
-    @MaxLength(50, { message: 'Title is too long' })
+    @IsBoolean()
     @IsNotEmpty()
-    username: string;
+    isActive: boolean;
 
     @Field()
     @IsEmail()
@@ -29,12 +27,11 @@ export class NewUserInput {
 }
 
 @InputType()
-export class UserInput {
+export class UpdateUserDto {
     @Field()
-    @MinLength(5, { message: 'Title is too short' })
-    @MaxLength(50, { message: 'Title is too long' })
+    @IsBoolean()
     @IsNotEmpty()
-    username: string;
+    isActive: boolean;
 
     @Field()
     @IsEmail()
@@ -47,8 +44,4 @@ export class UserInput {
     @MaxLength(50, { message: 'Title is too long' })
     @IsNotEmpty()
     password: string;
-
-    @Field()
-    @IsBoolean()
-    status: boolean;
 }

@@ -1,0 +1,32 @@
+type Category {
+  id: Int!
+  name: String!
+  description: String
+  categoryId: Int
+  createAdt: String!
+  createUpd: String
+}
+
+input NewCategoryInput {
+   name: String!
+   description: String
+   categoryId: Int
+}
+
+input CategoryInput {
+   name: String!
+   description: String
+   categoryId: Int
+}
+
+type Query {
+   getCategory(id: Int!): Category!
+   getCategories(input: CategoryInput, pagination: Pagination): [Category!]!
+#    countCategorys(input: CategoryInput): Int!
+}
+
+type Mutation {
+  createCategory(input: NewCategoryInput!): Boolean! 
+  updateCategory(id: Int!, input: CategoryInput!): Boolean!
+  deleteCategory(id: Int!): Boolean!
+}
