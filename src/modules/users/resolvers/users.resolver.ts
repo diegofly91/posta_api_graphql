@@ -31,7 +31,7 @@ export class UsersResolver {
 
     @UsePipes(new ValidationPipe())
     @Mutation(() => User, { nullable: true })
-    public async createCompany(
+    public async createUser(
         @Args('input') input: CreateUserDto,
     ): Promise<User> {
         return await this.usersService.createUser(input);

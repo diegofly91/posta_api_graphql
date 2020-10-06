@@ -5,6 +5,7 @@ import {
     PrimaryGeneratedColumn,
     Column,
     OneToMany,
+    OneToOne,
     ManyToOne,
     JoinColumn,
     CreateDateColumn,
@@ -15,6 +16,7 @@ import { Employee } from '../../employees/entities/employee.entity';
 import { Timetable } from '../../timetables/entities/timetable.entity';
 import { Discount } from '../../discounts/entities/discount.entity';
 import { Category } from '../../categories/entities/categories.entity'
+import { User } from '../../users/entities/user.entity'
 
 @ObjectType()
 @Entity({ name: 'companies' })
@@ -22,6 +24,14 @@ export class Company extends BaseEntity {
     @Field(type => Int, { description: `ID of the company` })
     @PrimaryGeneratedColumn('increment')
     id: number;
+
+    @Field({ description: `user id` })
+    @Column({name: 'users_id'})
+    userId: number;
+
+    @OneToOne(type => User)
+    @JoinColumn({name: 'users_id'})
+    user: User;
 
     @Field({ description: `category id` })
     @Column({name: 'categories_id'})

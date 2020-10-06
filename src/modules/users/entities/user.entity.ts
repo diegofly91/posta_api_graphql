@@ -10,7 +10,7 @@ import {
     JoinColumn,
 } from 'typeorm';
 import { Field, ObjectType, Int } from '@nestjs/graphql';
-import { hash } from 'bcryptjs';
+import * as bcrypt from 'bcryptjs';
 import { Role } from './role.entity';
 
 @ObjectType()
@@ -32,9 +32,10 @@ export class User {
     @BeforeUpdate()
     async hashPassword() {
       if (!this.password) {
-        return;
+         return;
       }
-      this.password = await hash(this.password, 10);
+      const salt = await bcrypt.genSalt()
+      this.password = await bcrypt.hash(this.password, salt);
     }
 
     @Field()
@@ -45,8 +46,8 @@ export class User {
     @Column({name: 'roles_id'})
     roleId: number;
 
-    @ManyToOne(() => Role, role => role.user, {nullable: false })
-    @JoinColumn({name: 'roles_id'})    
+    @ManyToOne(() => Role, role => role.user,  { nullable: false, onDelete: 'CASCADE' })
+    @JoinColumn({name: 'roles_id', referencedColumnName: "id"})    
     role: Role;
 
     @Field()

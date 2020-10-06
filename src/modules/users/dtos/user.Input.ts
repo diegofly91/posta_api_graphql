@@ -4,11 +4,18 @@ import {
     MinLength,
     MaxLength,
     IsNotEmpty,
+    IsInt,
     IsBoolean,
 } from 'class-validator';
 
 @InputType()
 export class CreateUserDto {
+    
+    @Field()
+    @IsInt()
+    @IsNotEmpty()
+    roleId: number;
+
     @Field()
     @IsBoolean()
     @IsNotEmpty()

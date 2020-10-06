@@ -36,12 +36,13 @@ export default  class RepoUser {
             throw new BadRequestException(`The user already registered.`);
         }
 
-        const user = new User();
-        user.email = createUserDto.email;
-        user.password = createUserDto.password;
-        user.isActive = createUserDto.isActive;
+        // const user = new User();
+        // user.email = createUserDto.email;
+        // user.password = createUserDto.password;
+        // user.isActive = createUserDto.isActive;
 
-        return this._userRepository.save(user);
+        const savedUser: User = await this._userRepository.save(createUserDto);
+        return savedUser;
     }
 
     async updateUser(

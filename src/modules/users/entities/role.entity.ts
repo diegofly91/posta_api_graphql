@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 import { Field, ObjectType, Int } from '@nestjs/graphql';
 
-import { OperationRole } from './operations_roles.entity'
+// import { OperationRole } from './operations_roles.entity2'
 import { User } from './user.entity';
 
 @ObjectType()
@@ -26,16 +26,13 @@ export class Role {
     @CreateDateColumn({ type: 'timestamp', nullable: true, name: 'created_at' })
     createdAt: Date;
 
-    @OneToMany(
-        () => OperationRole,
-        operationrole => operationrole.operation
-    )
-    operationsroles: OperationRole[];
+    // @OneToMany(
+    //     () => OperationRole,
+    //     operationrole => operationrole.operation
+    // )
+    // operationsroles: OperationRole[];
 
-    @OneToMany(
-        () => User,
-        user => user.role
-    )
+    @OneToMany(() => User,user => user.role, { cascade: true })
     user: User[];
 
 }

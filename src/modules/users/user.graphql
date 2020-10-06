@@ -1,5 +1,6 @@
 type User {
     id: Int!
+    roleId: Int!
     email: String!
     password: String
     isActive: Boolean
@@ -9,6 +10,7 @@ type User {
 
 input CreateUserDto {
     email: String!
+    roleId: Int!
     password: String
     isActive: Boolean
 }
@@ -25,7 +27,7 @@ type Query {
 }
 
 type Mutation {
-  createUser(input: CreateUserDto!): Boolean! 
+  createUser(input: CreateUserDto!): User! 
   updateUser(id: Int!, input: UpdateUserDto!): Boolean!
   deleteUser(id: Int!): Boolean!
 }

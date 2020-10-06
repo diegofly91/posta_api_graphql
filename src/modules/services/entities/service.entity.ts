@@ -37,7 +37,7 @@ export class Service extends BaseEntity {
     @OneToMany(
         () => TimeService,
         timeservice => timeservice.services,
-        { cascade: true },
+        { cascade: true }
     )
     timeservices: TimeService[];
 
