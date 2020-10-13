@@ -33,7 +33,7 @@ export class ServiceInput {
 
     @Field({ nullable: true })
     @IsBoolean()
-    status: boolean;
+    isActive: boolean;
 }
 
 @InputType()
@@ -68,7 +68,7 @@ export class NewServiceInput {
     @Field({ nullable: true })
     @IsBoolean()
     @IsOptional()
-    status: boolean;
+    isActive: boolean;
 }
 
 @InputType()
@@ -103,6 +103,6 @@ export class ServiceInputQuery {
     @Field({ nullable: true })
     @IsBoolean()
     @IsOptional()
-    status?: boolean;
+    isActive?: boolean;
 }
 

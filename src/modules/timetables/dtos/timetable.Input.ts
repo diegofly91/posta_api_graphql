@@ -52,7 +52,7 @@ export class TimetableInput {
     @Field({ nullable: true })
     @IsBoolean()
     @IsOptional()
-    status: boolean;
+    isActive: boolean;
 }
 @InputType()
 export class TimetableInputQuery {
@@ -69,7 +69,7 @@ export class TimetableInputQuery {
     @Field({ nullable: true })
     @IsBoolean()
     @IsOptional()
-    status: boolean;
+    isActive: boolean;
     
 }
 

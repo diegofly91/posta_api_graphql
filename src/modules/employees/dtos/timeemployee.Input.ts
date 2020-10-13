@@ -32,7 +32,7 @@ export class NewTimeEmployeeInput {
     @Field({ nullable: true })
     @IsBoolean()
     @IsNotEmpty()
-    status: boolean;
+    isActive: boolean;
 
 }
 
@@ -52,7 +52,7 @@ export class TimeEmployeeInput {
     @Field({ nullable: true })
     @IsBoolean()
     @IsOptional()
-    status: boolean;
+    isActive: boolean;
 
 }
 
@@ -67,7 +67,7 @@ export class TimeEmployeeInputQuery {
     @Field({ nullable: true })
     @IsBoolean()
     @IsOptional()
-    status: boolean;
+    isActive: boolean;
     
 }
 

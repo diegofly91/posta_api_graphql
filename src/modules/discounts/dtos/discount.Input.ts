@@ -52,7 +52,7 @@ export class NewDiscountInput {
     @Field({ nullable: true })
     @IsBoolean()
     @IsOptional()
-    status: boolean;
+    isActive: boolean;
 
 }
 
@@ -93,7 +93,7 @@ export class DiscountInput {
     @Field({ nullable: true })
     @IsBoolean()
     @IsOptional()
-    status: boolean;
+    isActive: boolean;
 
 }
 
@@ -120,6 +120,6 @@ export class DiscountInputQuery {
     @Field({ nullable: true })
     @IsBoolean()
     @IsOptional()
-    status: boolean;
+    isActive: boolean;
 
 }

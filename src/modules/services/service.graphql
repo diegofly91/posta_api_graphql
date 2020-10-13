@@ -8,7 +8,7 @@ type Service {
   company: Company!
   timeservice: [TimeService]!
   servempls: [ServEmpl]!
-  status: Boolean
+  isActive: Boolean
   createAdt: String!
   createUpd: String
 }
@@ -19,7 +19,7 @@ input NewServiceInput {
   description: String
   price: Float
   duration: Int!
-  status: Boolean
+  isActive: Boolean
 }
 
 input ServiceInput {
@@ -27,7 +27,7 @@ input ServiceInput {
   description: String
   price: Float
   duration: Int!
-  status: Boolean
+  isActive: Boolean
 }
 input ServiceInputQuery {
   companyId: Int
@@ -35,7 +35,7 @@ input ServiceInputQuery {
   description: String
   price: Float
   duration: Int
-  status: Boolean
+  isActive: Boolean
 }
 
 

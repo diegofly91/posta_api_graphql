@@ -13,7 +13,7 @@ import { Timetable } from '../../timetables/entities/timetable.entity';
 import { Service } from './service.entity';
 
 @ObjectType()
-@Entity({ name: 'timeservices' })
+@Entity({ name: 'timetables_services' })
 export class TimeService extends BaseEntity {
     @Field(type => Int, { description: `ID of the hours timeservice` })
     @PrimaryGeneratedColumn('increment')
@@ -53,7 +53,7 @@ export class TimeService extends BaseEntity {
 
     @Field()
     @Column({ type: 'boolean', default: 1 })
-    status: boolean;
+    isActive: boolean;
 
     @Field()
     @CreateDateColumn({ type: 'timestamp', name: 'created_at' })

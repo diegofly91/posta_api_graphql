@@ -3,10 +3,11 @@
 type Company {
     id: Int!
     categoryId: Int!
+    userId: Int!
     name: String!
     description: String
     address: String
-    status: Boolean
+    isActive: Boolean
     mobile: String
     timetable: [Timetable!]!
     service: [Service!]!
@@ -22,9 +23,10 @@ type Company {
 input NewCompanyInput {
   name: String!
   categoryId: Int!
+  userId: Int!
   description: String
   address: String
-  status: Boolean
+  isActive: Boolean
   mobile: String
 }
 
@@ -32,7 +34,7 @@ input CompanyInput {
   name: String!
   description: String
   address: String
-  status: Boolean
+  isActive: Boolean
   mobile: String
 }
 
@@ -41,7 +43,7 @@ input CompanyInputQuery {
      categoryId: Int
      description: String
      address: String
-     status: Boolean
+     isActive: Boolean
 }
 
 """ Query para ver datos de  Empresas """
@@ -57,7 +59,7 @@ type Query {
 """ Mutation  modulo empresas"""
 type Mutation {
    # crea los datos de una empresa
-  createCompany(input: CompanyInput!): Company!
+  createCompany(input: NewCompanyInput!): Company!
   # edita una empresa
   updateCompany(id: Int!, input: CompanyInput!): Boolean!
   #elimina una empresa 'aunque se desabilitaria'

@@ -5,12 +5,13 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     ManyToOne,
+    AfterLoad,
     BeforeInsert,
     BeforeUpdate,
     JoinColumn,
 } from 'typeorm';
 import { Field, ObjectType, Int } from '@nestjs/graphql';
-import * as bcrypt from 'bcryptjs';
+import  {hash} from 'bcryptjs';
 import { Role } from './role.entity';
 
 @ObjectType()
@@ -26,17 +27,7 @@ export class User {
 
     @Field({ nullable: true, description: `name password` }) 
     @Column({ type: 'varchar', nullable: false, length: 64 })
-    password: string;
-
-    @BeforeInsert()
-    @BeforeUpdate()
-    async hashPassword() {
-      if (!this.password) {
-         return;
-      }
-      const salt = await bcrypt.genSalt()
-      this.password = await bcrypt.hash(this.password, salt);
-    }
+    public password: string;
 
     @Field()
     @Column({ type: 'boolean', nullable: true, name: 'is_active', default: 1 })
@@ -57,4 +48,13 @@ export class User {
     @Field()
     @UpdateDateColumn({ type: 'timestamp', nullable: true, name: 'updated_at' })
     updatedAt: Date;
+
+    @BeforeUpdate()
+    @BeforeInsert()
+    hashPassword = async () => {
+        if (this.password) {
+            this.password = await hash(this.password, 10);
+        }    
+        return this.password;         
+     }
 }

@@ -32,7 +32,7 @@ export class NewTimeServiceInput {
     @Field({ nullable: true })
     @IsBoolean()
     @IsNotEmpty()
-    status: boolean;
+    isActive: boolean;
 
 }
 
@@ -52,7 +52,7 @@ export class TimeServiceInput {
     @Field({ nullable: true })
     @IsBoolean()
     @IsOptional()
-    status: boolean;
+    isActive: boolean;
 
 }
 
@@ -67,7 +67,7 @@ export class TimeServiceInputQuery {
     @Field({ nullable: true })
     @IsBoolean()
     @IsOptional()
-    status: boolean;
+    isActive: boolean;
     
 }
 

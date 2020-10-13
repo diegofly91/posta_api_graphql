@@ -21,6 +21,10 @@ input UpdateUserDto {
     isActive: Boolean
 }
 
+type Token {
+        token: String!
+}
+
 type Query {
     getUser(id:Int!): User
     getUsers: [User!]!
@@ -30,4 +34,5 @@ type Mutation {
   createUser(input: CreateUserDto!): User! 
   updateUser(id: Int!, input: UpdateUserDto!): Boolean!
   deleteUser(id: Int!): Boolean!
+  athenticationUser(email: String!, password:String! ): Token
 }

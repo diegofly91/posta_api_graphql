@@ -43,7 +43,7 @@ export class EmployeeInput {
 
     @Field({ nullable: true })
     @IsBoolean()
-    status: boolean;
+    isActive: boolean;
 }
 
 @InputType()
@@ -82,7 +82,7 @@ export class NewEmployeeInput {
     @Field({ nullable: true })
     @IsBoolean()
     @IsOptional()
-    status: boolean;
+    isActive: boolean;
 }
 
 @InputType()
@@ -100,6 +100,6 @@ export class EmployeeInputQuery {
     @Field({ nullable: true })
     @IsBoolean()
     @IsOptional()
-    status?: boolean;
+    isActive?: boolean;
 }
 

@@ -52,3 +52,16 @@ export class UpdateUserDto {
     @IsNotEmpty()
     password: string;
 }
+
+@InputType()
+export class LoginUserDto  {
+    
+    @Field()
+    @IsEmail()
+    @IsNotEmpty()
+    email: string;
+
+    @Field()
+    @IsNotEmpty()
+    password: string;
+}

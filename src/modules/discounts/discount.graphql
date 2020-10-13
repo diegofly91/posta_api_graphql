@@ -4,7 +4,7 @@ type Discount {
     name: String!
     porcentage: Int!
     description: String
-    status: Boolean!
+    isActive: Boolean!
     dateIni: String
     dateEnd: String
     createAdt: String!
@@ -18,7 +18,7 @@ input NewDiscountInput {
     dateIni: String
     dateEnd: String
     description: String
-    status: Boolean!
+    isActive: Boolean!
 }
 
 input DiscountInput {
@@ -27,14 +27,14 @@ input DiscountInput {
     description: String
     dateIni: String
     dateEnd: String
-    status: Boolean!
+    isActive: Boolean!
 }
 
 input DiscountInputQuery {
     companyId: Int
     dateIni: String
     dateEnd: String
-    status: Boolean
+    isActive: Boolean
 }
 
 """ Query para ver datos de  Empresas """

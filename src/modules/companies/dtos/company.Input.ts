@@ -52,11 +52,15 @@ export class NewCompanyInput {
     @IsOptional()
     mobile: string;
 
+    @Field({ nullable: false })
+    @IsInt()
+    @IsNotEmpty()
+    userId: number;
 
     @Field({ nullable: true })
     @IsBoolean()
     @IsOptional()
-    status: boolean;
+    isActive: boolean;
 }
 
 @InputType()
@@ -97,7 +101,7 @@ export class CompanyInput {
     @Field({ nullable: true })
     @IsBoolean()
     @IsOptional()
-    status: boolean;
+    isActive: boolean;
 }
 
 @InputType()
@@ -123,5 +127,5 @@ export class CompanyInputQuery {
     @Field({ nullable: true })
     @IsBoolean()
     @IsOptional()
-    status: boolean;
+    isActive: boolean;
 }

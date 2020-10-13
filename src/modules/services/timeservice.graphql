@@ -6,7 +6,7 @@ type TimeService {
     # service: Service
     hini: String!
     hend: String!
-    status: Boolean
+    isActive: Boolean
     createAdt: String!
     createUpd: String
 }
@@ -16,18 +16,18 @@ input NewTimeServiceInput {
   serviceId: Int!
   hini: String!
   hend: String!
-  status: Boolean!
+  isActive: Boolean!
 }
 
 input TimeServiceInput {
   hini: String!
   hend: String!
-  status: Boolean!
+  isActive: Boolean!
 }
 
 input TimeServiceInputQuery {
   serviceId: Int!
-  status: Boolean
+  isActive: Boolean
 }
 
 type Query {

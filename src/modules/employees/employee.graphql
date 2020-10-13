@@ -7,7 +7,7 @@ type Employee {
   company: Company!
   timeemployee: [TimeEmployee]!
   servempls: [ServEmpl]!
-  status: Boolean
+  isActive: Boolean
   createAdt: String!
   createUpd: String
 }
@@ -17,7 +17,7 @@ input NewEmployeeInput {
   name: String!
   mobile: String
   lastname: String
-  status: Boolean
+  isActive: Boolean
 }
 
 
@@ -25,14 +25,14 @@ input EmployeeInput {
   name: String!
   lastname: String
   mobile: String
-  status: Boolean
+  isActive: Boolean
 }
 
 input EmployeeInputQuery {
   companyId: Int!
   name: String
   lastname: String
-  status: Boolean
+  isActive: Boolean
 }
 
 type Query {

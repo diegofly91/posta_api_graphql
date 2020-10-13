@@ -57,7 +57,7 @@ export class Employee extends BaseEntity {
 
     @Field()
     @Column({ type: 'boolean', default: 1 })
-    status: boolean;
+    isActive: boolean;
 
     @Field()
     @CreateDateColumn({ type: 'timestamp', name: 'created_at' })
