@@ -37,6 +37,7 @@ input CompanyInput {
   address: String
   isActive: Boolean
   mobile: String
+  logo: String
 }
 
 input CompanyInputQuery {
@@ -45,11 +46,6 @@ input CompanyInputQuery {
      description: String
      address: String
      isActive: Boolean
-}
-
-input UploadFileCompany {
-    id: Int!
-    file: Image
 }
 
 """ Query para ver datos de  Empresas """
@@ -65,11 +61,9 @@ type Query {
 """ Mutation  modulo empresas"""
 type Mutation {
    # crea los datos de una empresa
-  createCompany(input: NewCompanyInput!): Company!
+  createCompany(input: NewCompanyInput!, file: Image): Company!
   # edita una empresa
-  updateCompany(id: Int!, input: CompanyInput!): Boolean!
+  updateCompany(id: Int!, input: CompanyInput!,  file: Image): Boolean!
   #elimina una empresa 'aunque se desabilitaria'
   deleteCompany(id: Int!): Boolean!
-  #logo
-  singleUploadCompany(input: UploadFileCompany): String!
 }

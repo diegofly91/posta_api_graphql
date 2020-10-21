@@ -10,7 +10,7 @@ import { UsePipes, ValidationPipe } from '@nestjs/common';
 
 import { CompanyService } from '../services/company.service';
 import { Company } from '../entities/companies.entity';
-import { NewCompanyInput, CompanyInput, CompanyInputQuery, UploadFileCompany } from '../dtos/company.Input';
+import { NewCompanyInput, CompanyInput, CompanyInputQuery } from '../dtos/company.Input';
 
 import { ServiceService } from '../../services/services/service.service';
 import { Service } from '../../services/entities/service.entity';
@@ -82,35 +82,18 @@ export class CompanyResolvers {
     public async updateCompany(
         @Args('id') id: number,
         @Args('input') input: CompanyInput,
+        @Args('file') file,
     ): Promise<boolean> {
-        return await this._companyService.updateCompany(id, input);
+        if(file){
+            input.logo = await this._uploads.uploadLogoCompany(file);
+        }
+        return await this._companyService.updateCompany(id,input);
     }
 
     @Mutation(() => Company)
     public async deleteCompany(@Args('id') id: number): Promise<boolean> {
         return await this._companyService.deleteCompany(id);
     }
-
-    @UsePipes(new ValidationPipe())
-    @Mutation(() => Company, { nullable: true })
-    async singleUploadCompany(
-        @Args('input')  input
-    ): Promise<string> {
-         const { file }  = await input;
-         let path = await this._uploads.uploadFile(file);
-         return path;
-          return await this._companyService.singleUploadCompany(input);
-    }
-
-
-    // @Mutation(() => Company, { nullable: true })
-    // async uploadFile(
-    //     @Args('file') file,
-    //     @Args('companyId') companyId: number,
-    // ): Promise<string> {
-    //     let path = await this._uploads.uploadFile(file);
-    //     return path;
-    // }
 
     @ResolveField('service', returns => [Service])
     async service(@Parent() company: Company) {

@@ -46,7 +46,7 @@ export class Company extends BaseEntity {
     name: string;
 
     @Field({ description: `logo company` })
-    @Column({ type: 'varchar', nullable: true, length: 60 })
+    @Column({ type: 'varchar', nullable: true, length: 120 })
     logo: string;
 
     @Field({ description: `company description` })

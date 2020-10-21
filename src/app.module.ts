@@ -21,8 +21,9 @@ import { UploadModule } from './modules/uploads/upload.module'
                  CompanyModule,EmployeeModule, 
                  TimetableModule, UserModule,
                  DiscountModule, GraphQL, 
-                 Image, UploadModule
-             ],           
+                 UploadModule
+             ],
+    providers: [Image],           
 })
 export class AppModule {
     static host: string;

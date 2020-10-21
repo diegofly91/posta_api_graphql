@@ -13,6 +13,7 @@ import {
     ValidationArguments
 } from 'class-validator';
 import { Type, Exclude } from 'class-transformer';
+import { GraphQLUpload } from "apollo-server-express";
 import {BadRequestException,InternalServerErrorException} from '@nestjs/common';
 
 
@@ -105,6 +106,11 @@ export class CompanyInput {
     @IsBoolean()
     @IsOptional()
     isActive: boolean;
+
+    @Field({ nullable: true })
+    @MaxLength(120, { message: 'name Image is too long' })
+    @IsOptional()
+    logo:  string;
 }
 
 @InputType()
