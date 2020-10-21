@@ -3,3 +3,4 @@ input Pagination {
   limit: Int
   offset: Int
 }
+scalar Image

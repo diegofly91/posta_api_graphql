@@ -1,14 +1,15 @@
   
 import { GraphQLModule } from '@nestjs/graphql';
-import jwt from 'jsonwebtoken';
-import { Configuration } from './config.keys';
-
 
 export const GraphQL = GraphQLModule.forRoot({
     typePaths: ['../**/*.graphql'],
     playground: true,
     installSubscriptionHandlers: true,
     debug: true,
+    uploads: {
+        maxFileSize: 20000000, // 20 MB
+        maxFiles: 5
+    },
     context: async ({ req, connection }) => ({ 
         req
         // if(connection){

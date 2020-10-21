@@ -10,7 +10,7 @@ import { UsePipes, ValidationPipe } from '@nestjs/common';
 
 import { CompanyService } from '../services/company.service';
 import { Company } from '../entities/companies.entity';
-import { NewCompanyInput, CompanyInput, CompanyInputQuery } from '../dtos/company.Input';
+import { NewCompanyInput, CompanyInput, CompanyInputQuery, UploadFileCompany } from '../dtos/company.Input';
 
 import { ServiceService } from '../../services/services/service.service';
 import { Service } from '../../services/entities/service.entity';
@@ -33,6 +33,10 @@ import { DiscountInputQuery } from '../../discounts/dtos/discount.Input';
 
 import { PaginationArgs } from '../../../shared/graphql/variousDto/various.Input';
 
+import {UploadService } from '../../uploads/upload.service'
+
+
+
 @Resolver(() => Company)
 export class CompanyResolvers {
     constructor(
@@ -42,6 +46,7 @@ export class CompanyResolvers {
         private readonly _timetableService: TimetableService,
         private readonly _locationService: LocationService,
         private readonly _discountService: DiscountService,
+        private readonly _uploads : UploadService,
     ) {}
 
     @Query(() => [Company])
@@ -85,6 +90,27 @@ export class CompanyResolvers {
     public async deleteCompany(@Args('id') id: number): Promise<boolean> {
         return await this._companyService.deleteCompany(id);
     }
+
+    @UsePipes(new ValidationPipe())
+    @Mutation(() => Company, { nullable: true })
+    async singleUploadCompany(
+        @Args('input')  input
+    ): Promise<string> {
+         const { file }  = await input;
+         let path = await this._uploads.uploadFile(file);
+         return path;
+          return await this._companyService.singleUploadCompany(input);
+    }
+
+
+    // @Mutation(() => Company, { nullable: true })
+    // async uploadFile(
+    //     @Args('file') file,
+    //     @Args('companyId') companyId: number,
+    // ): Promise<string> {
+    //     let path = await this._uploads.uploadFile(file);
+    //     return path;
+    // }
 
     @ResolveField('service', returns => [Service])
     async service(@Parent() company: Company) {

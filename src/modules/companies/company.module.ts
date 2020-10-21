@@ -39,6 +39,10 @@ import { Discount } from '../discounts/entities/discount.entity';
 import { DiscountService } from '../discounts/services/discount.service';
 import RepoDiscount from '../discounts/repositories/discount.repository';
 
+import { UploadService } from '../uploads/upload.service'
+import { ConfigService } from '../../config/config.service';
+
+
 @Module({
     imports:   [TypeOrmModule.forFeature([Company,Location,Discount, Service, Employee,Timetable, Day, TimeService, TimeEmployee])],
     providers: [ 
@@ -50,7 +54,8 @@ import RepoDiscount from '../discounts/repositories/discount.repository';
                 RepoTimetable,TimetableService,
                 RepoTimeService,TimeServiceService,
                 RepoTimeEmployee,TimeEmployeeService,
-                RepoDiscount, DiscountService
+                RepoDiscount, DiscountService,
+                UploadService, ConfigService
                ],
     exports:   [  
                 RepoCompany,CompanyService,

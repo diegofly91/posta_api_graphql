@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import RepoCompany from '../repositories/company.repository';
 import { Company } from '../entities';
-import { NewCompanyInput, CompanyInput, CompanyInputQuery } from '../dtos/company.Input';
+import { NewCompanyInput, CompanyInput, CompanyInputQuery, UploadFileCompany } from '../dtos/company.Input';
 import { PaginationArgs } from '../../../shared/graphql/variousDto/various.Input';
 
 @Injectable()
@@ -31,5 +31,9 @@ export class CompanyService {
 
     async deleteCompany(id: number): Promise<boolean> {
         return await this.repo.deleteCompany(id);
+    }
+
+    async singleUploadCompany(input:UploadFileCompany): Promise<string> {
+        return await this.repo.singleUploadCompany(input);
     }
 }

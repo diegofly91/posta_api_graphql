@@ -11,7 +11,8 @@ import { DiscountModule } from './modules/discounts/discount.module';
 import { CategoryModule } from './modules/categories/category.module'
 import { UserModule } from './modules/users/users.module';
 import { GraphQL } from './config/config.graphql';
-
+import { Image } from './shared/Scalars/Image.scalar'
+import { UploadModule } from './modules/uploads/upload.module'
 
 @Module({
     imports: [
@@ -19,8 +20,9 @@ import { GraphQL } from './config/config.graphql';
                  ServiceModule, CategoryModule,
                  CompanyModule,EmployeeModule, 
                  TimetableModule, UserModule,
-                 DiscountModule, GraphQL
-             ],
+                 DiscountModule, GraphQL, 
+                 Image, UploadModule
+             ],           
 })
 export class AppModule {
     static host: string;

@@ -4,6 +4,7 @@ import {
     MaxLength,
     IsNotEmpty,
     IsInt,
+    Min, Max,
     IsBoolean,
     IsOptional,
     IsNumber,
@@ -23,17 +24,29 @@ export class ServiceInput {
     @MaxLength(150, { message: 'Description is too long' })
     description: string;
 
-    @Field({ nullable: true })
+    @Field({ nullable: false })
     @IsInt()
     duration: number;
 
     @Field({ nullable: true })
     @IsNumber()
+    @IsOptional()
     price: number;
 
-    @Field({ nullable: true })
+    @Field({ nullable: false })
     @IsBoolean()
     isActive: boolean;
+
+    @Field({ nullable: false })
+    @IsBoolean()
+    isNeedEmployee: boolean;
+
+    @Field({ nullable: true })
+    @IsInt()
+    @Min(1)
+    @Max(10)
+    @IsOptional()
+    quantityPost: number;
 }
 
 @InputType()
@@ -69,6 +82,17 @@ export class NewServiceInput {
     @IsBoolean()
     @IsOptional()
     isActive: boolean;
+
+    @Field({ nullable: false })
+    @IsBoolean()
+    isNeedEmployee: boolean;
+
+    @Field({ nullable: true })
+    @IsInt()
+    @Min(1)
+    @Max(10)
+    @IsOptional()
+    quantityPost: number;
 }
 
 @InputType()
@@ -104,5 +128,10 @@ export class ServiceInputQuery {
     @IsBoolean()
     @IsOptional()
     isActive?: boolean;
+
+    @Field({ nullable: true })
+    @IsBoolean()
+    @IsOptional()
+    isNeedEmployee?: boolean;
 }
 

@@ -46,7 +46,6 @@ type Query {
 
 type Mutation {
   createDiscountCompany(input: NewDiscountInput!): Discount!
-#   createDiscount(input: NewDiscountServTimeInput!): Boolean!
   updateDiscountCompany(id: Int!, input: DiscountInput!): Boolean!
   deleteDiscountCompany(id: Int!): Boolean!
 }

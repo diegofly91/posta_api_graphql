@@ -2,7 +2,7 @@ import {  NotFoundException } from '@nestjs/common';
 import { EntityRepository, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Company } from '../entities/companies.entity';
-import { NewCompanyInput, CompanyInput, CompanyInputQuery } from '../dtos/company.Input';
+import { NewCompanyInput, CompanyInput, CompanyInputQuery, UploadFileCompany } from '../dtos/company.Input';
 import { PaginationArgs } from '../../../shared/graphql/variousDto/various.Input';
 
 
@@ -57,6 +57,12 @@ class RepoCompany {
         }else {
             throw new NotFoundException();
         }
+    }
+
+    async singleUploadCompany(input:UploadFileCompany): Promise<string> {
+        const file = await input.file;
+        return 'holamundo';
+
     }
   
 }

@@ -65,6 +65,14 @@ export class Service extends BaseEntity {
     isActive: boolean;
 
     @Field()
+    @Column({ type: 'boolean', default: 1 })
+    isNeedEmployee: boolean;
+
+    @Field(type => Int, { description: `quantitity post if isNeedEmployee == false` })
+    @Column({ type: 'int', nullable: true })
+    quantityPost: number;
+
+    @Field()
     @CreateDateColumn({ type: 'timestamp', name: 'created_at' })
     createAdt: Date;
 

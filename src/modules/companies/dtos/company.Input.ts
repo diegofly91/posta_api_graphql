@@ -1,4 +1,5 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Image } from '../../../shared/Scalars/Image.scalar'
+import { Field, InputType  } from '@nestjs/graphql';
 import {
     MinLength,
     MaxLength,
@@ -6,10 +7,12 @@ import {
     IsString,
     IsPhoneNumber,
     IsInt,
+    ValidateNested,
     IsBoolean,
     IsOptional,
     ValidationArguments
 } from 'class-validator';
+import { Type, Exclude } from 'class-transformer';
 import {BadRequestException,InternalServerErrorException} from '@nestjs/common';
 
 
@@ -128,4 +131,18 @@ export class CompanyInputQuery {
     @IsBoolean()
     @IsOptional()
     isActive: boolean;
+}
+
+@InputType()
+export class UploadFileCompany {
+
+    @Field({ nullable: false })
+    @IsInt()
+    @IsNotEmpty()
+    id: number;
+
+    @Field()
+    @ValidateNested()
+    @Type(() => Image) 
+    file:  Image;
 }
