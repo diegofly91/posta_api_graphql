@@ -65,6 +65,11 @@ export class NewCompanyInput {
     @IsBoolean()
     @IsOptional()
     isActive: boolean;
+
+    @Field({ nullable: true })
+    @MaxLength(120, { message: 'name Image is too long' })
+    @IsOptional()
+    logo:  string;
 }
 
 @InputType()

@@ -47,6 +47,11 @@ export class ServiceInput {
     @Max(10)
     @IsOptional()
     quantityPost: number;
+
+    @Field({ nullable: true })
+    @MaxLength(120, { message: 'name Image is too long' })
+    @IsOptional()
+    logo:  string;
 }
 
 @InputType()
@@ -93,6 +98,11 @@ export class NewServiceInput {
     @Max(10)
     @IsOptional()
     quantityPost: number;
+
+    @Field({ nullable: true })
+    @MaxLength(120, { message: 'name Image is too long' })
+    @IsOptional()
+    logo:  string;
 }
 
 @InputType()

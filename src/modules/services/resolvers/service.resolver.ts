@@ -25,13 +25,16 @@ import { ServEmpl } from '../entities/servempl.entity';
 import { ServEmplService } from '../services/servempl.service';
 import { ServEmplQueryInput } from '../dtos/servempl.Input';
 
+import { UploadService } from '../../uploads/upload.service'
+
 
 @Resolver(() => Service)
 export class ServiceResolvers {
     constructor(private readonly _serviceService: ServiceService,
                 private readonly _timeserviceService: TimeServiceService,
                 private readonly _companyService: CompanyService,
-                private readonly _servemplService: ServEmplService
+                private readonly _servemplService: ServEmplService,
+                private readonly _uploads : UploadService,
     ) {}
 
     @Query(() => [Service])
@@ -58,7 +61,11 @@ export class ServiceResolvers {
     @Mutation(() => Service, { nullable: true })
     public async createService(
         @Args('input') input: NewServiceInput,
+        @Args('file') file,
     ): Promise<Service> {
+        if(file){
+            input.logo = await this._uploads.uploadLogoService(file);
+        }
         return await this._serviceService.createService(input);
     }
 
@@ -67,7 +74,15 @@ export class ServiceResolvers {
     public async updateService(
         @Args('id') id: number,
         @Args('input') input: ServiceInput,
+        @Args('file') file,
     ): Promise<boolean> {
+        if(file){
+            let path =  await this._uploads.uploadLogoService(file);
+            if(input.logo){
+                await this._uploads.deleteImageServer(input.logo)
+            } 
+            input.logo = path;
+        }
         return await this._serviceService.updateService(id, input);
     }
 

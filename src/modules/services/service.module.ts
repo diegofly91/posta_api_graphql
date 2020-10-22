@@ -33,6 +33,10 @@ import RepoEmployee from '../employees/repositories/employee.repository';
 import { Employee } from '../employees/entities/employee.entity';
 import { EmployeeService } from '../employees/services/employee.service';
 
+import { UploadService } from '../uploads/upload.service'
+import { ConfigService } from '../../config/config.service';
+
+
 @Module({
     imports:   [TypeOrmModule.forFeature([Service, Company, TimeService, Timetable, Day, ServEmpl, Employee ])],
     providers: [
@@ -43,6 +47,7 @@ import { EmployeeService } from '../employees/services/employee.service';
                     RepoDay,DayService,
                     RepoCompany, CompanyService,
                     RepoTimetable, TimetableService,
+                    UploadService, ConfigService
                 ],
     exports:   [
                     RepoService,ServiceService,

@@ -29,6 +29,7 @@ input NewCompanyInput {
   address: String
   isActive: Boolean
   mobile: String
+  logo: String
 }
 
 input CompanyInput {

@@ -6,6 +6,7 @@ type Service {
   price: Float
   duration: Int!
   company: Company!
+  logo: String
   timeservice: [TimeService]!
   servempls: [ServEmpl]!
   isActive: Boolean!
@@ -24,6 +25,7 @@ input NewServiceInput {
   isActive: Boolean
   isNeedEmployee: Boolean!
   quantityPost: Int
+  logo: String
 }
 
 input ServiceInput {
@@ -34,6 +36,7 @@ input ServiceInput {
   isActive: Boolean
   isNeedEmployee: Boolean!
   quantityPost: Int
+  logo: String
 }
 input ServiceInputQuery {
   companyId: Int
@@ -53,7 +56,7 @@ type Query {
 }
 
 type Mutation {
-  createService(input: NewServiceInput!): Service! 
-  updateService(id: Int!, input: ServiceInput!): Boolean!
+  createService(input: NewServiceInput!,  file: Image): Service! 
+  updateService(id: Int!, input: ServiceInput!, file: Image): Boolean!
   deleteService(id: Int!): Boolean!
 }

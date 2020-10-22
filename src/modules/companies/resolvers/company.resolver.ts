@@ -33,7 +33,7 @@ import { DiscountInputQuery } from '../../discounts/dtos/discount.Input';
 
 import { PaginationArgs } from '../../../shared/graphql/variousDto/various.Input';
 
-import {UploadService } from '../../uploads/upload.service'
+import { UploadService } from '../../uploads/upload.service'
 
 
 
@@ -85,7 +85,11 @@ export class CompanyResolvers {
         @Args('file') file,
     ): Promise<boolean> {
         if(file){
-            input.logo = await this._uploads.uploadLogoCompany(file);
+            let path =  await this._uploads.uploadLogoCompany(file);
+            if(input.logo){
+                await this._uploads.deleteImageServer(input.logo)
+            } 
+            input.logo = path;
         }
         return await this._companyService.updateCompany(id,input);
     }

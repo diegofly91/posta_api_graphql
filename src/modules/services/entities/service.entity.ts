@@ -72,6 +72,10 @@ export class Service extends BaseEntity {
     @Column({ type: 'int', nullable: true })
     quantityPost: number;
 
+    @Field({ description: `logo company` })
+    @Column({ type: 'varchar', nullable: true, length: 120 })
+    logo: string;
+
     @Field()
     @CreateDateColumn({ type: 'timestamp', name: 'created_at' })
     createAdt: Date;
