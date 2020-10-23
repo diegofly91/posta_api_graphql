@@ -59,4 +59,9 @@ import { ConfigService } from '../../config/config.service';
                     RepoTimetable,
                ],
 })
+// @Module({
+//     imports: [TypeOrmModule.forFeature([RepoService, RepoTimeService, RepoServEmpl, RepoCompany])],
+//     providers: [ServiceService, ServiceResolvers,CompanyService,UploadService, TimeServiceService, TimeServiceResolvers,ServEmplResolvers, ServEmplService],
+//     // controllers: [CategoryController],
+// })
 export class ServiceModule {}

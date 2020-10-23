@@ -1,5 +1,5 @@
 import { NotFoundException, BadRequestException } from '@nestjs/common';
-import { EntityRepository, Repository, LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
+import { EntityRepository, Repository, LessThanOrEqual, Between, MoreThanOrEqual } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { NewTimeServiceInput, TimeServiceInput, TimeServiceInputQuery } from '../dtos/timeservice.Input';
 
@@ -22,19 +22,20 @@ class RepoTimeService {
     async createTimeService(input: NewTimeServiceInput): Promise<boolean> {
         const {timetableId, serviceId, hini, hend } = input;
         const exists =  await this._timetableRepository.find({
-                        where:[{
-                                    id:timetableId,
-                                    hini: LessThanOrEqual(hini), 
-                                    hend: MoreThanOrEqual(hend)
-                                }]
+                                        where:[{ id:timetableId}, 
+                                               { hini: MoreThanOrEqual(hini)}, 
+                                               { hend: LessThanOrEqual(hend)}
+                                               ]
         });
         if(exists.length == 0){
             throw new BadRequestException('time range exceeded');
         }
-        const timeser = await this._timeserviceRepository.find({where:[{
-                                                                            timetableId,
-                                                                            serviceId
-                                                                    }]});
+        const timeser = await this._timeserviceRepository.find({where:[{   timetableId,
+                                                                           serviceId,
+                                                                           hini: Between(hini, hend),
+                                                                           hend: Between(hini,hend)
+                                                                      }]});
+        console.log(timeser)
         if(timeser.length > 0){
             throw new BadRequestException('exist timeservice');
         }                                                                   
@@ -50,11 +51,10 @@ class RepoTimeService {
         const data :TimeService = await this._timeserviceRepository.findOne({id});
         const {timetableId} = data;
         const exists =  await this._timetableRepository.find({
-                                    where:[{
-                                            id:timetableId,
-                                            hini: LessThanOrEqual(hini), 
-                                            hend: MoreThanOrEqual(hend)
-                                        }]
+                                    where:[{id:timetableId},
+                                            {hini: MoreThanOrEqual(hini)}, 
+                                            {hend: LessThanOrEqual(hend)}
+                                          ]
                         });
         if(exists.length == 0){
         throw new BadRequestException('time range exceeded');
