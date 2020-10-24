@@ -35,8 +35,7 @@ class RepoTimeService {
                                                                            hini: Between(hini, hend),
                                                                            hend: Between(hini,hend)
                                                                       }]});
-        console.log(timeser)
-        if(timeser.length > 0){
+       if(timeser.length > 0){
             throw new BadRequestException('exist timeservice');
         }                                                                   
         const savedTimetable: TimeService = await this._timeserviceRepository.save(input);
