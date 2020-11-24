@@ -1,21 +1,21 @@
 type Location {
     id: Int!
     companyId: Int!
-    lat: Float!
-    lng: Float!
+    latitude: Float!
+    longitude: Float!
     createAdt: String!
     createUpd: String
 }
 
 input NewLocationInput {
    companyId: Int!
-   lat: Float!
-   lng: Float!
+   latitude: Float!
+   longitude: Float!
 }
 
 input LocationInput {
-   lat: Float!
-   lng: Float!
+   latitude: Float!
+   longitude: Float!
 }
 
 type Query {

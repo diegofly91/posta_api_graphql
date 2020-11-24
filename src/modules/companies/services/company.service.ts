@@ -17,6 +17,10 @@ export class CompanyService {
         return await this.repo.getCompanies(input, pagination);
     }
 
+    async getCompaniesFollowByUser(userId: number): Promise<Company[]>{
+        return await this.repo.getCompaniesFollowByUser(userId);
+    }
+
     async countCompanies(input?: CompanyInputQuery): Promise<number> {
         return await this.repo.countCompanies(input);
     }

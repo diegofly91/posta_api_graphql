@@ -1,0 +1,33 @@
+type CompanyFollow {
+    id: Int!
+    companyId: Int!
+    company: Company!
+    userId: Int!
+    user: User!
+    createAdt: String!
+}
+
+input CreateCompanyFollowDto {
+     companyId: Int!
+     userId: Int!
+}
+
+input QueryCompanyFollowDto {
+     companyId: Int
+     userId: Int
+}
+
+input QueryCompanyUserFollowDto {
+     companyId: Int!
+     userId: Int!
+}
+
+type Query {
+   getCompanyFollow(input: QueryCompanyFollowDto): [CompanyFollow!]!
+   findByCompanyUserExist(input: QueryCompanyUserFollowDto!): CompanyFollow
+ }
+
+type Mutation {
+  createCompanyFollow(input: CreateCompanyFollowDto!): CompanyFollow! 
+  deleteCompanyFollow(id: Int!): Boolean
+}

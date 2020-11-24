@@ -26,13 +26,13 @@ export class Location extends BaseEntity {
     @JoinColumn({name: 'companies_id'})    
     company: Company;
 
-    @Field({ description: `latitud` })
+    @Field({ description: `latitude` })
     @Column({ type: 'decimal', precision: 10, scale: 6, nullable: false })
-    lat: number;
+    latitude: number;
 
-    @Field({ description: `longitud` })
+    @Field({ description: `longitude` })
     @Column({ type: 'decimal', precision: 11, scale: 6, nullable: false })
-    lng: number;
+    longitude: number;
 
     @Field()
     @CreateDateColumn({ type: 'timestamp', name: 'created_at' })

@@ -42,12 +42,20 @@ import RepoDiscount from '../discounts/repositories/discount.repository';
 import { UploadService } from '../uploads/upload.service'
 import { ConfigService } from '../../config/config.service';
 
+import { CompanyFollowRepository } from './repositories'
+import { CompanyFollowService } from './services'
+import { CompanyFollowResolver } from './resolvers'
+
+import { UsersService } from '../users/services';
+import  RepoUser  from '../users/repositories/user.repository'
+import { User } from '../users/entities/user.entity'
 
 @Module({
-    imports:   [TypeOrmModule.forFeature([Company,Location,Discount, Service, Employee,Timetable, Day, TimeService, TimeEmployee])],
+    imports:   [TypeOrmModule.forFeature([User,Company,Location,Discount, Service, Employee,Timetable, Day, TimeService, TimeEmployee, CompanyFollowRepository])],
     providers: [ 
                 RepoCompany,CompanyService,CompanyResolvers, 
                 RepoLocation, LocationService,LocationResolvers,
+                CompanyFollowResolver, CompanyFollowService,
                 RepoDay, DayService,
                 RepoEmployee,EmployeeService,
                 RepoService,ServiceService,
@@ -55,18 +63,20 @@ import { ConfigService } from '../../config/config.service';
                 RepoTimeService,TimeServiceService,
                 RepoTimeEmployee,TimeEmployeeService,
                 RepoDiscount, DiscountService,
-                UploadService, ConfigService
+                UploadService, ConfigService,
+                UsersService, RepoUser
                ],
     exports:   [  
                 RepoCompany,CompanyService,
-                RepoDay,
-                RepoService, 
+                RepoService,
+                RepoUser, 
                 RepoLocation,
                 RepoEmployee, 
                 RepoTimetable, 
                 RepoTimeService, 
                 RepoTimeEmployee,
-                RepoDiscount
+                RepoDiscount,
+                CompanyFollowService
                ], 
 })
 export class CompanyModule {}

@@ -4,8 +4,8 @@ type TimeEmployee {
     timetable: Timetable
     employeeId: Int!
     # employee: Employee
-    hini: String!
-    hend: String!
+    startTime: String!
+    endTime: String!
     isActive: Boolean
     createAdt: String!
     createUpd: String
@@ -14,14 +14,14 @@ type TimeEmployee {
 input NewTimeEmployeeInput {
   timetableId: Int!
   employeeId: Int!
-  hini: String!
-  hend: String!
+  startTime: String!
+  endTime: String!
   isActive: Boolean!
 }
 
 input TimeEmployeeInput {
-  hini: String!
-  hend: String!
+  startTime: String!
+  endTime: String!
   isActive: Boolean!
 }
 

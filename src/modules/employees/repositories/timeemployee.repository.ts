@@ -14,15 +14,15 @@ class RepoTimeEmployee {
     @InjectRepository(Timetable) public readonly _timetableRepository: Repository<Timetable>
   ) {}
    async getTimeEmployee(input: TimeEmployeeInputQuery): Promise<TimeEmployee[]> {
-        return await this._timeemployeeRepository.find({where : input , order:{hini: "ASC"}});
+        return await this._timeemployeeRepository.find({where : input , order:{startTime: "ASC"}});
     }
 
     async createTimeEmployee(input: NewTimeEmployeeInput): Promise<boolean> {
-        const {timetableId, employeeId, hini, hend } = input;
+        const {timetableId, employeeId, startTime, endTime } = input;
         const exists =  await this._timetableRepository.find({
             where:[{ id:timetableId}, 
-                   { hini: MoreThanOrEqual(hini)}, 
-                   { hend: LessThanOrEqual(hend)}
+                   { startTime: MoreThanOrEqual(startTime)}, 
+                   { endTime: LessThanOrEqual(endTime)}
                    ]
         });
         if(exists.length == 0){
@@ -30,8 +30,8 @@ class RepoTimeEmployee {
         }
         const timeser = await this._timeemployeeRepository.find({where:[{   timetableId,
                                                                             employeeId,
-                                                                            hini: Between(hini, hend),
-                                                                            hend: Between(hini,hend)
+                                                                            startTime: Between(startTime, endTime),
+                                                                            endTime: Between(startTime,endTime)
                                                                 }]});
         if(timeser.length > 0){
                     throw new BadRequestException('exist timeEmployee');
@@ -44,13 +44,13 @@ class RepoTimeEmployee {
     }
 
     async updateTimeEmployee(id: number,input: TimeEmployeeInput): Promise<boolean> {
-        const { hini, hend } = input;
+        const { startTime, endTime } = input;
         const data : TimeEmployee = await this._timeemployeeRepository.findOne({id});
         const {timetableId} = data;
         const exists =  await this._timetableRepository.find({
                                                             where:[{id:timetableId},
-                                                                    {hini: MoreThanOrEqual(hini)}, 
-                                                                    {hend: LessThanOrEqual(hend)}
+                                                                    {startTime: MoreThanOrEqual(startTime)}, 
+                                                                    {endTime: LessThanOrEqual(endTime)}
                                                                 ]
                                                              });
         if(exists.length == 0){

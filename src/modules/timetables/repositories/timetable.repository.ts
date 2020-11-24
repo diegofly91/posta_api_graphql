@@ -16,14 +16,14 @@ class RepoTimetable {
     }
 
      async getTimetable(input: TimetableInputQuery): Promise<Timetable[]> {
-        return await this._timetableRepository.find({where : input , order:{dayId: "ASC",hini: "ASC"}});
+        return await this._timetableRepository.find({where : input , order:{dayId: "ASC",startTime: "ASC"}});
     }
 
     async createTimetable(input: NewTimetableInput): Promise<boolean> {
-        const {companyId, dayId, hini, hend } = input;
+        const {companyId, dayId, startTime, endTime } = input;
         const exists =  await this._timetableRepository.find({
-                          where:[{dayId, companyId,hini: Between(hini, hend)},
-                                 {dayId, companyId,hend: Between(hini, hend)}
+                          where:[{dayId, companyId,startTime: Between(startTime, endTime)},
+                                 {dayId, companyId,endTime: Between(startTime, endTime)}
                                 ]});
         if(exists.length){
             throw new BadRequestException('exists hours');
@@ -36,10 +36,10 @@ class RepoTimetable {
     }
 
     async updateTimetable(id: number, input: TimetableInput): Promise<boolean> {
-        const {dayId, hini, hend } = input;
+        const {dayId, startTime, endTime } = input;
         const exist =  await this._timetableRepository.find({
-                       where:[{dayId,id: Not(id),hini: Between(hini, hend),},
-                              {dayId,id: Not(id),hend: Between(hini, hend)}
+                       where:[{dayId,id: Not(id),startTime: Between(startTime, endTime),},
+                              {dayId,id: Not(id),endTime: Between(startTime, endTime)}
                              ]});
         if(exist.length){
             throw new BadRequestException('exist hours');

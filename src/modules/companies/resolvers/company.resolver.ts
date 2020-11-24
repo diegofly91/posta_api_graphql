@@ -57,6 +57,13 @@ export class CompanyResolvers {
         return this._companyService.getCompanies(input, pagination);
     }
 
+    @Query(() => [Company])
+    public async getCompaniesFollowByUser(
+        @Args('userId') userId: number,
+    ): Promise<Company[]> {
+        return this._companyService.getCompaniesFollowByUser(userId);
+    }
+
     @Query(() => Number)
     public async countCompanies(
         @Args('input') input?: CompanyInputQuery,

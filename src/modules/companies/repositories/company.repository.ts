@@ -16,6 +16,13 @@ class RepoCompany {
         return await this._companyRepository.findOne(id);
     }
 
+    async getCompaniesFollowByUser( userId: number): Promise<Company[]>{
+        return  await this._companyRepository.createQueryBuilder('companies')
+                                    .innerJoinAndSelect("companies.companyFollow", "companyFollow")
+                                    .where('companyFollow.user_id = :user', { user: userId })
+                                    .getMany();
+    }
+
     async getCompanies(input?: CompanyInputQuery, pagination?: PaginationArgs): Promise<Company[]> {
         let inputData = input? input : {};
         if (pagination) {

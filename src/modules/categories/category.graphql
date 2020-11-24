@@ -2,6 +2,7 @@ type Category {
   id: Int!
   name: String!
   description: String
+  logo: String
   categoryId: Int
   createAdt: String!
   createUpd: String

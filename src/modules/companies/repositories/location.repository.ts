@@ -25,8 +25,6 @@ class RepoLocation {
     }
 
     async updateLocation(id: number, input: LocationInput): Promise<boolean> {
-        console.log(id);
-        console.log(input);
         const update = await this._locationRepository.update({id}, input);
         if (!update.affected) {
             throw new NotFoundException();

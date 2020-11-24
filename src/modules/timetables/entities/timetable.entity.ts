@@ -63,11 +63,11 @@ export class Timetable extends BaseEntity {
 
     @Field({ description: `hour start` })
     @Column({ type: 'time', nullable: false })
-    hini: Date;
+    startTime: Date;
 
     @Field({ description: `hour end` })
     @Column({ type: 'time', nullable: false })
-    hend: Date;
+    endTime: Date;
 
     @Field()
     @Column({ type: 'boolean', default: 1 })

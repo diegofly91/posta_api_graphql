@@ -16,15 +16,15 @@ class RepoTimeService {
   ) {}
 
     async getTimeService(input: TimeServiceInputQuery): Promise<TimeService[]> {
-        return await this._timeserviceRepository.find({where : input , order:{hini: "ASC"}});
+        return await this._timeserviceRepository.find({where : input , order:{startTime: "ASC"}});
     }
 
     async createTimeService(input: NewTimeServiceInput): Promise<boolean> {
-        const {timetableId, serviceId, hini, hend } = input;
+        const {timetableId, serviceId, startTime, endTime } = input;
         const exists =  await this._timetableRepository.find({
                                         where:[{ id:timetableId}, 
-                                               { hini: MoreThanOrEqual(hini)}, 
-                                               { hend: LessThanOrEqual(hend)}
+                                               { startTime: MoreThanOrEqual(startTime)}, 
+                                               { endTime: LessThanOrEqual(endTime)}
                                                ]
         });
         if(exists.length == 0){
@@ -32,8 +32,8 @@ class RepoTimeService {
         }
         const timeser = await this._timeserviceRepository.find({where:[{   timetableId,
                                                                            serviceId,
-                                                                           hini: Between(hini, hend),
-                                                                           hend: Between(hini,hend)
+                                                                           startTime: Between(startTime, endTime),
+                                                                           endTime: Between(startTime,endTime)
                                                                       }]});
        if(timeser.length > 0){
             throw new BadRequestException('exist timeservice');
@@ -46,13 +46,13 @@ class RepoTimeService {
     }
 
     async updateTimeService(id: number,input: TimeServiceInput): Promise<boolean> {
-        const { hini, hend } = input;
+        const { startTime, endTime } = input;
         const data :TimeService = await this._timeserviceRepository.findOne({id});
         const {timetableId} = data;
         const exists =  await this._timetableRepository.find({
                                     where:[{id:timetableId},
-                                            {hini: MoreThanOrEqual(hini)}, 
-                                            {hend: LessThanOrEqual(hend)}
+                                            {startTime: MoreThanOrEqual(startTime)}, 
+                                            {endTime: LessThanOrEqual(endTime)}
                                           ]
                         });
         if(exists.length == 0){

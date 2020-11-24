@@ -6,6 +6,7 @@ import {
     UpdateDateColumn,
     ManyToOne,
     AfterLoad,
+    OneToMany,
     BeforeInsert,
     BeforeUpdate,
     JoinColumn,
@@ -13,6 +14,8 @@ import {
 import { Field, ObjectType, Int } from '@nestjs/graphql';
 import  {hash} from 'bcryptjs';
 import { Role } from './role.entity';
+import { CompanyFollow } from '../../companies/entities'
+
 
 @ObjectType()
 @Entity({ name: 'users' })
@@ -24,6 +27,9 @@ export class User {
     @Field({ nullable: true, description: `name mail` })
     @Column({ type: 'varchar', nullable: false, length: 60, unique: true })
     email: string;
+
+    @Column({ nullable: false,  type: 'varchar', length: 25, unique: true })
+    username: string;
 
     @Field({ nullable: true, description: `name password` }) 
     @Column({ type: 'varchar', nullable: false, length: 64 })
@@ -48,6 +54,10 @@ export class User {
     @Field()
     @UpdateDateColumn({ type: 'timestamp', nullable: true, name: 'updated_at' })
     updatedAt: Date;
+
+    @OneToMany( type => CompanyFollow, userFollow => userFollow.user,  { cascade: true })
+    companyFollow: CompanyFollow[];
+
 
     @BeforeUpdate()
     @BeforeInsert()

@@ -4,8 +4,8 @@ type TimeService {
     timetable: Timetable
     serviceId: Int!
     # service: Service
-    hini: String!
-    hend: String!
+    startTime: String!
+    endTime: String!
     isActive: Boolean
     createAdt: String!
     createUpd: String
@@ -14,14 +14,14 @@ type TimeService {
 input NewTimeServiceInput {
   timetableId: Int!
   serviceId: Int!
-  hini: String!
-  hend: String!
+  startTime: String!
+  endTime: String!
   isActive: Boolean!
 }
 
 input TimeServiceInput {
-  hini: String!
-  hend: String!
+  startTime: String!
+  endTime: String!
   isActive: Boolean!
 }
 

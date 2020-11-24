@@ -22,12 +22,12 @@ export class NewTimeServiceInput {
     @Field({ nullable: false })
     @IsMilitaryTime({ message: 'FORMAT HH:MM' })
     @IsNotEmpty()
-    hini: Date;
+    startTime: Date;
 
     @Field({ nullable: false })
     @IsMilitaryTime({ message: 'FORMAT HH:MM' })
     @IsNotEmpty()
-    hend: Date;
+    endTime: Date;
 
     @Field({ nullable: true })
     @IsBoolean()
@@ -42,12 +42,12 @@ export class TimeServiceInput {
     @Field({ nullable: false })
     @IsMilitaryTime({ message: 'FORMAT HH:MM' })
     @IsNotEmpty()
-    hini: Date;
+    startTime: Date;
 
     @Field({ nullable: false })
     @IsMilitaryTime({ message: 'FORMAT HH:MM' })
     @IsNotEmpty()
-    hend: Date;
+    endTime: Date;
 
     @Field({ nullable: true })
     @IsBoolean()

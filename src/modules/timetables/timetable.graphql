@@ -4,8 +4,8 @@ type Timetable {
     company: Company!
     dayId: Int!
     day: Day!
-    hini: String!
-    hend: String!
+    startTime: String!
+    endTime: String!
     isActive: Boolean
     createAdt: String!
     createUpd: String
@@ -14,14 +14,14 @@ type Timetable {
 input NewTimetableInput {
   companyId: Int!
   dayId: Int!
-  hini: String!
-  hend: String!
+  startTime: String!
+  endTime: String!
 }
 
 input TimetableInput {
   dayId: Int!
-  hini: String!
-  hend: String!
+  startTime: String!
+  endTime: String!
   isActive: Boolean
 }
 
@@ -32,13 +32,12 @@ input TimetableInputQuery {
 }
 
 type Query {
-    getTimetableId(id: Int!): Timetable!
+   getTimetableId(id: Int!): Timetable!
    getTimetable(input: TimetableInputQuery!): [Timetable!]!
-  # getTimetables(input: TimetableInputQuery, pagination: Pagination): [Employee!]!
 }
 
-type Mutation {
-  createTimetable(input: NewTimetableInput!): Boolean! 
-  updateTimetable(id: Int!, input: TimetableInput!): Boolean!
-  deleteTimetable(id: Int!): Boolean!
-}
+#type Mutation {
+#    createTimetable(input: NewTimetableInput!): Boolean! 
+#    updateTimetable(id: Int!, input: TimetableInput!): Boolean!
+#    deleteTimetable(id: Int!): Boolean!
+#}

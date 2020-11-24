@@ -20,13 +20,13 @@ export class NewLocationInput {
     @IsLatitude()
     @IsNumber()
     @IsNotEmpty()
-    lat: number;
+    latitude: number;
 
     @Field({ nullable: false })
     @IsLongitude()
     @IsNumber()
     @IsNotEmpty()
-    lng: number;
+    longitude: number;
 
 }
 
@@ -37,12 +37,12 @@ export class LocationInput {
     @IsLatitude()
     @IsNumber()
     @IsNotEmpty()
-    lat: number;
+    latitude: number;
 
     @Field({ nullable: false })
     @IsLongitude()
     @IsNumber()
     @IsNotEmpty()
-    lng: number;
+    longitude: number;
 
 }

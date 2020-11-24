@@ -26,6 +26,9 @@ export class Category  extends BaseEntity {
     @Column({ type: 'varchar', nullable: true, length: 150 })
     description: String;
 
+    @Column({ type: 'varchar', nullable: true, length: 120 })
+    logo: String;
+
     @Column({ name: 'categories_id', nullable: true })
     categoryId: number;
 
